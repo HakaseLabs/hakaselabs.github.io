@@ -1,0 +1,79 @@
+<head>
+  <!-- meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1, user-scalable=no">
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+  <meta property="og:site_name" content="hakaselabs" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="hakaselabs" />
+  <meta property="og:description" content="Articles on software development. Written by Francis Sunday, Software Developer and Creative" />
+  <meta property="og:url" content="https://hakaselabs.github.io/" />
+  <!-- <meta property="og:image" content="https://hakaselabs.github.io/assets/ogimage.svg" /> -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="hakaselabs" />
+  <meta name="twitter:description" content="Articles on software development. Written by Francis Sunday, Software Developer and Creative" />
+  <meta name="twitter:url" content="https://hakaselabs.github.io/" />
+  <!-- <meta name="twitter:image" content="https://hakaselabs.github.io/assets/ogimage.svg" /> -->
+  <meta name="twitter:site" content="@_hakasebot" />
+  <meta property="og:image:width" content="260" />
+  <meta property="og:image:height" content="200" />
+  <meta name="keywords" content="software, tech, php, javascript, frontend, backend, oop, software development, web development,go,nodejs,react,js" />
+  <meta name="theme-color" content="#1a1e1e">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/icons/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+
+   <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="/public/apple-touch-icon-144-precomposed.png">
+
+
+  <!-- google ads -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-6516758593918018",
+      enable_page_level_ads: true
+    });
+  </script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+   <!--Google analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90124514-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  <!-- push notifications -->
+  <script>
+    (function(p,u,s,h){
+        p._pcq=p._pcq||[];
+        p._pcq.push(['_currentTime',Date.now()]);
+        s=u.createElement('script');
+        s.type='text/javascript';
+        s.async=true;
+        s.src='https://cdn.pushcrew.com/js/f62971ec3dc8fd534e62bf17ab55d013.js';
+        h=u.getElementsByTagName('script')[0];
+        h.parentNode.insertBefore(s,h);
+    })(window,document);
+  </script>
+
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <title>
+    {% if page.title == "Home" %}
+      {{ site.title }}
+    {% else %}
+      {{ page.title }} &middot; {{ site.title }}
+    {% endif %}
+  </title>
+</head>

@@ -1,0 +1,27 @@
+# Permalinks
+permalink:      /:year-:month-:day/:title
+
+# Setup
+title:          HAKASELABS
+paginate:       5
+baseurl:        ""
+url:            "https://hakaselabs.github.io"
+long_title:     "HAKASELABS | Articles on Software Development, life, and everything in-between"
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        :compressed
+
+# Build settings
+markdown:       kramdown
+
+# About
+author:
+  name:         Francis Sunday
+  url:          http://codehakase.github.io
+  email:        codehakase@gmail.com
+
+# Gems
+gems:
+  - jekyll-paginate

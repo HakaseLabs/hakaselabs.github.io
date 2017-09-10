@@ -1,0 +1,52 @@
+<style>
+    .subscribe-form {
+        width: 100%;
+        max-width: 1078px;
+        border: 2px solid #ccc;
+        padding: 14px 16px;
+        background: #fff;
+        border-radius: 5px;
+    }
+    .subscribe-form h3, p {
+        font-family: "Segoe UI",  Roboto;
+    }
+    .subscribe-form input[type=text], input[type=email] {
+       padding: 10px;
+        position: relative;
+        display: inline;
+        border: 0;
+        background: #dedede;
+        border-radius: 5px;
+        margin: 7px;
+        font-size: 0.7em;
+    }
+    .subscribe-form input[type=submit] {
+        padding: 10px 12px;
+        font-weight: bold;
+        background: #ffdb3a;
+        border: 0;
+        cursor: pointer;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.17);
+        /*width: 20%;*/
+    }
+    @media (max-width: 720px) {
+        .subscribe-form input {
+            display: block;
+        }
+        .subscribe-form input[type=text], input[type=email] {
+            width: 100%;
+        }
+    }
+</style>
+<div class="subscribe-form">
+    <h3>Subscribe to my Newsletter</h3>
+    <p>
+        Receive updates on articles written by Francis Sunday, Software Developer and Tech Enthusiast.
+    </p>
+    <form action="//twitter.us15.list-manage.com/subscribe/post?u=48eca4c34f01c674dfcd28569&amp;id=48dfba54d3" method="post" target="_blank" novalidate>
+        <input type="email" placeholder="Email Address *" required name="EMAIL">
+        <input type="text" placeholder="First Name *" name="FNAME">
+        <input type="submit" value="Subscribe">
+    </form>
+</div>
+</script>
