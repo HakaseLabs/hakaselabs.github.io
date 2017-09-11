@@ -71,11 +71,11 @@ The `render` function is the heart of all components. It defines what will be di
 import React, { Component } from 'react';
 
 class AuthorProfile extends Component {
-	render() {
-		return(
-			<h1>John Doe - React Ninja!</h1>
-		);
-	}
+  render() {
+    return(
+      <h1>John Doe - React Ninja!</h1>
+    );
+  }
 }
 ```
 
@@ -86,11 +86,11 @@ import React, { Component } from 'react'
 import AuthorProfile from './AuthorProfile'
 
 class App extends Component {
-	<div className="App">
-		<div className="App-header">
-			<AuthorProfile />
-		</div>
-	</div>
+  <div className="App">
+    <div className="App-header">
+      <AuthorProfile />
+    </div>
+  </div>
 }
 ```
 
@@ -105,24 +105,24 @@ Let's modify our `AuthorProfile` component to make use of props, and pass the va
 import React, { Component } from 'react';
 
 class AuthorProfile extends Component {
-	render() {
-		return(
-			<h1>{this.props.name} - {this.props.role}!</h1>
-		);
-	}
+  render() {
+    return(
+      <h1>{this.props.name} - {this.props.role}!</h1>
+    );
+  }
 }
 
 // App.js
 class App extends Component {
   render() {
     return(
-			<div className="App">
-				<div className="App-header">
-					<AuthorProfile name={"John Doe"}, role={"React Ninja"} />
-				</div>
-			</div>
-		);
-	}
+      <div className="App">
+        <div className="App-header">
+          <AuthorProfile name={"John Doe"}, role={"React Ninja"} />
+        </div>
+      </div>
+    );
+  }
 }
 ```
 
@@ -137,24 +137,24 @@ To use states in a React component, we'll need to add a constructor. Back to our
 // App.js
 
 class App extends Component {
-	constructor() {
-		super();
-		this.state = {
-			txt = "Hello from React!"
-		}
-	}
+  constructor() {
+    super();
+    this.state = {
+      txt = "Hello from React!"
+    }
+  }
  
  update(e) {
    this.setState( {text: e.target.value })
  }
  render() {
   return(
-		<div className="App">
-			<div className="App-header">
-				<AuthorProfile name={"John Doe"}, role={"React Ninja"} />
-			</div>
-		</div>
-	 );
+    <div className="App">
+      <div className="App-header">
+        <AuthorProfile name={"John Doe"}, role={"React Ninja"} />
+      </div>
+    </div>
+   );
  }
 }
 ```
