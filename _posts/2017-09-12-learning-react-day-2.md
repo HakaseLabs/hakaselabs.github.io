@@ -120,7 +120,8 @@ At this point running your app on you should get something similar:
 
 ![React basic app](http://res.cloudinary.com/hakase-labs/image/upload/v1505241392/react30-basic-app_vghmhe.gif "Preview")
 
->.
+<br><br>
+
 
 ## Source
 The source for this series, can be found [HERE](https://github.com/codehakase/react30-source). You can clone the GitHub repo, and run locally, more instructions are on the README file.
