@@ -118,7 +118,7 @@ export default App;
 
 At this point running your app on you should get something similar:
 
-![React basic app](http://res.cloudinary.com/hakase-labs/image/upload/v1505241392/react30-basic-app_vghmhe.gif "Preview")
+![React basic app](http://res.cloudinary.com/hakase-labs/image/upload/c_scale,w_1230/v1505241392/react30-basic-app_vghmhe.gif "Preview")
 
 <br><br>
 
