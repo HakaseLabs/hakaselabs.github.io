@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Object-Oriented PHP - An Easy Approach - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Object-Oriented PHP - An Easy Approach">
+<meta itemprop="description" content="A simple guide to getting started with Object Oriented PHP">
+<meta itemprop="dateModified" content="2017-05-17T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1033">
+
+
+
+<meta itemprop="keywords" content="php,oop," />
+<meta property="og:title" content="Object-Oriented PHP - An Easy Approach" />
+<meta property="og:description" content="A simple guide to getting started with Object Oriented PHP" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-05-17/object-oriented-php-an-easy-approach/" />
+<meta property="article:published_time" content="2017-05-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-05-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Object-Oriented PHP - An Easy Approach"/>
+<meta name="twitter:description" content="A simple guide to getting started with Object Oriented PHP"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">17</span>
+							<span class="rest">May 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Object-Oriented PHP - An Easy Approach</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p><img src="%7B%7Bsite.url%7D%7D/images/oop-in-php.png" alt="OOP-PHP" title="Object-Oriented Programming in PHP"></p>
+<p>For some PHP developers, the concept of object-orient programming, seems like a frightening concept. You might have browsed through repos on GitHub or read articles on how to implement a feature in a particular PHP project of yours, and the code is full of complicated syntax. I tell you, the concept of OOP is easy to grasp.</p>
+<p><strong>Object-Oriented programming</strong> (OOP), is a style of programming which allows us developers and programmers group related tasks or actions into classes to produce effective code. OOP follows the tenet <em>&ldquo;don&rsquo;t repeat yourself (DRY)</em>, which are common in procedural programming.</p>
+<h2 id="why-learn-oop">Why Learn OOP?</h2>
+<p>Many frameworks built upon PHP are using the OOP paradigm and if you intend learning one of those frameworks (Laravel, Codeigniter, Symfony, etc), you&rsquo;ll need a ground on OOP to start with.</p>
+<h2 id="objects-and-classes">Objects and Classes</h2>
+<p>In OOP there are two major concepts you&rsquo;d see often (they really make up OOP), they are <strong>objects</strong> and <strong>classes</strong>. These terms sometimes appear to be interchangeable. That is not the case.
+A class for example, stands as a <strong>structure</strong> or <em>blueprint</em>. Relate that to a Building, say a Bank, a blueprint is presented which defines the properties of the buildings, and once accepted they proceed to errect the building. <em>Classes</em> form the structure of data needed to build objects. That same bank can use the same bluprint and errect same structure in a different location with slight differences (branch manager, number of staff, etc).</p>
+<h3 id="creating-classes">Creating Classes</h3>
+<p>The syntax to create a class in PHP is very straightforward, the <code>class</code> key word is used to declare a class, followed by the name and a pair of curly braces <code>{ ... }</code></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+
+<span style="color:#00f">class</span> <span style="color:#2b91af">OurClass</span>
+{
+  <span style="color:#008000">// properties and methods
+</span><span style="color:#008000"></span>}
+</code></pre></div><p>So we can write a basic <code>User</code> class as such</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">class</span> <span style="color:#2b91af">User</span>
+{
+  <span style="color:#00f">public</span> $firstname;
+  <span style="color:#00f">public</span> $lastname;
+
+  <span style="color:#00f">public</span> <span style="color:#00f">function</span> __construct($firstname, $lastname)
+  {
+    $this-&gt;firstname = $firstname;
+    $this-&gt;lastname = $lastname;
+  }
+
+  <span style="color:#00f">public</span> <span style="color:#00f">function</span> showInfo()
+  {
+    <span style="color:#00f">return</span> $this-&gt;firstname . <span style="color:#a31515">&#34; &#34;</span> . $this-&gt;lastname;
+  }
+}
+<span style="color:#008000">// using the class
+</span><span style="color:#008000"></span>$administrator = <span style="color:#00f">new</span> User(<span style="color:#a31515">&#34;John&#34;</span>, <span style="color:#a31515">&#34;Doe&#34;</span>);
+<span style="color:#00f">echo</span> $administrator-&gt;showInfo(); <span style="color:#008000">// should output
+</span></code></pre></div><p>The code above, creates a basic blueprint for a user, the <code>__construct</code> method, is a <em>magic</em> method. The method is called when ever the class is <strong>instantiated</strong>. The constructor accepts two parameters <code>$firstname</code> and <code>$lastname</code> and these are passed to the class properties <code>$this-&gt;firsname</code> and <code>$this-&gt;lastname</code>.</p>
+<p><code>$this</code> refers to the current class in scope.</p>
+<p>Also in the <code>User</code> class, there&rsquo;s a <code>showInfo</code> method, that dumps the data in a raw format.</p>
+<p>To instantiate a class, you use the <code>new</code> keyword &ndash; <code>$obj = new SomeClass;</code>. When a class is instantiated, it creates a copy of the blueprint to that object.
+We can have various objects as instance of the same class, but their data will vary.</p>
+<p>Add to the code</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">use</span> Codehakase\User;
+
+$user_a = <span style="color:#00f">new</span> User(<span style="color:#a31515">&#34;Francis&#34;</span>, <span style="color:#a31515">&#34;Sunday&#34;</span>);
+$user_a-&gt;showInfo();
+<span style="color:#00f">echo</span> <span style="color:#a31515">&#34;&lt;br&gt;&#34;</span>;
+$user_b = <span style="color:#00f">new</span> User(<span style="color:#a31515">&#34;Desiigner&#34;</span>, <span style="color:#a31515">&#34;Doe&#34;</span>);
+$user_b-&gt;showInfo();
+</code></pre></div><p>Load up the script in your favorite browser <code>localhost/dir/oop.php</code>, you should see an output similar to this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/var/www/html/tuts/backend/PHP/oop.php:15:
+object(User)[1]
+  public &#39;firstname&#39; =&gt; string &#39;John&#39; (length=4)
+  public &#39;lastname&#39; =&gt; string &#39;Doe&#39; (length=3)
+
+/var/www/html/tuts/backend/PHP/oop.php:15:
+object(User)[2]
+  public &#39;firstname&#39; =&gt; string &#39;Francis&#39; (length=7)
+  public &#39;lastname&#39; =&gt; string &#39;Sunday&#39; (length=6)
+
+/var/www/html/tuts/backend/PHP/oop.php:15:
+object(User)[3]
+  public &#39;firstname&#39; =&gt; string &#39;Desiigner&#39; (length=9)
+  public &#39;lastname&#39; =&gt; string &#39;Doe&#39; (length=3)
+
+</code></pre></div><p>Awesome!! each instance of the <code>User</code> class is independent of the others, their data is not same.</p>
+<h3 id="method-and-property-visibility">Method and Property Visibility</h3>
+<p>Now the <code>public</code> keyword, is a visibility type. There are three of them <code>public</code>, <code>protected</code>, and <code>private</code>. Also in addition to a property or method visiblity, there&rsquo;s <code>static</code> keyword, which allows them to accessed even without an instantiation of the class.
+Any property (variable) or method (class functions) with the <code>public</code> keyword, is accessible anywhere, within and outside the class.</p>
+<p>Any property or method declared as <code>protected</code> can only be accessible within that class and its child classes.</p>
+<p>A property or method declared as <code>private</code>, is only accessible from within the class it was defined in.</p>
+<h2 id="comparing-procedural-code-and-object-oriented-code">Comparing Procedural code and Object-Oriented code</h2>
+<p><em>OOP actually provides an easier approach to dealing with data. Because an object can store data internally, variables don&rsquo;t need to be passed from function to function to work properly.</em>
+Consider the following getter, setter procedural code</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">function</span> sample() {
+  <span style="color:#00f">return</span> [
+    <span style="color:#008000">//
+</span><span style="color:#008000"></span>  ]
+}
+<span style="color:#008000">// a basic setter function
+</span><span style="color:#008000"></span>
+<span style="color:#00f">function</span> sampleSet($sample, $name, $value) {
+  $sample[<span style="color:#a31515">&#39;vars&#39;</span>][$name] = $value; <span style="color:#008000">// creates a multidimensional array from function arguments
+</span><span style="color:#008000"></span>  <span style="color:#00f">return</span> $sample; <span style="color:#008000">//returns the loaded array
+</span><span style="color:#008000"></span>}
+
+<span style="color:#008000">// a basic getter
+</span><span style="color:#008000"></span><span style="color:#00f">function</span> sampleGet($sample, $name) {
+  <span style="color:#00f">if</span> (isset($sample[<span style="color:#a31515">&#39;vars&#39;</span>][$name])) {
+    $value = $sample[<span style="color:#a31515">&#39;vars&#39;</span>][$name];
+    <span style="color:#00f">return</span> [
+      $sample,
+      $value
+    ]
+  }
+
+  <span style="color:#008000">// using the functions
+</span><span style="color:#008000"></span>  $ex = sample();
+  $ex = sampleSet($ex, <span style="color:#a31515">&#39;Helo&#39;</span>, <span style="color:#a31515">&#39;World&#39;</span>); <span style="color:#008000">// set an item
+</span><span style="color:#008000"></span>  <span style="color:#00f">list</span>($ex, $value) = sampleGet($ex, <span style="color:#a31515">&#39;World&#39;</span>); <span style="color:#008000">// grab an item
+</span><span style="color:#008000"></span>}
+<span style="color:#00f">?&gt;</span>
+</code></pre></div><p>Now i&rsquo;ll re-write that in an OOP style.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">class</span> <span style="color:#2b91af">Sample</span>
+{
+  <span style="color:#00f">private</span> $vars;
+
+  <span style="color:#00f">public</span> <span style="color:#00f">function</span> set($name, $value)
+  {
+    $this-&gt;var[$name] = $value;
+  }
+
+  <span style="color:#00f">public</span> <span style="color:#00f">function</span> get($name)
+  {
+    <span style="color:#00f">return</span> isset($this-&gt;vars[$name]) ? $this-&gt;vars[$name] : <span style="color:#00f">null</span>;
+  }
+}
+
+<span style="color:#008000">// using
+</span><span style="color:#008000"></span>$ex = <span style="color:#00f">new</span> Sample;
+$ex-&gt;set(<span style="color:#a31515">&#34;Hello&#34;</span>, <span style="color:#a31515">&#34;World&#34;</span>);
+$value = $example-&gt;get(<span style="color:#a31515">&#34;World&#34;</span>);
+
+var_dump($ex);
+<span style="color:#00f">?&gt;</span>
+</code></pre></div><p>Running the OOP code, you get something similar to:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/var/www/html/tuts/backend/PHP/oop.php:49:
+object(Sample)[4]
+  private &#39;vars&#39; =&gt; null
+  public &#39;var&#39; =&gt;
+    array (size=1)
+      &#39;Hello&#39; =&gt; string &#39;World&#39; (length=5)
+</code></pre></div><h3 id="better-code-management">Better Code Management</h3>
+<p>With OOP, you can manage your files within your application easily, by making use of autoloading.</p>
+<p>A typical procedural dependencies script may look as such:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">require_once</span> <span style="color:#a31515">&#34;php-includes/connect.php&#34;</span>
+<span style="color:#00f">require_once</span> <span style="color:#a31515">&#34;php-includes/do-login.php&#34;</span>
+<span style="color:#00f">require_once</span> <span style="color:#a31515">&#34;php-includes/reset-password.php&#34;</span>
+<span style="color:#00f">require_once</span> <span style="color:#a31515">&#34;php-includes/do-signup.php&#34;</span>
+...
+</code></pre></div><p>We can use class autoloading to include all the files we want</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function __autoload($class) {
+  include_once &#39;inc/class&#39; . $class . &#39;.php&#39;;
+}
+</code></pre></div><p>Preferably, i use <a href="https://getcomposer.org">Composer</a> and the <a href="https://getcomposer.org/doc/04-schema.md#psr-4">PSR-4</a> autoloading standard, for everything autoloading.
+A basic Autoload with composer would look like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  &#34;autoload&#34;: {
+    &#34;psr-4&#34;: {
+      &#34;Codehakase\\&#34;: <span style="color:#a31515">&#34;app/&#34;</span>
+    }
+  }
+}
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#00f">&lt;?php</span>
+<span style="color:#00f">require_once</span> <span style="color:#a31515">&#34;vendor/autoload.php&#34;</span> <span style="color:#008000">// composer&#39;s autoloader
+</span><span style="color:#008000"></span>
+<span style="color:#00f">use</span> Codehakase\Models\User;
+
+$user = <span style="color:#00f">new</span> User;
+
+$user-&gt;learnOOP(<span style="color:#00f">true</span>);
+...
+</code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>It&rsquo;s been awesome walking you through the concept of object-orient programming in PHP. Learning or mastering OOP is a really great way to up your programming skills to the next level as a PHP Developer.
+We are still gonna continue learning other concepts of OOP, and build a real application with it. All this to come in subsequent articles after this.</p>
+<p>Got any questions or suggestions? Drop them in the comment box below.</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/php">php</a></li>
+							
+							<li><a href="/tags/oop">oop</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

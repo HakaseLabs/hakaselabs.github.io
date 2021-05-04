@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>javascript on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/javascript/</link>
+    <description>Recent content in javascript on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Sat, 12 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JavaScript Async/Await 101</title>
+      <link>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</guid>
+      <description>Async and Await has been a blessing to most JavaScript Developers. Even while it was on the Stage 4 proposal for ES6, the feature has been warmtly welcomed.
+Node.js now Supports async/await since its version 7.6.
+What is async/await? If this is your first time seeing/hearing of this term, here&amp;rsquo;s it in plain English:
+ Its the newest way/pattern of writing asychronous code in JavaScript, asides Promises and callbacks. Async/await compared to Promises, are non-blocking Async/await makes aysnchronous code appear and behave like synchronous code.</description>
+    </item>
+    
+    <item>
+      <title>for...in vs for...of Loops in JavaScript</title>
+      <link>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</guid>
+      <description>The for..in and for..of loops, gives us a clean and concise syntax to iterate on iterable items like arrays, strings, objects, and enumerables. Now the question is where to use which. Here&amp;rsquo;s a little reminder to get you you started.
+for..in Use this to iterate over the properties of an object:
+let person = { name: &amp;#39;Francis&amp;#39;, alias: &amp;#39;codehakase&amp;#39;, eyeColour: &amp;#39;brown&amp;#39; }; for(let key in person) { console.log( `${key}=&amp;gt; ${person[key]}` ); } // name =&amp;gt; Francis // alias =&amp;gt; codehakase .</description>
+    </item>
+    
+    <item>
+      <title>Making hakasebot - Twitter Bots 101</title>
+      <link>https://hakaselogs.me/2017-05-30/making-hakasebot-twitter-bots-101/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-30/making-hakasebot-twitter-bots-101/</guid>
+      <description>![Bots]({{ site.url }}/images/twitter-bots.gif &amp;ldquo;Bots&amp;rdquo;)
+This was my first attempt making twitter bots. I made a very simple twitter bot for this blog, check the Source and also follow @_hakasebot.
+Setting Up The bot was created using the Twit package, which is a Twitter API client for Node.js. Twit needs to connect with my twitter account so first I created a new Twitter Application. After that, I took note of my application&amp;rsquo;s keys:</description>
+    </item>
+    
+    <item>
+      <title>JavaScript Objects 101</title>
+      <link>https://hakaselogs.me/2017-05-25/javascript-objects-101/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-25/javascript-objects-101/</guid>
+      <description>In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers.
+What Is An Object? In JavaScript terms, An Object is a collection of data, which consits of several variables and functions - which are called properties and methods.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to JavaScript Promises</title>
+      <link>https://hakaselogs.me/2017-05-21/introduction-to-javascript-promises/</link>
+      <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-21/introduction-to-javascript-promises/</guid>
+      <description>JavaScript promises have become a popular way to handle the tangled mess that JavaScript’s asynchronous nature often creates for us. Synchronous code is eaiser to follow and debug, async is better for flexibiity. Promises are becomming a big part of the JavaScript world, with awesome APIs implemented with it.
+What is a Promise? A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action&amp;rsquo;s eventual success value or failure reason.</description>
+    </item>
+    
+    <item>
+      <title>Introducing Adonis Js</title>
+      <link>https://hakaselogs.me/2017-05-09/introducing-adonis-js/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-09/introducing-adonis-js/</guid>
+      <description>TL;DR AdonisJs is a true MVC Framework for Node.js. It encapsulate all the boring parts of Web programming and offers you a nice &amp;amp; clean API to work with. AdonisJs makes it easy to write web applications with less code. In this article, i will show you how to get started with AdonisJs. Checkout the repo on Github.
+Node.js is one of the emerging technologies to write real-time applications using one of your favorite web languages: Javascript.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>react on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/react/</link>
+    <description>Recent content in react on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Fri, 20 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building a Web App With Go, Gin and React</title>
+      <link>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</guid>
+      <description>TL;DR: In this tutorial, I&amp;rsquo;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it. Check out the Github repo for the code we&amp;rsquo;re going to write.
+ Gin is a high-performance micro-framework that delivers a very minimalistic framework that carries with it only the most essential features, libraries, and functionalities needed to build web applications and microservices. It makes it simple to build a request handling pipeline from modular, reusable pieces.</description>
+    </item>
+    
+  </channel>
+</rss>

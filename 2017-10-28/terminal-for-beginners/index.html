@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Terminal for Beginners! - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Terminal for Beginners!">
+<meta itemprop="description" content="A simple guide to getting started with the Terminal">
+<meta itemprop="dateModified" content="2017-10-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1009">
+
+
+
+<meta itemprop="keywords" content="unix,terminal," />
+<meta property="og:title" content="Terminal for Beginners!" />
+<meta property="og:description" content="A simple guide to getting started with the Terminal" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-10-28/terminal-for-beginners/" />
+<meta property="article:published_time" content="2017-10-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-10-28T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Terminal for Beginners!"/>
+<meta name="twitter:description" content="A simple guide to getting started with the Terminal"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">28</span>
+							<span class="rest">Oct 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Terminal for Beginners!</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>Getting into Software Development seem overwhelming (actually it is) these days. One has to go through the hassle of getting familiar with different languages, to organizing codebases, to libraries, frameworks, the list goes on. Every Job description (at least the sane ones), requires additional skills to get the job. Example of such, Version Control (Git or Mecurial), tasks runners, build tools, package managers, etc.</p>
+<p>Most of these extra tools are being accessed/used from a command line interface. The black hacker environment thingy stuff seem frightening kind of, but this article should get you familiar with the terminal interface. For those of us already familiar, after reading this article, you&rsquo;d wished you&rsquo;ve read it before you opened a terminal for the first time.</p>
+<blockquote>
+<p>Note, this article is directed towards unix based terminal environments</p>
+</blockquote>
+<h3 id="what-is-a-terminal">What is a terminal?</h3>
+<p>A terminal is an interface where you can type and execute text based commands. Every operating system comes with a factory command line interface (CLI). On Linux the default terminal is named &ldquo;Terminal&rdquo;, same for MacOS. On Windows, you&rsquo;d find the <strong>command prompt</strong> which is totally different from Linux and macOS since those are built on Unix, so to get the features (which we&rsquo;ll discuss later), you can Install a <a href="https://msdn.microsoft.com/en-us/commandline/wsl/install_guide">linux enviroment</a>.</p>
+<p><img src="http://res.cloudinary.com/hakase-labs/image/upload/c_scale,w_1230/v1509199976/terminal-1.png" alt="terminal window" title="An opened Terminal window on Linux"></p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="basic-commands">Basic commands</h3>
+<p><strong>Changing directories:</strong> You can change into any directory from a terminal with the <code>cd</code> command. What it requires is a valid path to a directory. So using the command:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd Downloads
+</code></pre></div><p><strong>Listing files and directories:</strong> To list the contents of a directory, you can use the <code>ls</code> command.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cd Downloads
+Downloads$ ls
+golang-1.9 file.txt ...
+</code></pre></div><blockquote>
+<p>You can also pass arguments to <code>ls</code> command to change its behaviour.</p>
+</blockquote>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Downloads$ ls -a -l
+total 12
+drwxr-xr-x  3 codehakase codehakase 4096 Oct 11 20:25 .
+drwxr-xr-x 37 codehakase codehakase 4096 Oct 28 15:22 ..
+drwxr-xr-x  2 codehakase codehakase 4096 Oct 22 17:04 talks
+</code></pre></div><p>The <code>-a</code> and <code>-l</code> flags, shows all files (<code>-a</code> including hidden ones), and list them one file per line (<code>-l</code>).</p>
+<h4 id="essential-commands-for-file-and-directory-management">Essential commands for file and directory management</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">ls     <span style="color:#008000"># List files</span>
+cat    <span style="color:#008000"># Show file content</span>
+mkdir  <span style="color:#008000"># Make directory</span>
+rm     <span style="color:#008000"># Remove file (or dir)</span>
+pwd    <span style="color:#008000"># Output the current directory</span>
+cd     <span style="color:#008000"># Change directory</span>
+mv     <span style="color:#008000"># Move or rename a file (or dir)</span>
+cp     <span style="color:#008000"># Copy file (or dir)</span>
+</code></pre></div><h4 id="finding-your-way-around-commands-when-stuck">Finding your way around commands when stuck</h4>
+<p>Most commands (if not all) comes with a <code>--help</code> argument, which displays a list of available options for that commands, and what each option do.
+So executing <code>ls --help</code> from the terminal would display:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically <span style="color:#00f">if</span> none of -cftuvSUX nor --sort is specified.
+
+Mandatory arguments to long options are mandatory <span style="color:#00f">for</span> short options too.
+  -a, --all                  <span style="color:#00f">do</span> not ignore entries starting with .
+  -A, --almost-all           <span style="color:#00f">do</span> not list implied . and ..
+      --author               with -l, print the author of each file
+  -b, --escape               print C-style escapes <span style="color:#00f">for</span> nongraphic characters
+      --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
+                               <span style="color:#a31515">&#39;--block-size=M&#39;</span> prints sizes in units of
+                               1,048,576 bytes; see SIZE format below
+  -B, --ignore-backups       <span style="color:#00f">do</span> not list implied entries ending with ~
+  -c                         with -lt: sort by, and show, ctime (time of last
+                               modification of file status information);
+                               with -l: show ctime and sort by name;
+                               otherwise: sort by ctime, newest first
+...
+</code></pre></div><blockquote>
+<p>For most commands, if you want to learn more about them without googling you can run <code>man commandName</code>. The <code>man</code> command displays a manual for any command.</p>
+</blockquote>
+<h3 id="setting-up-with-package-managers">Setting up with Package Managers</h3>
+<p>Package managers are tools used to install software, or dependencies for projects. Some examples:</p>
+<ul>
+<li>yarn</li>
+<li>npm</li>
+<li>Homebrew</li>
+<li>apt-get</li>
+</ul>
+<p>Linux distributions come pre-installed with package managers like <strong>apt-get</strong> or <strong>yum</strong>. MacOS preferred package manager is <em>Homebrew</em> available at <a href="https://brew.sh">brew.sh</a>.</p>
+<h3 id="dotfiles">Dotfiles</h3>
+<p>Dotfiles are used to customize your system. The name is derived from the configuration files in Unix-like systems (eg .zshrc, .gitconfig, etc). Dotfiles automate things. If you get a new machine, you&rsquo;ll have to setup your development environment to the taste of yours, that takes a while, and yeah you&rsquo;d probably forgotten the download pages for those awesome little plugins/packages that did the job. And apart from remembering download pages, we haven&rsquo;t mentioned the plethora of configurations and system preference to redo (I don&rsquo;t think you can memorize all&hellip;). I&rsquo;m not going to go too deep into dotfiles, there&rsquo;ll be a dedicated article for it here on my blog.</p>
+<p>Some example dotfiles</p>
+<ul>
+<li>.bashrc</li>
+<li>.zshrc</li>
+<li>.env</li>
+<li>.prompt</li>
+</ul>
+<p><img src="http://res.cloudinary.com/hakase-labs/image/upload/c_scale,w_1230/v1509222152/dotfiles_gyp7ku.png" alt="Dotfiles" title="Dotfiles linux"></p>
+<h3 id="git">Git</h3>
+<p>You&rsquo;ve probably heard of Git before, well no assumptions here. Git is a program used for version control. It allows you keep track of changes made to a project (repository), and allow multiple collaboration on a single project.</p>
+<blockquote>
+<p>Git is a life saver!!!</p>
+</blockquote>
+<p>Installing Git is easy, we can use either Homebrew (macOS), apt-get (Linux distros) and on windows, Git bash or Chocolatey.</p>
+<h4 id="linux">Linux</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-get install git
+</code></pre></div><h4 id="macos">macOS</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">brew install git
+</code></pre></div><h4 id="windows">windows</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#008000"># chocolatey</span>
+choco install git
+</code></pre></div><p><img src="http://res.cloudinary.com/hakase-labs/image/upload/c_scale,w_1230/v1509221564/git-shell_f7q4nc.png" alt="Git" title="git prompt"></p>
+<h3 id="aliases">Aliases</h3>
+<p>While using the terminal more often, you&rsquo;d probably note some commands you repeat. You can use an alias to abbreviate more complex commands. While I work, I normally have to commit, push, or clone stuff using git, I have some commands abbreviated:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">alias gc=<span style="color:#a31515">&#34;git commit -m&#34;</span>
+
+<span style="color:#008000"># The above is used, gc &#34;initial commit&#34;</span>
+</code></pre></div><p>Note, if you define aliases, it will only be available on the terminal&rsquo;s session. If you close your terminal, everything resets. If you want a permanent alias, you&rsquo;d edit your terminal&rsquo;s profile (<code>.bashrc</code>, <code>.zshrc</code>, <code>.profile</code>). I use <a href="https://github.com/robbyrussell/oh-my-zsh">ZSH and oh-my-zsh</a> for my terminal environment, so I&rsquo;d edit my <code>.zshrc</code> file to add my alias same as before.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Its been walking with you this far. If you&rsquo;re new to the terminal bla bla bla, I hope you feel comfortable now to use the terminal.</p>
+<p>I&rsquo;m no expert with the Terminal, still finding my way around it too, so I may have missed something. If I have, feel free to let me know in the comment below, or send me a tweet <a href="https://twitter.com/codehakase">@codehakase</a>. Thanks.</p>
+<h3 id="worth-checking-out">Worth Checking out</h3>
+<p><a href="https://github.com/jlevy/the-art-of-command-line#the-art-of-command-line">The Art of Command Line</a></p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/unix">unix</a></li>
+							
+							<li><a href="/tags/terminal">terminal</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

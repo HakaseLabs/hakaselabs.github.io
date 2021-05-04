@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unix on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/unix/</link>
+    <description>Recent content in unix on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Sun, 19 Nov 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/unix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting Started with Go - Variables</title>
+      <link>https://hakaselogs.me/2017-11-19/getting-started-with-go-variables/</link>
+      <pubDate>Sun, 19 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-11-19/getting-started-with-go-variables/</guid>
+      <description>In the previous article - Golang - Getting Started on The Practical Dev, I wrote an intro to the Go programing language, and how to setup a development environment for your platform.
+In this part of the series, we&amp;rsquo;re going to talk about variables in Go, check it out HERE</description>
+    </item>
+    
+    <item>
+      <title>Terminal for Beginners!</title>
+      <link>https://hakaselogs.me/2017-10-28/terminal-for-beginners/</link>
+      <pubDate>Sat, 28 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-10-28/terminal-for-beginners/</guid>
+      <description>Getting into Software Development seem overwhelming (actually it is) these days. One has to go through the hassle of getting familiar with different languages, to organizing codebases, to libraries, frameworks, the list goes on. Every Job description (at least the sane ones), requires additional skills to get the job. Example of such, Version Control (Git or Mecurial), tasks runners, build tools, package managers, etc.
+Most of these extra tools are being accessed/used from a command line interface.</description>
+    </item>
+    
+  </channel>
+</rss>

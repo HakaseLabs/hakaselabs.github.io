@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Building a Web App With Go, Gin and React - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Building a Web App With Go, Gin and React">
+<meta itemprop="description" content="In this tutorial, I&#39;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it.">
+<meta itemprop="dateModified" content="2018-04-20T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4073">
+
+
+
+<meta itemprop="keywords" content="go,gin-gonic,react,golang," />
+<meta property="og:title" content="Building a Web App With Go, Gin and React" />
+<meta property="og:description" content="In this tutorial, I&#39;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/" />
+<meta property="article:published_time" content="2018-04-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-20T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Building a Web App With Go, Gin and React"/>
+<meta name="twitter:description" content="In this tutorial, I&#39;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">20</span>
+							<span class="rest">Apr 2018</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Building a Web App With Go, Gin and React</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p><strong>TL;DR:</strong> In this tutorial, I&rsquo;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it. Check out the Github <a href="https://github.com/codehakase/golang-gin">repo</a> for the code we&rsquo;re going to write.</p>
+<hr>
+<p><strong>Gin</strong> is a high-performance micro-framework that delivers a very minimalistic framework that carries with it only the most essential features, libraries, and functionalities needed to build web applications and microservices. It makes it simple to build a request handling pipeline from modular, reusable pieces. It does this by allowing you to write middleware that can be plugged into one or more request handlers or groups of request handlers.</p>
+<h2 id="gin-features">Gin Features</h2>
+<p>Gin is a fast, simple yet fully featured and very efficient web framework for Go. Check out some of the features below that makes it a worthy framework to consider for your next Golang project.</p>
+<ul>
+<li><strong>Speed:</strong> Gin is built for speed. The framework offers a Radix tree based routing, small memory foot print. No reflection. Predictable API performance.</li>
+<li><strong>Crash-Free</strong>:  Gin has the capability of catching crashes or panics during runtime, and can recover from it, this way your application will be always available.</li>
+<li><strong>Routing:</strong> Gin provides a routing interface to allow you express how your web application or API routes should look.</li>
+<li><strong>JSON Validation:</strong> Gin can parse and validate the JSON requests easily, checking for the existence of required values.</li>
+<li><strong>Error Management:</strong> Gin provides a convenient way to collect all the errors occurred during a HTTP request. Eventually, a middleware can write them to a log file, to a database and send them through the network.</li>
+<li><strong>Built-In Rendering:</strong> Gin provides an easy to use API for JSON, XML, and HTML rendering.</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To follow along with this tutorial, you&rsquo;ll need to have Go installed on your machine, a web browser to view the app, and a command line to execute build commands.</p>
+<p><strong>Go</strong> or as its normally called; <em>&ldquo;Golang&rdquo;</em>, is a programming language developed by Google for building modern software. Go is a language designed to get stuff done efficiently and fast. The key benefits of Go include:</p>
+<ul>
+<li>Strongly typed and garbage collected</li>
+<li>Blazing fast compile times</li>
+<li>Concurrency built in</li>
+<li>Extensive standard library</li>
+</ul>
+<p>Head over to the <a href="https://golang.org/dl/">downloads section</a> of the Go website, to get Go running on your machine.</p>
+<h2 id="building-an-app-with-gin">Building An App With Gin</h2>
+<p>We&rsquo;ll be building a simple joke listing app with <strong>Gin</strong>. Our app will simply list some silly dad jokes. We are going to add authentication to it, all logged-in users will have the privilege to like and view jokes.</p>
+<p>This will allow us illustrate how <strong>Gin</strong> can be used to develop web applications, and/or APIs.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38371873-6ccabb50-38e5-11e8-9b67-b97cc2ce98c6.png" alt="golang-gin-demo-shot"></p>
+<p>We&rsquo;ll be making use of the following functionalities offered by Gin:</p>
+<ul>
+<li>Middleware</li>
+<li>Routing</li>
+<li>Routes Grouping</li>
+</ul>
+<h3 id="ready-set-go">Ready, Set, Go</h3>
+<p>We will write our entire Go application in a <code>main.go</code> file. Since its a small application, its going to be easy to build the application with just  <code>go run</code> from the terminal.</p>
+<p>We&rsquo;ll create a new directory <code>golang-gin</code> in our Go workspace, and then a <code>main.go</code> file in it:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ mkdir -p $GOPATH/src/github.com/user/golang-gin
+$ cd $GOPATH/src/github.com/user/golang-gin
+$ touch main.go
+</code></pre></div><p>The content of the <code>main.go</code> file:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
+
+<span style="color:#00f">import</span> (
+  <span style="color:#a31515">&#34;net/http&#34;</span>
+
+  <span style="color:#a31515">&#34;github.com/gin-gonic/contrib/static&#34;</span>
+  <span style="color:#a31515">&#34;github.com/gin-gonic/gin&#34;</span>
+)
+
+<span style="color:#00f">func</span> main() {
+  <span style="color:#008000">// Set the router as the default one shipped with Gin
+</span><span style="color:#008000"></span>  router := gin.Default()
+
+  <span style="color:#008000">// Serve frontend static files
+</span><span style="color:#008000"></span>  router.Use(static.Serve(<span style="color:#a31515">&#34;/&#34;</span>, static.LocalFile(<span style="color:#a31515">&#34;./views&#34;</span>, <span style="color:#00f">true</span>)))
+
+  <span style="color:#008000">// Setup route group for the API
+</span><span style="color:#008000"></span>  api := router.Group(<span style="color:#a31515">&#34;/api&#34;</span>)
+  {
+    api.GET(<span style="color:#a31515">&#34;/&#34;</span>, <span style="color:#00f">func</span>(c *gin.Context) {
+      c.JSON(http.StatusOK, gin.H {
+        <span style="color:#a31515">&#34;message&#34;</span>: <span style="color:#a31515">&#34;pong&#34;</span>,
+      })
+    })
+  }
+
+  <span style="color:#008000">// Start and run the server
+</span><span style="color:#008000"></span>  router.Run(<span style="color:#a31515">&#34;:3000&#34;</span>)
+}
+</code></pre></div><p>We&rsquo;ll need to create some more directories for our static files. In the same directory as the <code>main.go</code> file, let&rsquo;s create a <code>views</code> folder. In the <code>views</code> folder, create a <code>js</code> folder and an <code>index.html</code> file in it.</p>
+<p>The <code>index.html</code> file will be very simple for now:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#00f">&lt;!DOCTYPE html&gt;</span>
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Jokeish App&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Welcome to the Jokeish App&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p>Before we test what we have to far, let&rsquo;s install the added dependencies:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go get -u github.com/gin-gonic/gin
+$ go get -u github.com/gin-gonic/contrib/static
+</code></pre></div><p>To see what&rsquo;s working, we&rsquo;ll need to start our server by running <code>go run main.go</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38358547-700bc822-38bd-11e8-88a6-246559fbe57f.png" alt="go-gin-gorun-1"></p>
+<p>Once the application is running, navigate to <code>http://localhost:3000</code> in your browser. If all went well, you should see level 1 header text <strong>Welcome to the Jokeish App</strong> displayed.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38385072-cdaa2168-3908-11e8-9889-e9c1e713ce0a.png" alt="golang-welcome-de"></p>
+<h3 id="defining-the-api">Defining The API</h3>
+<p>Let&rsquo;s add some more code in our <code>main.go</code> file, for our API definitions. We&rsquo;ll update our <code>main</code> function with two routes <code>/jokes/</code> and <code>/jokes/like/:jokeID</code>, to the route group <code>/api/</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> main() {
+  <span style="color:#008000">// ... leave the code above untouched...
+</span><span style="color:#008000"></span>
+  <span style="color:#008000">// Our API will consit of just two routes
+</span><span style="color:#008000"></span>  <span style="color:#008000">// /jokes - which will retrieve a list of jokes a user can see
+</span><span style="color:#008000"></span>  <span style="color:#008000">// /jokes/like/:jokeID - which will capture likes sent to a particular joke
+</span><span style="color:#008000"></span>  api.GET(<span style="color:#a31515">&#34;/jokes&#34;</span>, JokeHandler)
+  api.POST(<span style="color:#a31515">&#34;/jokes/like/:jokeID&#34;</span>, LikeJoke)
+}
+
+<span style="color:#008000">// JokeHandler retrieves a list of available jokes
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> JokeHandler(c *gin.Context) {
+  c.Header(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+  c.JSON(http.StatusOK, gin.H {
+    <span style="color:#a31515">&#34;message&#34;</span>:<span style="color:#a31515">&#34;Jokes handler not implemented yet&#34;</span>,
+  })
+}
+
+<span style="color:#008000">// LikeJoke increments the likes of a particular joke Item
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> LikeJoke(c *gin.Context) {
+  c.Header(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+  c.JSON(http.StatusOK, gin.H {
+    <span style="color:#a31515">&#34;message&#34;</span>:<span style="color:#a31515">&#34;LikeJoke handler not implemented yet&#34;</span>,
+  })
+}
+</code></pre></div><p>The content of the <code>main.go</code> file, should look like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
+
+<span style="color:#00f">import</span> (
+  <span style="color:#a31515">&#34;net/http&#34;</span>
+
+  <span style="color:#a31515">&#34;github.com/gin-gonic/contrib/static&#34;</span>
+  <span style="color:#a31515">&#34;github.com/gin-gonic/gin&#34;</span>
+)
+
+<span style="color:#00f">func</span> main() {
+  <span style="color:#008000">// Set the router as the default one shipped with Gin
+</span><span style="color:#008000"></span>  router := gin.Default()
+
+  <span style="color:#008000">// Serve frontend static files
+</span><span style="color:#008000"></span>  router.Use(static.Serve(<span style="color:#a31515">&#34;/&#34;</span>, static.LocalFile(<span style="color:#a31515">&#34;./views&#34;</span>, <span style="color:#00f">true</span>)))
+
+  <span style="color:#008000">// Setup route group for the API
+</span><span style="color:#008000"></span>  api := router.Group(<span style="color:#a31515">&#34;/api&#34;</span>)
+  {
+    api.GET(<span style="color:#a31515">&#34;/&#34;</span>, <span style="color:#00f">func</span>(c *gin.Context) {
+      c.JSON(http.StatusOK, gin.H {
+        <span style="color:#a31515">&#34;message&#34;</span>: <span style="color:#a31515">&#34;pong&#34;</span>,
+      })
+    })
+  }
+  <span style="color:#008000">// Our API will consit of just two routes
+</span><span style="color:#008000"></span>  <span style="color:#008000">// /jokes - which will retrieve a list of jokes a user can see
+</span><span style="color:#008000"></span>  <span style="color:#008000">// /jokes/like/:jokeID - which will capture likes sent to a particular joke
+</span><span style="color:#008000"></span>  api.GET(<span style="color:#a31515">&#34;/jokes&#34;</span>, JokeHandler)
+  api.POST(<span style="color:#a31515">&#34;/jokes/like/:jokeID&#34;</span>, LikeJoke)
+
+  <span style="color:#008000">// Start and run the server
+</span><span style="color:#008000"></span>  router.Run(<span style="color:#a31515">&#34;:3000&#34;</span>)
+}
+
+<span style="color:#008000">// JokeHandler retrieves a list of available jokes
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> JokeHandler(c *gin.Context) {
+  c.Header(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+  c.JSON(http.StatusOK, gin.H {
+    <span style="color:#a31515">&#34;message&#34;</span>:<span style="color:#a31515">&#34;Jokes handler not implemented yet&#34;</span>,
+  })
+}
+
+<span style="color:#008000">// LikeJoke increments the likes of a particular joke Item
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> LikeJoke(c *gin.Context) {
+  c.Header(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+  c.JSON(http.StatusOK, gin.H {
+    <span style="color:#a31515">&#34;message&#34;</span>:<span style="color:#a31515">&#34;LikeJoke handler not implemented yet&#34;</span>,
+  })
+}
+</code></pre></div><p>Let&rsquo;s run our app again <code>go run main.go</code>, and access our routes; <code>http://localhost:3000/api/jokes</code> will return a <code>200 OK</code> header response, with message <code>jokes handler not implemented yet</code>, and a POST request to <code>http://localhost:3000/api/jokes/like/1</code> returns a <code>200 OK</code> header, and message <code>Likejoke handler not implemented yet</code>.</p>
+<h3 id="jokes-data">Jokes Data</h3>
+<p>Since we already have our routes definition set, which does only one thing, which is to return a json response, we&rsquo;ll spice our codebase a bit by adding some more code to it.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000">// ... leave the code above untouched...
+</span><span style="color:#008000"></span>
+<span style="color:#008000">// Let&#39;s create our Jokes struct. This will contain information about a Joke
+</span><span style="color:#008000"></span>
+<span style="color:#008000">// Joke contains information about a single Joke
+</span><span style="color:#008000"></span><span style="color:#00f">type</span> Joke <span style="color:#00f">struct</span> {
+  ID     <span style="color:#2b91af">int</span>     <span style="color:#a31515">`json:&#34;id&#34; binding:&#34;required&#34;`</span>
+  Likes  <span style="color:#2b91af">int</span>     <span style="color:#a31515">`json:&#34;likes&#34;`</span>
+  Joke   <span style="color:#2b91af">string</span>  <span style="color:#a31515">`json:&#34;joke&#34; binding:&#34;required&#34;`</span>
+}
+
+<span style="color:#008000">// We&#39;ll create a list of jokes
+</span><span style="color:#008000"></span><span style="color:#00f">var</span> jokes = []Joke{
+  Joke{1, 0, <span style="color:#a31515">&#34;Did you hear about the restaurant on the moon? Great food, no atmosphere.&#34;</span>},
+  Joke{2, 0, <span style="color:#a31515">&#34;What do you call a fake noodle? An Impasta.&#34;</span>},
+  Joke{3, 0, <span style="color:#a31515">&#34;How many apples grow on a tree? All of them.&#34;</span>},
+  Joke{4, 0, <span style="color:#a31515">&#34;Want to hear a joke about paper? Nevermind it&#39;s tearable.&#34;</span>},
+  Joke{5, 0, <span style="color:#a31515">&#34;I just watched a program about beavers. It was the best dam program I&#39;ve ever seen.&#34;</span>},
+  Joke{6, 0, <span style="color:#a31515">&#34;Why did the coffee file a police report? It got mugged.&#34;</span>},
+  Joke{7, 0, <span style="color:#a31515">&#34;How does a penguin build it&#39;s house? Igloos it together.&#34;</span>},
+}
+
+<span style="color:#00f">func</span> main() {
+  <span style="color:#008000">// ... leave this block untouched...
+</span><span style="color:#008000"></span>}
+
+<span style="color:#008000">// JokeHandler retrieves a list of available jokes
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> JokeHandler(c *gin.Context) {
+  c.Header(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+  c.JSON(http.StatusOK, jokes)
+}
+
+<span style="color:#008000">// LikeJoke increments the likes of a particular joke Item
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> LikeJoke(c *gin.Context) {
+  <span style="color:#008000">// confirm Joke ID sent is valid
+</span><span style="color:#008000"></span>  <span style="color:#008000">// remember to import the `strconv` package
+</span><span style="color:#008000"></span>  <span style="color:#00f">if</span> jokeid, err := strconv.Atoi(c.Param(<span style="color:#a31515">&#34;jokeID&#34;</span>)); err == <span style="color:#00f">nil</span> {
+    <span style="color:#008000">// find joke, and increment likes
+</span><span style="color:#008000"></span>    <span style="color:#00f">for</span> i := 0; i &lt; len(jokes); i++ {
+      <span style="color:#00f">if</span> jokes[i].ID == jokeid {
+        jokes[i].Likes += 1
+      }
+    }
+
+    <span style="color:#008000">// return a pointer to the updated jokes list
+</span><span style="color:#008000"></span>    c.JSON(http.StatusOK, &amp;jokes)
+  } <span style="color:#00f">else</span> {
+    <span style="color:#008000">// Joke ID is invalid
+</span><span style="color:#008000"></span>    c.AbortWithStatus(http.StatusNotFound)
+  }
+}
+
+<span style="color:#008000">// NB: Replace the JokeHandler and LikeJoke functions in the previous version to the ones above
+</span></code></pre></div><p>With our code looking good, lets go ahead and test our API. We can test with <code>cURL</code> or <code>postman</code> , and sending a <code>GET</code> request to <code>http://localhost:3000/jokes</code> to get the full list of jokes, and a <code>POST</code> request to <code>http://localhost:3000/jokes/like/{jokeid}</code> to increment the likes of a joke.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ curl http://localhost:3000/api/jokes
+
+$ curl -X POST http://localhost:3000/api/jokes/like/4
+</code></pre></div><h3 id="building-the-ui-react">Building the UI (React)</h3>
+<p>We have our API in place, so let&rsquo;s build a frontend to present the data from our API. For this, we&rsquo;ll be using React. We won&rsquo;t go too deep into React as it will be out of scope for this tutorial. If you need to learn more about React, checkout the official <a href="https://facebook.github.io/react/docs/tutorial.html">tutorial</a>. You can implement the UI with any frontend framework you&rsquo;re comfortable with.</p>
+<h3 id="setup">Setup</h3>
+<p>We&rsquo;ll edit the <code>index.html</code> file to add external libraries needed to run React, we&rsquo;ll then need to create an<code>app.jsx</code> file in the <code>views/js</code> directory, which will contain our React code.</p>
+<p>Our <code>index.html</code> file should look like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#00f">&lt;!DOCTYPE html&gt;</span>
+&lt;html&gt;
+
+&lt;head&gt;
+  &lt;meta charset=<span style="color:#a31515">&#34;UTF-8&#34;</span> /&gt;
+  &lt;meta name=<span style="color:#a31515">&#34;viewport&#34;</span> content=<span style="color:#a31515">&#34;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&#34;</span> /&gt;
+  &lt;title&gt;Jokeish App&lt;/title&gt;
+  &lt;script src=<span style="color:#a31515">&#34;http://code.jquery.com/jquery-2.1.4.min.js&#34;</span>&gt;&lt;/script&gt;
+  &lt;script src=<span style="color:#a31515">&#34;https://cdn.auth0.com/js/auth0/9.0/auth0.min.js&#34;</span>&gt;&lt;/script&gt;
+  &lt;script type=<span style="color:#a31515">&#34;application/javascript&#34;</span> src=<span style="color:#a31515">&#34;https://unpkg.com/react@16.0.0/umd/react.production.min.js&#34;</span>&gt;&lt;/script&gt;
+  &lt;script type=<span style="color:#a31515">&#34;application/javascript&#34;</span> src=<span style="color:#a31515">&#34;https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js&#34;</span>&gt;&lt;/script&gt;
+  &lt;script type=<span style="color:#a31515">&#34;application/javascript&#34;</span> src=<span style="color:#a31515">&#34;https://unpkg.com/babel-standalone@6.26.0/babel.js&#34;</span>&gt;&lt;/script&gt;
+  &lt;script type=<span style="color:#a31515">&#34;text/babel&#34;</span> src=<span style="color:#a31515">&#34;js/app.jsx&#34;</span>&gt;&lt;/script&gt;
+  &lt;link href=<span style="color:#a31515">&#34;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css&#34;</span> rel=<span style="color:#a31515">&#34;stylesheet&#34;</span>&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id=<span style="color:#a31515">&#34;app&#34;</span>&gt;&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre></div><h3 id="building-our-components">Building our Components</h3>
+<p>In React views are broken down into components. We&rsquo;ll need to build some components. An <code>App</code> component as the main entry, that launches the application, a <code>Home</code> component which will face non logged-in users, a <code>LoggedIn</code> component with content only visible by authenticated users, and a <code>Joke</code> component to display a list of jokes. We&rsquo;ll write all these components in the <code>app.jsx</code> file.</p>
+<h3 id="the-app-component">The App component</h3>
+<p>This component bootstraps our entire React app. It decides on which component to show when a user is authenticated or not. We&rsquo;ll start off with just its base, and later update it with more functionality.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">class</span> App <span style="color:#00f">extends</span> React.Component {
+  render() {
+    <span style="color:#00f">if</span> (<span style="color:#00f">this</span>.loggedIn) {
+      <span style="color:#00f">return</span> (&lt;LoggedIn /&gt;);
+    } <span style="color:#00f">else</span> {
+      <span style="color:#00f">return</span> (&lt;Home /&gt;);
+    }
+  }
+}
+</code></pre></div><h3 id="the-home-component">The Home component</h3>
+<p>This component is shown to non logged-in users. And a button which opens a Hosted lock screen (we&rsquo;ll add this functionality later), where they can signup, or login.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">class</span> Home <span style="color:#00f">extends</span> React.Component {
+  render() {
+    <span style="color:#00f">return</span> (
+      &lt;div className=<span style="color:#a31515">&#34;container&#34;</span>&gt;
+        &lt;div className=<span style="color:#a31515">&#34;col-xs-8 col-xs-offset-2 jumbotron text-center&#34;</span>&gt;
+          &lt;h1&gt;Jokeish&lt;/h1&gt;
+          &lt;p&gt;A load <span style="color:#00f">of</span> Dad jokes XD&lt;/p&gt;
+          &lt;p&gt;Sign <span style="color:#00f">in</span> to get access &lt;/p&gt;
+          &lt;a onClick={<span style="color:#00f">this</span>.authenticate} className=<span style="color:#a31515">&#34;btn btn-primary btn-lg btn-login btn-block&#34;</span>&gt;Sign In&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></div><h3 id="loggedin-component">LoggedIn component</h3>
+<p>This component is displayed when a user is authenticated. It stores in its <code>state</code> an array of jokes which is populated when the component mounts.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">class</span> LoggedIn <span style="color:#00f">extends</span> React.Component {
+  constructor(props) {
+    <span style="color:#00f">super</span>(props);
+    <span style="color:#00f">this</span>.state = {
+      jokes: []
+    }
+  }
+
+  render() {
+    <span style="color:#00f">return</span> (
+      &lt;div className=<span style="color:#a31515">&#34;container&#34;</span>&gt;
+        &lt;div className=<span style="color:#a31515">&#34;col-lg-12&#34;</span>&gt;
+          &lt;br /&gt;
+          &lt;span className=<span style="color:#a31515">&#34;pull-right&#34;</span>&gt;&lt;a onClick={<span style="color:#00f">this</span>.logout}&gt;Log out&lt;/a&gt;&lt;/span&gt;
+          &lt;h2&gt;Jokeish&lt;/h2&gt;
+          &lt;p&gt;Let<span style="">&#39;</span>s feed you <span style="color:#00f">with</span> some funny Jokes!!!&lt;/p&gt;
+          &lt;div className=<span style="color:#a31515">&#34;row&#34;</span>&gt;
+            {<span style="color:#00f">this</span>.state.jokes.map(<span style="color:#00f">function</span>(joke, i){
+              <span style="color:#00f">return</span> (&lt;Joke key={i} joke={joke} /&gt;);
+            })}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></div><h3 id="the-joke-component">The Joke component</h3>
+<p>The <code>Joke</code> component will contain information about each item from the jokes response to be displayed.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">class</span> Joke <span style="color:#00f">extends</span> React.Component {
+  constructor(props) {
+    <span style="color:#00f">super</span>(props);
+    <span style="color:#00f">this</span>.state = {
+      liked: <span style="color:#a31515">&#34;&#34;</span>
+    }
+    <span style="color:#00f">this</span>.like = <span style="color:#00f">this</span>.like.bind(<span style="color:#00f">this</span>);
+  }
+
+  like() {
+    <span style="color:#008000">// ... we&#39;ll add this block later
+</span><span style="color:#008000"></span>  }
+
+  render() {
+    <span style="color:#00f">return</span> (
+      &lt;div className=<span style="color:#a31515">&#34;col-xs-4&#34;</span>&gt;
+        &lt;div className=<span style="color:#a31515">&#34;panel panel-default&#34;</span>&gt;
+          &lt;div className=<span style="color:#a31515">&#34;panel-heading&#34;</span>&gt;<span style="">#</span>{<span style="color:#00f">this</span>.props.joke.id} &lt;span className=<span style="color:#a31515">&#34;pull-right&#34;</span>&gt;{<span style="color:#00f">this</span>.state.liked}&lt;/span&gt;&lt;/div&gt;
+          &lt;div className=<span style="color:#a31515">&#34;panel-body&#34;</span>&gt;
+            {<span style="color:#00f">this</span>.props.joke.joke}
+          &lt;/div&gt;
+          &lt;div className=<span style="color:#a31515">&#34;panel-footer&#34;</span>&gt;
+            {<span style="color:#00f">this</span>.props.joke.likes} Likes &amp;nbsp;
+            &lt;a onClick={<span style="color:#00f">this</span>.like} className=<span style="color:#a31515">&#34;btn btn-default&#34;</span>&gt;
+              &lt;span className=<span style="color:#a31515">&#34;glyphicon glyphicon-thumbs-up&#34;</span>&gt;&lt;/span&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></div><p>We&rsquo;ve written our components, now let&rsquo;s tell React where to render the app. We&rsquo;ll add the block of code below to the bottom of our <code>app.jsx</code> file.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">ReactDOM.render(&lt;App /&gt;, document.getElementById(<span style="color:#a31515">&#39;app&#39;</span>));
+</code></pre></div><p>Let&rsquo;s restart our Go server <code>go run main.go</code>, and head over to our app&rsquo;s URL <code>http://localhost:3000/</code>. You&rsquo;d see the <code>Home</code> component is being rendered.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38368612-a452879a-38dd-11e8-8a63-5cc7530fc9bd.png" alt="golang-gin-home-component"></p>
+<h2 id="securing-our-jokes-app-with-auth0">Securing our Jokes App With Auth0</h2>
+<blockquote>
+<p>Disclaimer: This isn&rsquo;t a sponsored content.</p>
+</blockquote>
+<p><strong>Auth0</strong> issues <a href="https://jwt.io/">JSON Web Tokens</a> on every login for your users. This means that you can have a solid <a href="https://auth0.com/docs/identityproviders">identity infrastructure</a>, including <a href="https://auth0.com/docs/sso/single-sign-on">single sign-on</a>, user management, support for social identity providers (Facebook, Github, Twitter, etc.), enterprise identity providers (Active Directory, LDAP, SAML, etc.) and your own database of users with just a few lines of code.</p>
+<p>We can easily set up authentication in our GIN app by using Auth0. You&rsquo;ll need an ccount to follow along with this part. If you don&rsquo;t already have an Auth0 account, <a href="https://auth0.com/signup">sign up</a> for one now.</p>
+<h3 id="creating-the-api-client">Creating the API client</h3>
+<p>Our tokens will be generated with Auth0, so we need to create an API and a Client from our Auth0 dashboard. If you haven&rsquo;t already, <a href="https://auth0.com/signup">sign up</a> for an Auth0 account.</p>
+<p>To create a new API, navigate to the <a href="https://manage.auth0.com/#/apis">APIs section</a> in your dashboard, and click the <strong>Create API</strong> button.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38367092-a7bbfffa-38d9-11e8-949e-04542283606c.png" alt="golang-gin-apis-section"></p>
+<p>Choose an API <strong>name</strong>, and an <strong>identifier</strong>. The identifier will be the <strong>audience</strong> for the middleware. The <strong>Signing Algorithm</strong> should be <strong>RS256</strong>.</p>
+<p>To create a new Client, navigate to the <a href="">clients section</a> in your dashboard, and click the <strong>Create Client</strong> button, and select type <code>Regular Web Applications</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38453889-025202bc-3a55-11e8-9ff6-1d5265ebecd9.png" alt="golang-gin-create-client"></p>
+<p>Once the client is created, take note of the <code>client_id</code> and <code>client_secret</code>, as we&rsquo;ll need it later.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38453892-09268fea-3a55-11e8-9c3d-68de4b26295d.png" alt="golang-gin-client-page"></p>
+<p>We need to add the credentials needed for our API to an environment vairable. In the root directory, create a new file <code>.env</code> and add the following to it, with the details from the Auth0 dashboard:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">export AUTH0_API_CLIENT_SECRET=&#34;&#34;
+export AUTH0_CLIENT_ID=&#34;&#34;
+export AUTH0_DOMAIN=&#34;yourdomain.auth0.com&#34;
+export AUTH0_API_AUDIENCE=&#34;&#34;
+</code></pre></div><h3 id="securing-our-api-endpoints">Securing our API Endpoints</h3>
+<p>Currently, our API is open to the world, so we need to secure them, so only authorized users can access them.</p>
+<p>We are going to make use of a <strong>JWT Middleware</strong> to check for a valid <em>JSON Web Token</em> from each requests hitting our Endpoints.</p>
+<p>Let&rsquo;s create our middleware:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">
+<span style="color:#008000">// ...
+</span><span style="color:#008000"></span>
+<span style="color:#00f">var</span> jwtMiddleWare *jwtmiddleware.JWTMiddleware
+
+<span style="color:#00f">func</span> main() {
+  jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
+    ValidationKeyGetter: <span style="color:#00f">func</span>(token *jwt.Token) (<span style="color:#00f">interface</span>{}, <span style="color:#2b91af">error</span>) {
+      aud := os.Getenv(<span style="color:#a31515">&#34;AUTH0_API_AUDIENCE&#34;</span>)
+      checkAudience := token.Claims.(jwt.MapClaims).VerifyAudience(aud, <span style="color:#00f">false</span>)
+      <span style="color:#00f">if</span> !checkAudience {
+        <span style="color:#00f">return</span> token, errors.New(<span style="color:#a31515">&#34;Invalid audience.&#34;</span>)
+      }
+      <span style="color:#008000">// verify iss claim
+</span><span style="color:#008000"></span>      iss := os.Getenv(<span style="color:#a31515">&#34;AUTH0_DOMAIN&#34;</span>)
+      checkIss := token.Claims.(jwt.MapClaims).VerifyIssuer(iss, <span style="color:#00f">false</span>)
+      <span style="color:#00f">if</span> !checkIss {
+        <span style="color:#00f">return</span> token, errors.New(<span style="color:#a31515">&#34;Invalid issuer.&#34;</span>)
+      }
+
+      cert, err := getPemCert(token)
+      <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+        log.Fatalf(<span style="color:#a31515">&#34;could not get cert: %+v&#34;</span>, err)
+      }
+
+      result, _ := jwt.ParseRSAPublicKeyFromPEM([]byte(cert))
+      <span style="color:#00f">return</span> result, <span style="color:#00f">nil</span>
+    },
+    SigningMethod: jwt.SigningMethodRS256,
+  })
+
+  <span style="color:#008000">// register our actual jwtMiddleware
+</span><span style="color:#008000"></span>  jwtMiddleWare = jwtMiddleware
+
+  <span style="color:#008000">// ... the rest of the code below this function doesn&#39;t change yet
+</span><span style="color:#008000"></span>}
+
+<span style="color:#008000">// authMiddleware intercepts the requests, and check for a valid jwt token
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> authMiddleware() gin.HandlerFunc {
+  <span style="color:#00f">return</span> <span style="color:#00f">func</span>(c *gin.Context) {
+    <span style="color:#008000">// Get the client secret key
+</span><span style="color:#008000"></span>    err := jwtMiddleWare.CheckJWT(c.Writer, c.Request)
+    <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+      <span style="color:#008000">// Token not found
+</span><span style="color:#008000"></span>      fmt.Println(err)
+      c.Abort()
+      c.Writer.WriteHeader(http.StatusUnauthorized)
+      c.Writer.Write([]byte(<span style="color:#a31515">&#34;Unauthorized&#34;</span>))
+      <span style="color:#00f">return</span>
+    }
+  }
+}
+</code></pre></div><p>The above code, we have a new <code>jwtMiddleWare</code> variable which is initialized in the <code>main</code> function, and is used in the <code>authMiddleware</code> middle function. If you notice, we are pulling our server-side credentials from an environment variable (one of the tenets of a <strong>12-factor app</strong>). Our middleware checks and receives a token from a request, it calls the <code>jwtMiddleWare.CheckJWT</code> method to validate the token sent.</p>
+<p>Let&rsquo;s also write the function to return the JSON Web Keys:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000">// ... the code above is untouched...
+</span><span style="color:#008000"></span>
+<span style="color:#008000">// Jwks stores a slice of JSON Web Keys
+</span><span style="color:#008000"></span><span style="color:#00f">type</span> Jwks <span style="color:#00f">struct</span> {
+  Keys []JSONWebKeys <span style="color:#a31515">`json:&#34;keys&#34;`</span>
+}
+
+<span style="color:#00f">type</span> JSONWebKeys <span style="color:#00f">struct</span> {
+  Kty <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;kty&#34;`</span>
+  Kid <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;kid&#34;`</span>
+  Use <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;use&#34;`</span>
+  N   <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;n&#34;`</span>
+  E   <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;e&#34;`</span>
+  X5c []<span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;x5c&#34;`</span>
+}
+
+<span style="color:#00f">func</span> main() {
+  <span style="color:#008000">// ... the code in this method is untouched...
+</span><span style="color:#008000"></span>}
+
+<span style="color:#00f">func</span> getPemCert(token *jwt.Token) (<span style="color:#2b91af">string</span>, <span style="color:#2b91af">error</span>) {
+  cert := <span style="color:#a31515">&#34;&#34;</span>
+  resp, err := http.Get(os.Getenv(<span style="color:#a31515">&#34;AUTH0_DOMAIN&#34;</span>) + <span style="color:#a31515">&#34;.well-known/jwks.json&#34;</span>)
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    <span style="color:#00f">return</span> cert, err
+  }
+  <span style="color:#00f">defer</span> resp.Body.Close()
+
+  <span style="color:#00f">var</span> jwks = Jwks{}
+  err = json.NewDecoder(resp.Body).Decode(&amp;jwks)
+
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    <span style="color:#00f">return</span> cert, err
+  }
+
+  x5c := jwks.Keys[0].X5c
+  <span style="color:#00f">for</span> k, v := <span style="color:#00f">range</span> x5c {
+    <span style="color:#00f">if</span> token.Header[<span style="color:#a31515">&#34;kid&#34;</span>] == jwks.Keys[k].Kid {
+      cert = <span style="color:#a31515">&#34;-----BEGIN CERTIFICATE-----\n&#34;</span> + v + <span style="color:#a31515">&#34;\n-----END CERTIFICATE-----&#34;</span>
+    }
+  }
+
+  <span style="color:#00f">if</span> cert == <span style="color:#a31515">&#34;&#34;</span> {
+    <span style="color:#00f">return</span> cert, errors.New(<span style="color:#a31515">&#34;unable to find appropriate key.&#34;</span>)
+  }
+
+  <span style="color:#00f">return</span> cert, <span style="color:#00f">nil</span>
+}
+</code></pre></div><h3 id="using-the-jwt-middleware">Using the JWT Middleware</h3>
+<p>Using the middleware is very straight forward. We just pass it as a parameter to our routes definition.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">...
+
+api.GET(<span style="color:#a31515">&#34;/jokes&#34;</span>, authMiddleware(), JokeHandler)
+api.POST(<span style="color:#a31515">&#34;/jokes/like/:jokeID&#34;</span>, authMiddleware(), LikeJoke)
+
+...
+</code></pre></div><p>Our <code>main.go</code> file should look like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
+
+<span style="color:#00f">import</span> (
+  <span style="color:#a31515">&#34;encoding/json&#34;</span>
+  <span style="color:#a31515">&#34;errors&#34;</span>
+  <span style="color:#a31515">&#34;fmt&#34;</span>
+  <span style="color:#a31515">&#34;log&#34;</span>
+  <span style="color:#a31515">&#34;net/http&#34;</span>
+  <span style="color:#a31515">&#34;os&#34;</span>
+  <span style="color:#a31515">&#34;strconv&#34;</span>
+
+  jwtmiddleware <span style="color:#a31515">&#34;github.com/auth0/go-jwt-middleware&#34;</span>
+  jwt <span style="color:#a31515">&#34;github.com/dgrijalva/jwt-go&#34;</span>
+  <span style="color:#a31515">&#34;github.com/gin-gonic/contrib/static&#34;</span>
+  <span style="color:#a31515">&#34;github.com/gin-gonic/gin&#34;</span>
+)
+
+<span style="color:#00f">type</span> Response <span style="color:#00f">struct</span> {
+  Message <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;message&#34;`</span>
+}
+
+<span style="color:#00f">type</span> Jwks <span style="color:#00f">struct</span> {
+  Keys []JSONWebKeys <span style="color:#a31515">`json:&#34;keys&#34;`</span>
+}
+
+<span style="color:#00f">type</span> JSONWebKeys <span style="color:#00f">struct</span> {
+  Kty <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;kty&#34;`</span>
+  Kid <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;kid&#34;`</span>
+  Use <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;use&#34;`</span>
+  N   <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;n&#34;`</span>
+  E   <span style="color:#2b91af">string</span>   <span style="color:#a31515">`json:&#34;e&#34;`</span>
+  X5c []<span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;x5c&#34;`</span>
+}
+
+<span style="color:#00f">type</span> Joke <span style="color:#00f">struct</span> {
+  ID    <span style="color:#2b91af">int</span>    <span style="color:#a31515">`json:&#34;id&#34; binding:&#34;required&#34;`</span>
+  Likes <span style="color:#2b91af">int</span>    <span style="color:#a31515">`json:&#34;likes&#34;`</span>
+  Joke  <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;joke&#34; binding:&#34;required&#34;`</span>
+}
+
+<span style="color:#008000">/** we&#39;ll create a list of jokes */</span>
+<span style="color:#00f">var</span> jokes = []Joke{
+  Joke{1, 0, <span style="color:#a31515">&#34;Did you hear about the restaurant on the moon? Great food, no atmosphere.&#34;</span>},
+  Joke{2, 0, <span style="color:#a31515">&#34;What do you call a fake noodle? An Impasta.&#34;</span>},
+  Joke{3, 0, <span style="color:#a31515">&#34;How many apples grow on a tree? All of them.&#34;</span>},
+  Joke{4, 0, <span style="color:#a31515">&#34;Want to hear a joke about paper? Nevermind it&#39;s tearable.&#34;</span>},
+  Joke{5, 0, <span style="color:#a31515">&#34;I just watched a program about beavers. It was the best dam program I&#39;ve ever seen.&#34;</span>},
+  Joke{6, 0, <span style="color:#a31515">&#34;Why did the coffee file a police report? It got mugged.&#34;</span>},
+  Joke{7, 0, <span style="color:#a31515">&#34;How does a penguin build it&#39;s house? Igloos it together.&#34;</span>},
+}
+
+<span style="color:#00f">var</span> jwtMiddleWare *jwtmiddleware.JWTMiddleware
+
+<span style="color:#00f">func</span> main() {
+  jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
+    ValidationKeyGetter: <span style="color:#00f">func</span>(token *jwt.Token) (<span style="color:#00f">interface</span>{}, <span style="color:#2b91af">error</span>) {
+      aud := os.Getenv(<span style="color:#a31515">&#34;AUTH0_API_AUDIENCE&#34;</span>)
+      checkAudience := token.Claims.(jwt.MapClaims).VerifyAudience(aud, <span style="color:#00f">false</span>)
+      <span style="color:#00f">if</span> !checkAudience {
+        <span style="color:#00f">return</span> token, errors.New(<span style="color:#a31515">&#34;Invalid audience.&#34;</span>)
+      }
+      <span style="color:#008000">// verify iss claim
+</span><span style="color:#008000"></span>      iss := os.Getenv(<span style="color:#a31515">&#34;AUTH0_DOMAIN&#34;</span>)
+      checkIss := token.Claims.(jwt.MapClaims).VerifyIssuer(iss, <span style="color:#00f">false</span>)
+      <span style="color:#00f">if</span> !checkIss {
+        <span style="color:#00f">return</span> token, errors.New(<span style="color:#a31515">&#34;Invalid issuer.&#34;</span>)
+      }
+
+      cert, err := getPemCert(token)
+      <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+        log.Fatalf(<span style="color:#a31515">&#34;could not get cert: %+v&#34;</span>, err)
+      }
+
+      result, _ := jwt.ParseRSAPublicKeyFromPEM([]byte(cert))
+      <span style="color:#00f">return</span> result, <span style="color:#00f">nil</span>
+    },
+    SigningMethod: jwt.SigningMethodRS256,
+  })
+
+  jwtMiddleWare = jwtMiddleware
+  <span style="color:#008000">// Set the router as the default one shipped with Gin
+</span><span style="color:#008000"></span>  router := gin.Default()
+
+  <span style="color:#008000">// Serve the frontend
+</span><span style="color:#008000"></span>  router.Use(static.Serve(<span style="color:#a31515">&#34;/&#34;</span>, static.LocalFile(<span style="color:#a31515">&#34;./views&#34;</span>, <span style="color:#00f">true</span>)))
+
+  api := router.Group(<span style="color:#a31515">&#34;/api&#34;</span>)
+  {
+    api.GET(<span style="color:#a31515">&#34;/&#34;</span>, <span style="color:#00f">func</span>(c *gin.Context) {
+      c.JSON(http.StatusOK, gin.H{
+        <span style="color:#a31515">&#34;message&#34;</span>: <span style="color:#a31515">&#34;pong&#34;</span>,
+      })
+    })
+    api.GET(<span style="color:#a31515">&#34;/jokes&#34;</span>, authMiddleware(), JokeHandler)
+    api.POST(<span style="color:#a31515">&#34;/jokes/like/:jokeID&#34;</span>, authMiddleware(), LikeJoke)
+  }
+  <span style="color:#008000">// Start the app
+</span><span style="color:#008000"></span>  router.Run(<span style="color:#a31515">&#34;:3000&#34;</span>)
+}
+
+<span style="color:#00f">func</span> getPemCert(token *jwt.Token) (<span style="color:#2b91af">string</span>, <span style="color:#2b91af">error</span>) {
+  cert := <span style="color:#a31515">&#34;&#34;</span>
+  resp, err := http.Get(os.Getenv(<span style="color:#a31515">&#34;AUTH0_DOMAIN&#34;</span>) + <span style="color:#a31515">&#34;.well-known/jwks.json&#34;</span>)
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    <span style="color:#00f">return</span> cert, err
+  }
+  <span style="color:#00f">defer</span> resp.Body.Close()
+
+  <span style="color:#00f">var</span> jwks = Jwks{}
+  err = json.NewDecoder(resp.Body).Decode(&amp;jwks)
+
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    <span style="color:#00f">return</span> cert, err
+  }
+
+  x5c := jwks.Keys[0].X5c
+  <span style="color:#00f">for</span> k, v := <span style="color:#00f">range</span> x5c {
+    <span style="color:#00f">if</span> token.Header[<span style="color:#a31515">&#34;kid&#34;</span>] == jwks.Keys[k].Kid {
+      cert = <span style="color:#a31515">&#34;-----BEGIN CERTIFICATE-----\n&#34;</span> + v + <span style="color:#a31515">&#34;\n-----END CERTIFICATE-----&#34;</span>
+    }
+  }
+
+  <span style="color:#00f">if</span> cert == <span style="color:#a31515">&#34;&#34;</span> {
+    <span style="color:#00f">return</span> cert, errors.New(<span style="color:#a31515">&#34;unable to find appropriate key&#34;</span>)
+  }
+
+  <span style="color:#00f">return</span> cert, <span style="color:#00f">nil</span>
+}
+
+<span style="color:#008000">// authMiddleware intercepts the requests, and check for a valid jwt token
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> authMiddleware() gin.HandlerFunc {
+  <span style="color:#00f">return</span> <span style="color:#00f">func</span>(c *gin.Context) {
+    <span style="color:#008000">// Get the client secret key
+</span><span style="color:#008000"></span>    err := jwtMiddleWare.CheckJWT(c.Writer, c.Request)
+    <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+      <span style="color:#008000">// Token not found
+</span><span style="color:#008000"></span>      fmt.Println(err)
+      c.Abort()
+      c.Writer.WriteHeader(http.StatusUnauthorized)
+      c.Writer.Write([]byte(<span style="color:#a31515">&#34;Unauthorized&#34;</span>))
+      <span style="color:#00f">return</span>
+    }
+  }
+}
+
+<span style="color:#008000">// JokeHandler returns a list of jokes available (in memory)
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> JokeHandler(c *gin.Context) {
+  c.Header(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+
+  c.JSON(http.StatusOK, jokes)
+}
+
+<span style="color:#00f">func</span> LikeJoke(c *gin.Context) {
+  <span style="color:#008000">// Check joke ID is valid
+</span><span style="color:#008000"></span>  <span style="color:#00f">if</span> jokeid, err := strconv.Atoi(c.Param(<span style="color:#a31515">&#34;jokeID&#34;</span>)); err == <span style="color:#00f">nil</span> {
+    <span style="color:#008000">// find joke and increment likes
+</span><span style="color:#008000"></span>    <span style="color:#00f">for</span> i := 0; i &lt; len(jokes); i++ {
+      <span style="color:#00f">if</span> jokes[i].ID == jokeid {
+        jokes[i].Likes = jokes[i].Likes + 1
+      }
+    }
+    c.JSON(http.StatusOK, &amp;jokes)
+  } <span style="color:#00f">else</span> {
+    <span style="color:#008000">// the jokes ID is invalid
+</span><span style="color:#008000"></span>    c.AbortWithStatus(http.StatusNotFound)
+  }
+}
+</code></pre></div><p>Let&rsquo;s install the <code>jwtmiddleware</code> libraries:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go get -u github.com/auth0/go-jwt-middleware
+$ go get -u github.com/dgrijalva/jwt-go
+</code></pre></div><p>Let&rsquo;s source our environment file, and restart our app server:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="">$</span> source .env
+<span style="">$</span> <span style="color:#00f">go</span> run main.<span style="color:#00f">go</span>
+</code></pre></div><p>Now if we try accessing any of the endpoints, you&rsquo;d be faced with a <code>401 Unauthorized</code> error. That&rsquo;s because we need to send along a token with the request.</p>
+<h3 id="login-with-auth0-and-react">Login with Auth0 and React</h3>
+<p>Let&rsquo;s implement a login system, so users can login or create accounts, so they have access to our jokes. We&rsquo;ll add to our <code>app.jsx</code> file, the following Auth0 credentials:</p>
+<ul>
+<li><code>AUTH0_CLIENT_ID</code></li>
+<li><code>AUTH0_DOMAIN</code></li>
+<li><code>AUTH0_CALLBACK_URL</code> - The URL of your app</li>
+<li><code>AUTH0_API_AUDIENCE</code></li>
+</ul>
+<blockquote>
+<p>You can find the <code>AUTH0_CLIENT_ID</code>, <code>AUTH0_DOMAIN</code>, and <code>AUTH0_API_AUDIENCE</code> data from your Auth0 <a href="https://manage.auth0.com/">management dashboard</a>.</p>
+</blockquote>
+<p>We need to set a <code>callback</code> which Auth0 redirects to. Navigate to the Clients section in your dashboard, and in the settings, let&rsquo;s set the callback to <code>http://localhost:3000</code>:</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38453893-0cf84032-3a55-11e8-9b03-d26ba1d3e56a.png" alt="auth0-golang-gin-allowed-callbacks"></p>
+<p>With the credentials in place, lets update our React components.</p>
+<h4 id="app-component">APP component</h4>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">const</span> AUTH0_CLIENT_ID = <span style="color:#a31515">&#34;aIAOt9fkMZKrNsSsFqbKj5KTI0ObTDPP&#34;</span>;
+<span style="color:#00f">const</span> AUTH0_DOMAIN = <span style="color:#a31515">&#34;hakaselabs.auth0.com&#34;</span>;
+<span style="color:#00f">const</span> AUTH0_CALLBACK_URL = location.href;
+<span style="color:#00f">const</span> AUTH0_API_AUDIENCE = <span style="color:#a31515">&#34;golang-gin&#34;</span>;
+
+<span style="color:#00f">class</span> App <span style="color:#00f">extends</span> React.Component {
+  parseHash() {
+    <span style="color:#00f">this</span>.auth0 = <span style="color:#00f">new</span> auth0.WebAuth({
+      domain: AUTH0_DOMAIN,
+      clientID: AUTH0_CLIENT_ID
+    });
+    <span style="color:#00f">this</span>.auth0.parseHash(window.location.hash, (err, authResult) =&gt; {
+      <span style="color:#00f">if</span> (err) {
+        <span style="color:#00f">return</span> console.log(err);
+      }
+      <span style="color:#00f">if</span> (
+        authResult !== <span style="color:#00f">null</span> &amp;&amp;
+        authResult.accessToken !== <span style="color:#00f">null</span> &amp;&amp;
+        authResult.idToken !== <span style="color:#00f">null</span>
+      ) {
+        localStorage.setItem(<span style="color:#a31515">&#34;access_token&#34;</span>, authResult.accessToken);
+        localStorage.setItem(<span style="color:#a31515">&#34;id_token&#34;</span>, authResult.idToken);
+        localStorage.setItem(
+          <span style="color:#a31515">&#34;profile&#34;</span>,
+          JSON.stringify(authResult.idTokenPayload)
+        );
+        window.location = window.location.href.substr(
+          0,
+          window.location.href.indexOf(<span style="color:#a31515">&#34;#&#34;</span>)
+        );
+      }
+    });
+  }
+
+  setup() {
+    $.ajaxSetup({
+      beforeSend: (r) =&gt; {
+        <span style="color:#00f">if</span> (localStorage.getItem(<span style="color:#a31515">&#34;access_token&#34;</span>)) {
+          r.setRequestHeader(
+            <span style="color:#a31515">&#34;Authorization&#34;</span>,
+            <span style="color:#a31515">&#34;Bearer &#34;</span> + localStorage.getItem(<span style="color:#a31515">&#34;access_token&#34;</span>)
+          );
+        }
+      }
+    });
+  }
+
+  setState() {
+    <span style="color:#00f">let</span> idToken = localStorage.getItem(<span style="color:#a31515">&#34;id_token&#34;</span>);
+    <span style="color:#00f">if</span> (idToken) {
+      <span style="color:#00f">this</span>.loggedIn = <span style="color:#00f">true</span>;
+    } <span style="color:#00f">else</span> {
+      <span style="color:#00f">this</span>.loggedIn = <span style="color:#00f">false</span>;
+    }
+  }
+
+  componentWillMount() {
+    <span style="color:#00f">this</span>.setup();
+    <span style="color:#00f">this</span>.parseHash();
+    <span style="color:#00f">this</span>.setState();
+  }
+
+  render() {
+    <span style="color:#00f">if</span> (<span style="color:#00f">this</span>.loggedIn) {
+      <span style="color:#00f">return</span> &lt;LoggedIn /&gt;;
+    }
+    <span style="color:#00f">return</span> &lt;Home /&gt;;
+  }
+}
+</code></pre></div><p>We updated the App component with three component methods (<code>setup</code>, <code>parseHash</code> and <code>setState</code>), and a lifecycle method <code>componentWillMount</code>. The <code>parseHash</code> method, initializes the <code>auth0</code> <code>webAuth</code> client, and parses the hash to a more readable format, saving them to localSt.  to show the lock screen, capture and store the user token and add the correct authorization header to any requests to our API</p>
+<h4 id="home-component">Home component</h4>
+<p>Our Home component will be updated, we&rsquo;ll add the functionality for the <code>authenticate</code> method, which will trigger the hosted lock screen to display, and allow our users login or signup.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">class</span> Home <span style="color:#00f">extends</span> React.Component {
+  constructor(props) {
+    <span style="color:#00f">super</span>(props);
+    <span style="color:#00f">this</span>.authenticate = <span style="color:#00f">this</span>.authenticate.bind(<span style="color:#00f">this</span>);
+  }
+  authenticate() {
+    <span style="color:#00f">this</span>.WebAuth = <span style="color:#00f">new</span> auth0.WebAuth({
+      domain: AUTH0_DOMAIN,
+      clientID: AUTH0_CLIENT_ID,
+      scope: <span style="color:#a31515">&#34;openid profile&#34;</span>,
+      audience: AUTH0_API_AUDIENCE,
+      responseType: <span style="color:#a31515">&#34;token id_token&#34;</span>,
+      redirectUri: AUTH0_CALLBACK_URL
+    });
+    <span style="color:#00f">this</span>.WebAuth.authorize();
+  }
+
+  render() {
+    <span style="color:#00f">return</span> (
+      &lt;div className=<span style="color:#a31515">&#34;container&#34;</span>&gt;
+        &lt;div className=<span style="color:#a31515">&#34;row&#34;</span>&gt;
+          &lt;div className=<span style="color:#a31515">&#34;col-xs-8 col-xs-offset-2 jumbotron text-center&#34;</span>&gt;
+            &lt;h1&gt;Jokeish&lt;/h1&gt;
+            &lt;p&gt;A load <span style="color:#00f">of</span> Dad jokes XD&lt;/p&gt;
+            &lt;p&gt;Sign <span style="color:#00f">in</span> to get access &lt;/p&gt;
+            &lt;a
+              onClick={<span style="color:#00f">this</span>.authenticate}
+              className=<span style="color:#a31515">&#34;btn btn-primary btn-lg btn-login btn-block&#34;</span>
+            &gt;
+              Sign In
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre></div><h4 id="loggedin-component-1">LoggedIn Component</h4>
+<p>We will update the <code>LoggedIn</code> component to communicate with our API, and pull all jokes, pass each joke as a <code>prop</code> to the <code>Joke</code> component, which renders a bootstrap pannel. Let&rsquo;s write those:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">class</span> LoggedIn <span style="color:#00f">extends</span> React.Component {
+  constructor(props) {
+    <span style="color:#00f">super</span>(props);
+    <span style="color:#00f">this</span>.state = {
+      jokes: []
+    };
+
+    <span style="color:#00f">this</span>.serverRequest = <span style="color:#00f">this</span>.serverRequest.bind(<span style="color:#00f">this</span>);
+    <span style="color:#00f">this</span>.logout = <span style="color:#00f">this</span>.logout.bind(<span style="color:#00f">this</span>);
+  }
+
+  logout() {
+    localStorage.removeItem(<span style="color:#a31515">&#34;id_token&#34;</span>);
+    localStorage.removeItem(<span style="color:#a31515">&#34;access_token&#34;</span>);
+    localStorage.removeItem(<span style="color:#a31515">&#34;profile&#34;</span>);
+    location.reload();
+  }
+
+  serverRequest() {
+    $.get(<span style="color:#a31515">&#34;http://localhost:3000/api/jokes&#34;</span>, res =&gt; {
+      <span style="color:#00f">this</span>.setState({
+        jokes: res
+      });
+    });
+  }
+
+  componentDidMount() {
+    <span style="color:#00f">this</span>.serverRequest();
+  }
+
+  render() {
+    <span style="color:#00f">return</span> (
+      &lt;div className=<span style="color:#a31515">&#34;container&#34;</span>&gt;
+        &lt;br /&gt;
+        &lt;span className=<span style="color:#a31515">&#34;pull-right&#34;</span>&gt;
+          &lt;a onClick={<span style="color:#00f">this</span>.logout}&gt;Log out&lt;/a&gt;
+        &lt;/span&gt;
+        &lt;h2&gt;Jokeish&lt;/h2&gt;
+        &lt;p&gt;Let<span style="">&#39;</span>s feed you <span style="color:#00f">with</span> some funny Jokes!!!&lt;/p&gt;
+        &lt;div className=<span style="color:#a31515">&#34;row&#34;</span>&gt;
+          &lt;div className=<span style="color:#a31515">&#34;container&#34;</span>&gt;
+            {<span style="color:#00f">this</span>.state.jokes.map(<span style="color:#00f">function</span>(joke, i) {
+              <span style="color:#00f">return</span> &lt;Joke key={i} joke={joke} /&gt;;
+            })}
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre></div><h4 id="joke-component">Joke Component</h4>
+<p>We&rsquo;ll also update the <code>Joke</code> component to format each Joke item passed to it from the Parent compoent (<code>LoggedIn</code>), and add a <code>like</code> method, which will increment the likes of a Joke.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#00f">class</span> Joke <span style="color:#00f">extends</span> React.Component {
+  constructor(props) {
+    <span style="color:#00f">super</span>(props);
+    <span style="color:#00f">this</span>.state = {
+      liked: <span style="color:#a31515">&#34;&#34;</span>,
+      jokes: []
+    };
+    <span style="color:#00f">this</span>.like = <span style="color:#00f">this</span>.like.bind(<span style="color:#00f">this</span>);
+    <span style="color:#00f">this</span>.serverRequest = <span style="color:#00f">this</span>.serverRequest.bind(<span style="color:#00f">this</span>);
+  }
+
+  like() {
+    <span style="color:#00f">let</span> joke = <span style="color:#00f">this</span>.props.joke;
+    <span style="color:#00f">this</span>.serverRequest(joke);
+  }
+  serverRequest(joke) {
+    $.post(
+      <span style="color:#a31515">&#34;http://localhost:3000/api/jokes/like/&#34;</span> + joke.id,
+      { like: 1 },
+      res =&gt; {
+        console.log(<span style="color:#a31515">&#34;res... &#34;</span>, res);
+        <span style="color:#00f">this</span>.setState({ liked: <span style="color:#a31515">&#34;Liked!&#34;</span>, jokes: res });
+        <span style="color:#00f">this</span>.props.jokes = res;
+      }
+    );
+  }
+
+  render() {
+    <span style="color:#00f">return</span> (
+      &lt;div className=<span style="color:#a31515">&#34;col-xs-4&#34;</span>&gt;
+        &lt;div className=<span style="color:#a31515">&#34;panel panel-default&#34;</span>&gt;
+          &lt;div className=<span style="color:#a31515">&#34;panel-heading&#34;</span>&gt;
+            <span style="">#</span>{<span style="color:#00f">this</span>.props.joke.id}{<span style="color:#a31515">&#34; &#34;</span>}
+            &lt;span className=<span style="color:#a31515">&#34;pull-right&#34;</span>&gt;{<span style="color:#00f">this</span>.state.liked}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div className=<span style="color:#a31515">&#34;panel-body&#34;</span>&gt;{<span style="color:#00f">this</span>.props.joke.joke}&lt;/div&gt;
+          &lt;div className=<span style="color:#a31515">&#34;panel-footer&#34;</span>&gt;
+            {<span style="color:#00f">this</span>.props.joke.likes} Likes &amp;nbsp;
+            &lt;a onClick={<span style="color:#00f">this</span>.like} className=<span style="color:#a31515">&#34;btn btn-default&#34;</span>&gt;
+              &lt;span className=<span style="color:#a31515">&#34;glyphicon glyphicon-thumbs-up&#34;</span> /&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre></div><h3 id="putting-it-all-together">Putting it all together</h3>
+<p>With the UI and API complete, we can test our app. We&rsquo;ll start of by booting our server <code>source .env &amp;&amp; go run main.go</code>, and the navigate to <code>http://localhost:3000</code> from any browser, you should see the <code>Home</code> component with a signin button. Clicking on the signin button will redirect to a hosted Lock page, create an account or login, to continue using the application.</p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38368612-a452879a-38dd-11e8-8a63-5cc7530fc9bd.png" alt="golang-gin-home-component">
+<em>Home</em></p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38369278-4685f35c-38df-11e8-97ac-98b2b9d07bab.png" alt="golang-gin-login-screen">
+<em>Auth0 Hosted Lock Screen</em></p>
+<p><img src="https://user-images.githubusercontent.com/9336187/38371873-6ccabb50-38e5-11e8-9b67-b97cc2ce98c6.png" alt="golang-gin-demo-shot">
+<em>LoggedIn App view</em></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Congrats! You have learned how to build an application and an API with Go and the GIN framework.</p>
+<p>This tutorial is designed to help you get started on building and adding authentication to a Golang app with the GIN framework.</p>
+<p>Did I miss something important? Let me know of it in the comments.</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/go">go</a></li>
+							
+							<li><a href="/tags/gin-gonic">gin-gonic</a></li>
+							
+							<li><a href="/tags/react">react</a></li>
+							
+							<li><a href="/tags/golang">golang</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

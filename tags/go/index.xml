@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/go/</link>
+    <description>Recent content in go on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Working with JSON in Go</title>
+      <link>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</link>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</guid>
+      <description>Summary: I&amp;rsquo;ve worked with JSON in various programming languages in context to data exchange/communication between applications. In this article, I&amp;rsquo;ll give a brief overview of the encoding/json package in Go, and point some gotchas I&amp;rsquo;ve encountered.
+ Go to: Encoding | Decoding | HTTP Handler Example | Read and Write JSON to File | Streaming | Gotchas
+JSON (JavaScript Object Notation), is a popular data interchange format commonly used for communication between applications.</description>
+    </item>
+    
+    <item>
+      <title>Enum Stringer Interface optimisation in Go</title>
+      <link>https://hakaselogs.me/2021-04-08/enum-stringer-interface-optimisation-in-go/</link>
+      <pubDate>Thu, 08 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2021-04-08/enum-stringer-interface-optimisation-in-go/</guid>
+      <description>The most idiomatic way of describing an enum type in Go is to use constants, often in conjunction with iota.
+A pattern I&amp;rsquo;ve used to implement the Stringer interface for an enum type is to lookup the string representation in a slice. Consider this snippet from a project I&amp;rsquo;m working on:
+// Status ... type Status uint32 // List of possible status values const ( // The operation is known, but hasn&amp;#39;t been decided yet 	Processing Status = iota // The operation will never be accepted 	Rejected // The operation was accepted 	Accepted .</description>
+    </item>
+    
+    <item>
+      <title>Building Small Containers for Kubernetes</title>
+      <link>https://hakaselogs.me/2018-12-01/building-small-containers-for-kubernetes/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-12-01/building-small-containers-for-kubernetes/</guid>
+      <description>The first step to deploying any app to Kubernetes, is to bundle the app in a container. There are several official, and community-backed container images for various languages and distros, and most of these containers can be really large, or sometimes contain overheads your app may never need/use.
+Thanks to Docker, you can easily create container images in a few steps; specify a base image, add your app-specific changes, and build your container.</description>
+    </item>
+    
+    <item>
+      <title>Building a Web App With Go, Gin and React</title>
+      <link>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</guid>
+      <description>TL;DR: In this tutorial, I&amp;rsquo;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it. Check out the Github repo for the code we&amp;rsquo;re going to write.
+ Gin is a high-performance micro-framework that delivers a very minimalistic framework that carries with it only the most essential features, libraries, and functionalities needed to build web applications and microservices. It makes it simple to build a request handling pipeline from modular, reusable pieces.</description>
+    </item>
+    
+    <item>
+      <title>Here&#39;s What&#39;s New  In Go 1.10</title>
+      <link>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</guid>
+      <description>Go 1.8 is one year old (Happy belated Birthday 🎊 🎉) Go 1.9 is already 6 months old! Go 1.10 is out ✌
+ The latest Go release, v1.10 arrived six months after V1.9. This release was stated in the change-logs and the Go blog. I&amp;rsquo;m gonna share some interesting changes I&amp;rsquo;ve found in Go 1.10 with you.
+New Features The Language Go 1.10 offers compiler tool chain and performance improvements, but no significant changes was made to the language&amp;rsquo;s specification.</description>
+    </item>
+    
+    <item>
+      <title>Golang - Getting Started, The Practical Dev</title>
+      <link>https://hakaselogs.me/2017-11-18/golang-getting-started-the-practical-dev/</link>
+      <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-11-18/golang-getting-started-the-practical-dev/</guid>
+      <description>“Go will be the server language of the future.” — Tobias Lütke, Shopify
+ Go was first created as an experiment, the goal of its creators was to come up with a language that would resolve bad practices of others while keeping the good things.
+Its first release was on March 2012. Go was designed to feel familiar and to stay as simple as possible, the entire language specification fits in just a few pages.</description>
+    </item>
+    
+    <item>
+      <title>How I Learned Golang</title>
+      <link>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</guid>
+      <description>Go is a relatively new programming language, and nothing makes a developer go crazier than a new programming language, haha! As many new tech inventions, Go was created as an experiment. The goal of its creators was to come up with a language that would resolve bad practices of others while keeping the good things. It was first released in March 2012. Since then Go has attracted many developers from all fields and disciplines.</description>
+    </item>
+    
+  </channel>
+</rss>

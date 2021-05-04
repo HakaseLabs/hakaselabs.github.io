@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>json on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/json/</link>
+    <description>Recent content in json on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/json/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Working with JSON in Go</title>
+      <link>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</link>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</guid>
+      <description>Summary: I&amp;rsquo;ve worked with JSON in various programming languages in context to data exchange/communication between applications. In this article, I&amp;rsquo;ll give a brief overview of the encoding/json package in Go, and point some gotchas I&amp;rsquo;ve encountered.
+ Go to: Encoding | Decoding | HTTP Handler Example | Read and Write JSON to File | Streaming | Gotchas
+JSON (JavaScript Object Notation), is a popular data interchange format commonly used for communication between applications.</description>
+    </item>
+    
+  </channel>
+</rss>

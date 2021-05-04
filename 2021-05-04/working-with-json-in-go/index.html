@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Working with JSON in Go - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Working with JSON in Go">
+<meta itemprop="description" content="A guide to working with JSON in Go and some gotchas and surprises to take note of.">
+<meta itemprop="dateModified" content="2021-05-04T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1414">
+
+
+
+<meta itemprop="keywords" content="golang,go,json," />
+<meta property="og:title" content="Working with JSON in Go" />
+<meta property="og:description" content="A guide to working with JSON in Go and some gotchas and surprises to take note of." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2021-05-04/working-with-json-in-go/" />
+<meta property="article:published_time" content="2021-05-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-05-04T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Working with JSON in Go"/>
+<meta name="twitter:description" content="A guide to working with JSON in Go and some gotchas and surprises to take note of."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">04</span>
+							<span class="rest">May 2021</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Working with JSON in Go</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<blockquote>
+<p>Summary: I&rsquo;ve worked with JSON in various programming languages in context to
+data exchange/communication between applications. In this article, I&rsquo;ll give a brief overview of
+the encoding/json package in Go, and point some gotchas I&rsquo;ve
+encountered.</p>
+</blockquote>
+<p><strong>Go to:</strong> <a href="#encoding">Encoding</a> | <a href="#decoding">Decoding</a> | <a href="#http-handler-example">HTTP Handler Example</a> | <a href="#read-and-write-json-to-file">Read and Write JSON to File</a> | <a href="#json-streaming">Streaming</a> | <a href="#json-gotchas-in-go">Gotchas</a></p>
+<p><a href="https://www.json.org">JSON</a> (JavaScript Object Notation), is a popular data interchange format commonly used for communication between applications.</p>
+<p>Working with JSON in Go is stress-free thanks to the <a href="https://golang.org/pkg/encoding/json">encoding/json</a> package from the standard library.</p>
+<h3 id="encoding-and-decoding-data">Encoding and decoding data</h3>
+<p>To encode or decode data we use the <a href="https://golang.org/pkg/encoding/json/#Marshal">Marshal</a> and <a href="https://golang.org/pkg/encoding/json/#Unmarshal">Unmarshal</a> functions from the json package.
+Both methods have the following signatures:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> Marshal(v <span style="color:#00f">interface</span>{}) ([]<span style="color:#2b91af">byte</span>, <span style="color:#2b91af">error</span>)
+<span style="color:#00f">func</span> Unmarshal(data []<span style="color:#2b91af">byte</span>, v <span style="color:#00f">interface</span>{}) <span style="color:#2b91af">error</span>
+</code></pre></div><h4 id="encoding">Encoding</h4>
+<p>Here&rsquo;s a basic example of retrieving the JSON-encoded value of a <code>Config</code> struct instance:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">type</span> Config <span style="color:#00f">struct</span> {
+  BuildDirPath <span style="color:#2b91af">string</span>
+  MaxRefreshRate <span style="color:#2b91af">int</span>
+}
+
+c := Config{BuildDirPath: <span style="color:#a31515">&#34;/bin&#34;</span>}
+b, err := json.Marshal(c)
+fmt.Println(string(b), err)
+<span style="color:#008000">// output:
+</span><span style="color:#008000">// {&#34;BuildDirPath&#34;:&#34;/bin&#34;,&#34;MaxRefreshRate&#34;:0}
+</span></code></pre></div><p>By default, the <code>Marshal</code> function will include all <strong>zero-value</strong> exported fields as it treats the field names as the key of the JSON element. The code snippet above elaborates this &ndash; the <code>MaxRefreshRate</code> field had no value set but the JSON-encoded output included the field set to zero.</p>
+<h4 id="custom-json-keys">Custom JSON keys</h4>
+<p>From the previous code snippet, the JSON-encoded output uses the name of the
+struct fields. To control this we use the <a href="https://golang.org/ref/spec#Tag">struct tag</a> literal &ndash; here&rsquo;s an example:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">type</span> Config <span style="color:#00f">struct</span> {
+  BuildDirPath <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;build_dir_path&#34;`</span>
+  MaxRefreshRate <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;max_refresh_rate&#34;`</span>
+}
+</code></pre></div><p>Printing the JSON-encoded instance of the update <code>Config</code> struct will yield the
+following:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{&#34;build_dir_path&#34;:<span style="color:#a31515">&#34;/bin&#34;</span>,&#34;max_refresh_rate&#34;:0}
+</code></pre></div><h4 id="decoding">Decoding</h4>
+<p>To decode JSON data we need to define a data structure (struct or map) where the
+value will be decoded to. Here&rsquo;s what it looks like:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">configJSON := <span style="color:#a31515">`{&#34;build_dir_path&#34;:&#34;/bin&#34;,&#34;max_refresh_rate&#34;:0}`</span>
+<span style="color:#008000">// create struct to decode JSON string to
+</span><span style="color:#008000"></span><span style="color:#00f">var</span> config Config
+
+err := json.Unmarshal([]byte(configJSON), &amp;config)
+<span style="color:#008000">// handle err
+</span></code></pre></div><h5 id="destination-field-identification">Destination field identification</h5>
+<p><code>Unmarshal</code> will decode only the fields that it can find in the destination type (<code>config</code>). In our example, only the <code>build_dir_path</code> and <code>max_refresh_rate</code> field of m will be populated, ignoring any other fields not defined in the destination type.</p>
+<p>The <code>Unmarshal</code> function identifies each JSON key on the destination struct by
+checking for:</p>
+<ul>
+<li>An exported field with a json tag of <code>KEY</code></li>
+<li>An exported field named <code>KEY</code> or</li>
+<li>An exported field matching <code>KEY</code> (case-insensitive)</li>
+</ul>
+<h5 id="decoding-an-unknown-json-structure">Decoding an unknown JSON structure</h5>
+<p>There are cases where you wouldn&rsquo;t know the structure of the JSON data you&rsquo;re
+decoding, or the data source is subject to changing its structure &ndash; telemetry
+data for instance. We can decode the JSON data into an <code>interface{}</code> or
+<code>map[string]interface{}</code> value, and
+use type assertions to acess the underlying data structures. Here&rsquo;s an example:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">unknownData := <span style="color:#a31515">`{&#34;status&#34;: &#34;online&#34;, &#34;available_items&#34;: 200, &#34;stats&#34;: [{&#34;p1&#34;:
+</span><span style="color:#a31515">&#34;-2&#34;, &#34;p2&#34;: &#34;0&#34;}]}`</span>
+<span style="color:#00f">var</span> data <span style="color:#00f">interface</span>{}
+_ = json.Unmarshal([]byte(unknownData), &amp;data)
+
+<span style="color:#008000">// access underlying data
+</span><span style="color:#008000"></span>m := f.(<span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{})
+status := m[<span style="color:#a31515">&#34;status&#34;</span>]
+fmt.Println(status) <span style="color:#008000">// online
+</span></code></pre></div><h3 id="http-handler-example"><strong>HTTP</strong> Handler Example</h3>
+<p>The json package enables encoding and decoding json over HTTP hassle-free.
+Here&rsquo;s an example of a HTTP POST request handler.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">type</span> BoxhubSync <span style="color:#00f">struct</span> {
+  IP <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;ip&#34;`</span>
+  LastSyncUpdate <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;last_sync_update&#34;`</span>
+  <span style="color:#008000">// ... other fields omitted for brevity
+</span><span style="color:#008000"></span>}
+
+<span style="color:#00f">func</span> readBoxhubSyncRequest(w http.ResponseWriter, r *http.Request){
+  <span style="color:#00f">var</span> reqArgs BoxhubSync
+  err := decodeReqBody(r, &amp;reqArgs)
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    log.Fatal(err)
+  }
+
+  <span style="color:#008000">// process reqArgs
+</span><span style="color:#008000"></span>
+  <span style="color:#008000">// send response to client
+</span><span style="color:#008000"></span>  resJSON(w, http.StatusCreated, <span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{}{
+    <span style="color:#a31515">&#34;status&#34;</span>: <span style="color:#a31515">&#34;success&#34;</span>,
+    <span style="color:#a31515">&#34;message&#34;</span>: <span style="color:#a31515">&#34;sync requested processed&#34;</span>,
+  })
+}
+
+<span style="color:#008000">// decodeReqBody decodes from [r.Body] to [v]
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> decodeReqBody(r *http.Request, v <span style="color:#00f">interface</span>{}) <span style="color:#2b91af">error</span> {
+  <span style="color:#00f">defer</span> r.Body.Close()
+  b, _ := ioutil.ReadAll(r.Body)
+  err := json.Unmarshal(b, v)
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    <span style="color:#00f">return</span> err
+  }
+  r.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+  <span style="color:#00f">return</span> <span style="color:#00f">nil</span>
+}
+
+<span style="color:#008000">// resJSON writes a response to the http client
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> resJSON(w http.ResponseWriter, code <span style="color:#2b91af">int</span>, payload <span style="color:#00f">interface</span>{}) {
+  res, err := json.Marshal(payload)
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    log.Fatal(err)
+  }
+  w.Header().Set(<span style="color:#a31515">&#34;Content-Type&#34;</span>, <span style="color:#a31515">&#34;application/json&#34;</span>)
+  w.WriteHeader(code)
+  w.Write(res)
+  <span style="color:#00f">return</span>
+}
+</code></pre></div><h3 id="json-streaming">JSON Streaming</h3>
+<p>The json package provides <code>NewEncoder</code> and <code>NewDecoder</code> functions to
+encode/decode JSON data from/to a stream. This is helpful if your data is coming from an <code>io.Reader</code> stream (eg. HTTP request body), or you need to decode multiple values from a stream of data.</p>
+<p><strong>Encoder</strong></p>
+<p>The <code>json.NewEncoder</code> function returns a new encoder that writes to a
+<code>io.Writer</code> stream:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> NewEncoder(w io.Writer) *Encoder
+</code></pre></div><p>The <code>Encoder.Encode</code> function is responsible for writing JSON-encoded data to the
+stream. Each time the <code>Encode</code> function is called, JSON is marshalled from <code>v</code> and appended to the <code>io.Writer</code> with a trailing newline.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> (enc *Encoder) Encode(v <span style="color:#00f">interface</span>{}) <span style="color:#2b91af">error</span>
+</code></pre></div><p>Here&rsquo;s an example of how to encode JSON data to a buffer:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> main() {
+  buf := new(bytes.Buffer)
+  config := Config{
+    BuildDirPath: <span style="color:#a31515">&#34;/bin&#34;</span>,
+    MaxRefreshRate: 80,
+  }
+  err := json.NewEncoder(buf).Encode(u)
+  <span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+    log.Fatal(err)
+  }
+  fmt.Print(buf.String())
+  <span style="color:#008000">// output:
+</span><span style="color:#008000"></span>  {<span style="color:#a31515">&#34;build_dir_path&#34;</span>:<span style="color:#a31515">&#34;/bin&#34;</span>,<span style="color:#a31515">&#34;max_refresh_rate&#34;</span>:80}
+}
+</code></pre></div><p><strong>Decoder</strong></p>
+<p>The <code>json.NewDecoder</code> function returns a new decoder that reads from an
+<code>io.Reader</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> NewDecoder(r io.Reader) *Decoder
+</code></pre></div><p>The <code>Decoder.Decode</code> function decodes the JSON-encoded data. <code>Decode</code> reads the next JSON-encoded value from its input and stores it in the value pointed to by <code>v</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> (dec *Decoder) Decode(v <span style="color:#00f">interface</span>{}) <span style="color:#2b91af">error</span>
+</code></pre></div><p>Here&rsquo;s an example of how to decode JSON-data from a Stdin stream:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">func</span> main() {
+	decoder := json.NewDecoder(os.Stdin)
+	output := make(<span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{})
+	<span style="color:#00f">for</span> {
+		err := decoder.Decode(&amp;output)
+		<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+			log.Fatal(err)
+		} <span style="color:#00f">else</span> {
+			fmt.Println(<span style="color:#a31515">&#34;JSON output:&#34;</span>)
+			fmt.Println(output)
+			output = make(<span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{})
+		}
+	}
+}
+</code></pre></div><p>Running the above snippet and passing JSON to Stdin will print the decoded
+version:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># sample json gotten from: https://jsonapi.org/examples
+$ go run stream.go
+{
+  &#34;data&#34;: [{
+    &#34;type&#34;: &#34;articles&#34;,
+    &#34;id&#34;: &#34;1&#34;,
+    &#34;attributes&#34;: {
+      &#34;title&#34;: &#34;JSON:API paints my bikeshed!&#34;,
+      &#34;body&#34;: &#34;The shortest article. Ever.&#34;,
+      &#34;created&#34;: &#34;2015-05-22T14:56:29.000Z&#34;,
+      &#34;updated&#34;: &#34;2015-05-22T14:56:28.000Z&#34;
+    },
+    &#34;relationships&#34;: {
+      &#34;author&#34;: {
+        &#34;data&#34;: {&#34;id&#34;: &#34;42&#34;, &#34;type&#34;: &#34;people&#34;}
+      }
+    }
+  }],
+  &#34;included&#34;: [
+    {
+      &#34;type&#34;: &#34;people&#34;,
+      &#34;id&#34;: &#34;42&#34;,
+      &#34;attributes&#34;: {
+        &#34;name&#34;: &#34;John&#34;,
+        &#34;age&#34;: 80,
+        &#34;gender&#34;: &#34;male&#34;
+      }
+    }
+  ]
+}
+
+JSON out:
+map[data:[map[attributes:map[body:The shortest article. Ever. created:2015-05-22T14:56:29.000Z title:JSON:API paints my bikeshed! updated:2015-05-22T14:56:28.000Z] id:1 relationships:map[author:map[data:map[id:42 type:people]]] type:articles]] included:[map[attributes:map[age:80 gender:male name:John] id:42 type:people]]]
+</code></pre></div><h3 id="read-and-write-json-to-file">Read and Write JSON to file</h3>
+<p>I&rsquo;ve needed to read and write json to and from a file. This can come in handy
+when you have some sort of state stored in files you want to read and write to.
+Here&rsquo;s an example of reading and writing a config file:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000">// using Config struct from previous examples
+</span><span style="color:#008000"></span><span style="color:#00f">var</span> config Config
+
+<span style="color:#008000">// read file
+</span><span style="color:#008000"></span>b, err := io.ReadFile(<span style="color:#a31515">&#34;path/to/config.json&#34;</span>)
+<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+  log.Fatal(err) <span style="color:#008000">// handle err
+</span><span style="color:#008000"></span>}
+
+err = json.Unmarshal(b, &amp;config)
+<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+  log.Fatal(err)
+}
+
+<span style="color:#008000">// write file
+</span><span style="color:#008000"></span>config.MaxRefreshRate = 300
+b, err := json.Marshal(config)
+<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+  log.Fatal(err)
+}
+
+err = io.WriteFile(<span style="color:#a31515">&#34;path/to/config.json&#34;</span>, b, FILE_PERM)
+<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+  log.Fatal(err)
+}
+</code></pre></div><h3 id="json-gotchas-in-go">JSON Gotchas in Go</h3>
+<p>While working with JSON inputs, I&rsquo;ve come across things that surprised or
+confused me, some of
+which I&rsquo;ve read about on the encoding/json documentation. I&rsquo;ll list a few I&rsquo;ve
+noted down below:</p>
+<h4 id="unexported-fields-cant-have-data-decoded-as-values">Unexported fields can&rsquo;t have data decoded as values</h4>
+<p>When decoding JSON data to a struct, if there are fields unexported by the
+struct present in the json blob, the field is skipped:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">type</span> User <span style="color:#00f">struct</span> {
+  FirstName <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;first_name&#34;`</span>
+  LastName <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;last_name&#34;`</span>
+  photoURL <span style="color:#2b91af">string</span> <span style="color:#a31515">`json:&#34;photoURL&#34;`</span>
+}
+
+data := <span style="color:#a31515">`{&#34;first_name&#34;: &#34;Jane&#34;, &#34;last_name&#34;: &#34;Doe&#34;, &#34;photoURL&#34;: &#34;xx.io/xx&#34;}`</span>
+<span style="color:#00f">var</span> user User
+_ = json.Unmarshal([]byte(data), &amp;user)
+fmt.Println(user)
+
+<span style="color:#008000">// output:
+</span><span style="color:#008000"></span>{Jane Doe }
+</code></pre></div><h4 id="nil-and-empty-slices-are-decoded-differently">Nil and empty slices are decoded differently</h4>
+<p>A JSON-encoded nil slice value is <code>null</code>, while for an empty slice, is an
+empty JSON array:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">d := <span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{}{
+  <span style="color:#a31515">&#34;nil_slice&#34;</span>: []<span style="color:#2b91af">int</span>,
+  <span style="color:#a31515">&#34;empty_slice&#34;</span>: []<span style="color:#2b91af">int</span>{},
+}
+
+<span style="color:#008000">// encoding d will output:
+</span><span style="color:#008000"></span>{<span style="color:#a31515">&#34;empty_slice&#34;</span>:[],<span style="color:#a31515">&#34;nil_slice&#34;</span>:null}
+</code></pre></div><h4 id="maps-are-sorted-alphabetically">Maps are sorted alphabetically</h4>
+<p>Encoding a map to JSON will sort its keys alphabetically:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">d := <span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{}{
+  <span style="color:#a31515">&#34;status&#34;</span>: <span style="color:#a31515">&#34;success&#34;</span>,
+  <span style="color:#a31515">&#34;code&#34;</span>: 201,
+  <span style="color:#a31515">&#34;0&#34;</span>: <span style="color:#00f">nil</span>,
+}
+
+<span style="color:#008000">// output:
+</span><span style="color:#008000"></span>{<span style="color:#a31515">&#34;0&#34;</span>:null,<span style="color:#a31515">&#34;code&#34;</span>:201,<span style="color:#a31515">&#34;status&#34;</span>:<span style="color:#a31515">&#34;success&#34;</span>}
+</code></pre></div><h4 id="byte-is-encoded-as-base64-string"><code>[]byte</code> is encoded as base64 string</h4>
+<p>When encoding a <code>[]byte</code> to JSON, the value is converted to a base64-encoded string:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">d := <span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{}{
+  <span style="color:#a31515">&#34;public_key&#34;</span>: []byte(<span style="color:#a31515">&#34;public_key&#34;</span>),
+  ...
+}
+
+<span style="color:#008000">// output:
+</span><span style="color:#008000"></span>{<span style="color:#a31515">&#34;public_key&#34;</span>:<span style="color:#a31515">&#34;cHVibGljX2tleQ==&#34;</span>}
+</code></pre></div><h4 id="trailing-zeros-are-removed-from-floats">Trailing zeros are removed from floats</h4>
+<p>When encoding a floating-point number, any trailing zeroes will not appear in the JSON-encoded value:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">d := <span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{}{
+  <span style="color:#a31515">&#34;starting_balance&#34;</span>: 80.0,
+  <span style="color:#a31515">&#34;upgrade_perc&#34;</span>: 30.23,
+  ...
+}
+
+<span style="color:#008000">// output:
+</span><span style="color:#008000"></span>{<span style="color:#a31515">&#34;starting_balance&#34;</span>:80,<span style="color:#a31515">&#34;upgrade_perc&#34;</span>:30.23}
+</code></pre></div><h4 id="decoding-numbers-to-interface-resolves-to-float64">Decoding numbers to <code>interface{}</code> resolves to <code>float64</code></h4>
+<p>When decoding a JSON number into an <code>interface{}</code>, the value will have the type <code>float64</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">data := <span style="color:#a31515">`{&#34;type&#34;: &#34;tx&#34;, &#34;amount&#34;: 230}`</span>
+<span style="color:#00f">var</span> out <span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{}
+_ = json.Unmarshal([]byte(data), &amp;out)
+
+fmt.Printf(<span style="color:#a31515">&#34;%T&#34;</span>, out[<span style="color:#a31515">&#34;amount&#34;</span>]) <span style="color:#008000">// float64
+</span></code></pre></div><h3 id="wrapping-up">Wrapping Up</h3>
+<p>There’s much more to say about the json package and its various applications, but hopefully, this is a helpful introduction. To learn more, I highly recommend the package documentation found <a href="https://golang.org/pkg/encoding/json">HERE</a>.</p>
+<p>Let me know your thoughts or feedback, or send ideas for improvements. You can
+also go the discussions on <a href="https://twitter.com/codehakase/status/1389247089541005313">Twitter</a>, <a href="">Reddit</a>, and <a href="">Hacker News</a></p>
+<hr>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/golang">golang</a></li>
+							
+							<li><a href="/tags/go">go</a></li>
+							
+							<li><a href="/tags/json">json</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

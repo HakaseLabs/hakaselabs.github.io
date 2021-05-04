@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>getting-started on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/getting-started/</link>
+    <description>Recent content in getting-started on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Sat, 02 Sep 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How I Learned Golang</title>
+      <link>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</guid>
+      <description>Go is a relatively new programming language, and nothing makes a developer go crazier than a new programming language, haha! As many new tech inventions, Go was created as an experiment. The goal of its creators was to come up with a language that would resolve bad practices of others while keeping the good things. It was first released in March 2012. Since then Go has attracted many developers from all fields and disciplines.</description>
+    </item>
+    
+  </channel>
+</rss>

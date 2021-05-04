@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>api on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/api/</link>
+    <description>Recent content in api on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Tue, 13 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Build your first RESTful API with Node.js</title>
+      <link>https://hakaselogs.me/2017-06-13/build-your-first-restful-api-with-node.js/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-06-13/build-your-first-restful-api-with-node.js/</guid>
+      <description>Node.js is one intimidating JavaScript framework, especially for beginners. This article serves as a quick quide to Node.js, Express.js and MongoDB. We&amp;rsquo;ll building a simple REST API that&amp;rsquo;ll serve as a basic foundation for an application.
+For the purpose of this tutorial, you&amp;rsquo;ll be creating the base for a ToDo List application (yeah its kinda like the convention to start with ToDo list apps). You&amp;rsquo;ll use all CRUD (create, read, update and delete) actions on the API.</description>
+    </item>
+    
+  </channel>
+</rss>

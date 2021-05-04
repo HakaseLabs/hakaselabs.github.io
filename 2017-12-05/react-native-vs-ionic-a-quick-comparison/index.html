@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>React Native vs Ionic - A Quick Comparison - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="React Native vs Ionic - A Quick Comparison">
+<meta itemprop="description" content="Demistifying the differences between Ionic and React Native">
+<meta itemprop="dateModified" content="2017-12-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="692">
+
+
+
+<meta itemprop="keywords" content="ionic,react-native," />
+<meta property="og:title" content="React Native vs Ionic - A Quick Comparison" />
+<meta property="og:description" content="Demistifying the differences between Ionic and React Native" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-12-05/react-native-vs-ionic-a-quick-comparison/" />
+<meta property="article:published_time" content="2017-12-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-12-05T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="React Native vs Ionic - A Quick Comparison"/>
+<meta name="twitter:description" content="Demistifying the differences between Ionic and React Native"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">05</span>
+							<span class="rest">Dec 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">React Native vs Ionic - A Quick Comparison</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p><img src="https://cdn.scotch.io/23499/HDDv8v7TRhqt4ao1nwfH_React_Native_vs_Ionic_m5b5ol.png.jpg" alt="&ldquo;React Native vs Ionic&rdquo;"></p>
+<p>The main purpose of this article, is to highlight the important differences between Ionic and React Native. Developers utilize a variety of tools. There&rsquo;s always an unending discussion and argument on which platform is best, as every developer has her own personal preferences. Hopefully this article would give you the information you&rsquo;ll need to make a decision on which you&rsquo;d want to settle for in your next mobile app project.</p>
+<h2 id="native-vs-hybrid-apps">Native vs Hybrid apps</h2>
+<p>We&rsquo;re going to journey smoothly on pointing out the differences between Ionic and React Native after we note the difference between a Native and a Hybrid app.</p>
+<p>Hybrid apps are websites/web apps embedded in a mobile app through what we call a webview. They are developed using web technologies like HTML5, CSS, and JavaScript, and execute the same code regardless of the platform in which they run. They can, with tools like PhoneGap, to use the native features of a device, like bluetooth or camera.</p>
+<p>Native apps are developed in the language required by the platform it targets, Objective-C or Swift for iOS, Java for Android, etc. The code written is not shared across platforms and their behavior varies. They have direct access to all features offered by the platform without any restriction.</p>
+<h2 id="ionic-vs-react-native---differences">Ionic vs React Native - Differences</h2>
+<h3 id="ionic">Ionic</h3>
+<p>Ionic is a typical hybrid development framework. It uses web technologies to write and render the application, and requires PhoneGap/Cordova bridges to access native features. Then it will try to reproduce native behaviors to provide the best user experience.</p>
+<h3 id="react-native">React Native</h3>
+<p>Developing in React Native is primarily done with JavaScript, which means most of the code you need to get started can be shared across platforms. However, where hybrid apps render using HTML and CSS, React Native will render using native components. In React Native, you can choose to write in Native code (Objective-C or Java) based on the feature you want to optimize.</p>
+<h3 id="hello-world-in-ionic">Hello world in Ionic</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">
+<span style="color:#008000">&lt;!-- Template --&gt;</span>
+&lt;ion-navbar <span style="">*</span>navbar&gt;
+  &lt;ion-title&gt;
+    Home
+  &lt;/ion-title&gt;
+&lt;/ion-navbar&gt;
+
+&lt;ion-content class=<span style="color:#a31515">&#34;home&#34;</span>&gt;
+  &lt;ion-card&gt;
+    &lt;ion-card-header&gt;
+      Card Header
+    &lt;/ion-card-header&gt;
+    &lt;ion-card-content&gt;
+      Hello World, Man&#39;s not Hot!!!
+    &lt;/ion-card-content&gt;
+  &lt;/ion-card&gt;
+&lt;/ion-content&gt;
+</code></pre></div><h3 id="hello-world-in-react-native">Hello world in React Native</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">import</span> React from <span style="color:#a31515">&#39;react&#39;</span>
+<span style="color:#00f">import</span> {
+  AppRegistry,
+  Text,
+  View
+} from <span style="color:#a31515">&#39;react-native&#39;</span>
+
+<span style="color:#00f">class</span> App <span style="color:#00f">extends</span> React.Component
+{
+  render() {
+    <span style="color:#00f">return</span>(
+      &lt;View&gt;
+    &lt;Text&gt;Hello World!&lt;<span style="">/Text&gt;</span>
+      &lt;<span style="">/View&gt;</span>
+   );
+  }
+}
+
+AppRegistry.registerComponent(<span style="color:#a31515">&#39;App&#39;</span>, () =&gt; App)
+</code></pre></div><h2 id="write-once-run-anywhere">Write once, run anywhere?</h2>
+<h3 id="ionic-1">Ionic</h3>
+<p>Hybrid apps, are meant to run the same code on any platform, and that is what Ionic is capable of doing. However, in order to feel more “native”, Ionic will adapt a few of its behaviors according to the platform.</p>
+<h3 id="react-native-1">React Native</h3>
+<p>React focuses on the use of components which best follow the native behaviors of the platform. For example, Android has a highly customizable toolbar; iOS does not. You can use the component for the toolbar on Android but you’ll have to use something different for iOS.</p>
+<h2 id="community--plugins">Community &amp; Plugins</h2>
+<p>When I choose an Open Source project to use, I find it very important to assess how the community is backing such project. This directly impacts how easily you can find information online, answers to your questions, or getting bugs fixed.</p>
+<h3 id="ionic-2">Ionic</h3>
+<p>At the point of this writing, The Ionic project on <a href="Github">https://github.com/ionic-team/ionic</a>, has over 6k commits, 30 branches, <strong>32,264</strong> stars, 108 releases, and 252 contributors. Ionic also have hundreds on plugins on npm that adds to bringing more native feel to Ionic apps.</p>
+<h3 id="react-native-2">React Native</h3>
+<p>Also, at the point of this writing, The React Native project on <a href="Github">https://github.com/facebook/react-native</a>, has over 12k commits, 56 branches, <strong>56,007</strong> stars, 233 releases, and <strong>1,531</strong> contributors. React native have hundreds on plugins available on npm.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In the cross-platform app development worlds, Ionic and React Native are the developer&rsquo;s best choices. Its really hard to say which is better than the other, its all a matter of preference.</p>
+<p>From my personal prespective, React Native has these advantages over Ionic:</p>
+<ul>
+<li>React Native gives you more Native feel compared to a hybrid app</li>
+<li>React Native&rsquo;s native rendering, is faster compared to Ionic&rsquo;s</li>
+</ul>
+<p>But anyway, the best way to choose the best tool for resolving particular issues is to test different options. So, try them both to make a choice.</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/ionic">ionic</a></li>
+							
+							<li><a href="/tags/react-native">react-native</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

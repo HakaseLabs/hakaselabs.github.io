@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>JavaScript Objects 101 - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="JavaScript Objects 101">
+<meta itemprop="description" content="A gentle guide to getting started with JavaScript Objects">
+<meta itemprop="dateModified" content="2017-05-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="862">
+
+
+
+<meta itemprop="keywords" content="javascript,objects," />
+<meta property="og:title" content="JavaScript Objects 101" />
+<meta property="og:description" content="A gentle guide to getting started with JavaScript Objects" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-05-25/javascript-objects-101/" />
+<meta property="article:published_time" content="2017-05-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-05-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JavaScript Objects 101"/>
+<meta name="twitter:description" content="A gentle guide to getting started with JavaScript Objects"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">25</span>
+							<span class="rest">May 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">JavaScript Objects 101</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers.</p>
+<h3 id="what-is-an-object">What Is An Object?</h3>
+<p>In JavaScript terms, An Object is a collection of data, which consits of several variables and functions - which are called properties and methods.</p>
+<p>Creating an object is as easy as eating candy (lol!). Taking our Vehicle instance, we can create a Car Object like so:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> car = {
+    type: <span style="color:#a31515">&#34;salon&#34;</span>,
+    colour: <span style="color:#a31515">&#34;black&#34;</span>,
+}
+</code></pre></div><p>In the code above, we created a variable <code>car</code> which is now an object, and has some <code>key-value</code> pairs inside. The <code>type</code> and <code>colour</code> items inside our car object are referred to as properties, and they hold their various values.
+If we log to our console the type of our car variable, we&rsquo;d get an object <code>console.log(typeof car); //object</code> .</p>
+<blockquote>
+<p>Note: We separate each key-value pairs with a comma (,)</p>
+</blockquote>
+<h4 id="accessing-object-properties">Accessing Object Properties</h4>
+<p>Now we&rsquo;ve created our object, how do we access the items inside? Its easy. We use the <code>dot</code> notation to access properties of an object. Say we want to log to our console, the value of the <code>colour</code> property in our <code>car</code> object, we&rsquo;ll write as so:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">console.log( car.colour ); <span style="color:#008000">// black
+</span></code></pre></div><h4 id="what-data-types-are-allowed-as-property-values-in-objects">What Data Types are allowed as Property values in Objects?</h4>
+<p>An Object&rsquo;s property can have all data type as its value (<code>strings, number, float, array, function, ...</code>).</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> me = {
+    name: <span style="color:#a31515">&#34;Francis Sunday&#34;</span>,
+    gender: <span style="color:#a31515">&#34;male&#34;</span>,
+    interests: [<span style="color:#a31515">&#39;God&#39;</span>, <span style="color:#a31515">&#39;programming&#39;</span>, <span style="color:#a31515">&#39;music&#39;</span>, <span style="color:#a31515">&#39;writing&#39;</span>],
+    bio: <span style="color:#00f">function</span>() {
+        console.log( <span style="color:#a31515">&#34;Hi! I&#39;m &#34;</span> + <span style="color:#00f">this</span>.name + <span style="color:#a31515">&#34;, and I&#39;m interested in &#34;</span> + <span style="color:#00f">this</span>.showInterests() )
+    },
+    showInterests: <span style="color:#00f">function</span>() {
+        <span style="color:#00f">return</span> <span style="color:#00f">this</span>.interests.join(<span style="color:#a31515">&#34;, &#34;</span>);
+    }
+}
+</code></pre></div><p>Quite a lot going on up there, nothing to worry, I&rsquo;ll walk you through it.
+First I created a variable <code>me</code> to hold an object holding the properties <code>name, interests, gender</code>, and methods <code>bio(), showInterests()</code>. The <code>this</code> keyword here, refers to the current object. So <code>this.name</code> also means the value of the <code>name</code> property in this particular object I&rsquo;m in.</p>
+<p>Let&rsquo;s use the object.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">console.log ( me.name ); <span style="color:#008000">// &#34;Francis Sunday&#34;
+</span><span style="color:#008000"></span>console.log ( me.gender ); <span style="color:#008000">// male
+</span><span style="color:#008000"></span>console.log ( me.interests ) <span style="color:#008000">// [&#39;God&#39;, &#39;programming&#39; ...]
+</span><span style="color:#008000"></span>me.bio(); <span style="color:#008000">//  Hi! I&#39;m Francis Sunday, and I&#39;m interested in God, programming, music, writing
+</span></code></pre></div><p>Now you get the feel of objects :+1:</p>
+<h3 id="objects-are-everywhere">Objects Are Everywhere</h3>
+<p>You need to grab an element in a DIV with html, you&rsquo;d do something like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> myDiv = document.getElementById(<span style="color:#a31515">&#39;thatDiv&#39;</span>);
+</code></pre></div><p><code>document</code> is an object and <code>getElementById</code> is a method of it. You get the idea now right?</p>
+<p>Here are some other examples of objects:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">someVar.split(<span style="color:#a31515">&#39;&#39;</span>);
+someVar.join(<span style="color:#a31515">&#39;,&#39;</span>);
+someVar.style
+...
+</code></pre></div><h4 id="sub-namespaces">Sub-Namespaces</h4>
+<p>Values of objects, can also become objects. And they are still accessed via the dot notation.
+If i change the name property in the <code>me</code> object as so:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">name: {
+    firstname: <span style="color:#a31515">&#34;Francis&#34;</span>,
+    lastname: <span style="color:#a31515">&#34;Sunday&#34;</span>
+}
+</code></pre></div><p>To access those inner objects, we just extend with another <code>dot</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">me.name.firstname <span style="color:#008000">// Francis
+</span><span style="color:#008000"></span>me.name.lastname <span style="color:#008000">// Sunday
+</span><span style="color:#008000"></span>
+</code></pre></div><h4 id="updating-objects-properties">Updating Objects Properties</h4>
+<p>After an Object has been created with its properties, we can still update the values of its properties.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> person = {
+    name: <span style="color:#a31515">&#34;John Doe&#34;</span>,
+    age: 19
+}
+<span style="color:#008000">// changing the value of the name property
+</span><span style="color:#008000"></span>console.log ( person.name ); <span style="color:#008000">// John Doe
+</span><span style="color:#008000"></span>person.name = <span style="color:#a31515">&#34;Brian&#34;</span>;
+console.log( person.name ); <span style="color:#008000">// Brian
+</span></code></pre></div><p>Also, we can create new properties outside the creation block.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> car = {
+    model: <span style="color:#a31515">&#34;MV400&#34;</span>,
+    colour: <span style="color:#a31515">&#34;blue&#34;</span>
+}
+
+car.name = <span style="color:#a31515">&#34;benz&#34;</span>;
+
+console.log( car );
+<span style="color:#008000">// Output
+</span><span style="color:#008000">// { model: &#39;MV400&#39;, colour: &#39;blue&#39;, name: &#39;benz&#39; }
+</span></code></pre></div><h3 id="try-it">Try It</h3>
+<p>We&rsquo;ve covered a lot of ground so far, to make sure everything we learned so far sinks in, open up your favourite editor (mine is VSCode), and try a quick example.</p>
+<p>Create a basic <code>HTML</code> markup with two text fields <code>name</code>, <code>age</code> and a <code>submit</code> button. Make sure all the form fields has an ID.
+In your JavaScript file, grab the items from the text fields when the submit button is clicked and add the values of the form fields to a <code>userInfo</code> object.
+Display the inputs from the text fields to the browser in a <code>div</code>.</p>
+<p>I&rsquo;ll wait here for you. No peeking.</p>
+<hr>
+<p>Okay, if you didn&rsquo;t peek, you should have something like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#008000">&lt;!--the HTML markup--&gt;</span>
+&lt;input type=<span style="color:#a31515">&#34;text&#34;</span> id=<span style="color:#a31515">&#34;name&#34;</span> placeholder=<span style="color:#a31515">&#34;Enter Your Name&#34;</span> &gt;
+&lt;input type=<span style="color:#a31515">&#34;text&#34;</span> id=<span style="color:#a31515">&#34;age&#34;</span> placeholder=<span style="color:#a31515">&#34;Enter Your Age&#34;</span> &gt;
+&lt;button id=<span style="color:#a31515">&#34;submitBtn&#34;</span>&gt;Submit&lt;/button&gt;
+
+<span style="color:#008000">&lt;!--for the output--&gt;</span>
+&lt;div id=<span style="color:#a31515">&#34;info&#34;</span>&gt;&lt;/div&gt;
+
+</code></pre></div><div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000">// The JavaScript code
+</span><span style="color:#008000"></span><span style="color:#00f">let</span> _name = document.getElementById(<span style="color:#a31515">&#39;name&#39;</span>);
+<span style="color:#00f">let</span> _age = document.getElementById(<span style="color:#a31515">&#39;age&#39;</span>);
+<span style="color:#00f">let</span> btn = document.getElementById(<span style="color:#a31515">&#39;submitBtn&#39;</span>);
+
+<span style="color:#008000">// when the send button is clicked
+</span><span style="color:#008000"></span>btn.addEventListener(<span style="color:#a31515">&#39;click&#39;</span>, <span style="color:#00f">function</span>() {
+<span style="color:#008000">// The userInfo object, holding the values from the text fields
+</span><span style="color:#008000"></span><span style="color:#00f">let</span> userInfo = {
+    name: _name.value,
+    age: _age.value,
+    display: <span style="color:#00f">function</span>() {
+        <span style="color:#00f">return</span> <span style="color:#a31515">&#34;Name: &#34;</span> + <span style="color:#00f">this</span>.name + <span style="color:#a31515">&#34;, &#34;</span> + <span style="color:#a31515">&#34;Age: &#34;</span> + <span style="color:#00f">this</span>.age;
+    }
+}
+<span style="color:#008000">// displays the data in the HTML markup
+</span><span style="color:#008000"></span>document.getElementById(<span style="color:#a31515">&#39;info&#39;</span>).innerHTML = userInfo.display();
+});
+</code></pre></div><p>Preview</p>
+<p><img src="/images/Objects-demo.gif" alt="Objects-demo" title="Objects Demo"></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->
+<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="summary">Summary</h3>
+<p>In this title, we walked through the basics of Objects in JavaScript. In the next part (<em>JavaScript Objects 102</em>), I&rsquo;ll be writing on Object Oriented programming in JavaScript, with highlights on Prototypes, Inheritance, and Constructors.
+Have any questions? Drop them in the comment box below.</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/javascript">javascript</a></li>
+							
+							<li><a href="/tags/objects">objects</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

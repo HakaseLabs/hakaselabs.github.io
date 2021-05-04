@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hakaselogs</title>
+    <link>https://hakaselogs.me/</link>
+    <description>Recent content on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Working with JSON in Go</title>
+      <link>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</link>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</guid>
+      <description>Summary: I&amp;rsquo;ve worked with JSON in various programming languages in context to data exchange/communication between applications. In this article, I&amp;rsquo;ll give a brief overview of the encoding/json package in Go, and point some gotchas I&amp;rsquo;ve encountered.
+ Go to: Encoding | Decoding | HTTP Handler Example | Read and Write JSON to File | Streaming | Gotchas
+JSON (JavaScript Object Notation), is a popular data interchange format commonly used for communication between applications.</description>
+    </item>
+    
+    <item>
+      <title>Projects I&#39;ve Authored</title>
+      <link>https://hakaselogs.me/projects/</link>
+      <pubDate>Thu, 08 Apr 2021 10:52:01 +0100</pubDate>
+      
+      <guid>https://hakaselogs.me/projects/</guid>
+      <description>Below are some small open source software projects I’ve authored or helped develop. Enjoy!
+ rld is a tiny tool that runs a Go program and watch changes on it. Engage PHP SDK lets you capture user attributes and events on your site. Engage Go SDK is the Engage.so sdk written in Go. slack-logrus is an Intuitive Logrus Hook for Slack. Mobius Go SDK is an SDK for the Mobius DApp Store written in Go.</description>
+    </item>
+    
+    <item>
+      <title>Enum Stringer Interface optimisation in Go</title>
+      <link>https://hakaselogs.me/2021-04-08/enum-stringer-interface-optimisation-in-go/</link>
+      <pubDate>Thu, 08 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2021-04-08/enum-stringer-interface-optimisation-in-go/</guid>
+      <description>The most idiomatic way of describing an enum type in Go is to use constants, often in conjunction with iota.
+A pattern I&amp;rsquo;ve used to implement the Stringer interface for an enum type is to lookup the string representation in a slice. Consider this snippet from a project I&amp;rsquo;m working on:
+// Status ... type Status uint32 // List of possible status values const ( // The operation is known, but hasn&amp;#39;t been decided yet 	Processing Status = iota // The operation will never be accepted 	Rejected // The operation was accepted 	Accepted .</description>
+    </item>
+    
+    <item>
+      <title>Line Numbers In Vim</title>
+      <link>https://hakaselogs.me/2020-02-07/line-numbers-in-vim/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2020-02-07/line-numbers-in-vim/</guid>
+      <description>Vim doesn&amp;rsquo;t show line numbers by default, they can be turned on in your vim configuration. Vim has an absolute, relative and hybrid line numbering mode. Absolute Line Numbers Addding the number option to your vim config, Vim sets up absolute line numbers to show the line number for each line in the current buffer. &amp;#34; set absolute numbersset number &amp;#34; orset nuRelative Line Numbers With the relativenumber option, each line in your file is numbered relative to the cursor’s current position.</description>
+    </item>
+    
+    <item>
+      <title>What I Use</title>
+      <link>https://hakaselogs.me/2020-01-10/what-i-use/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2020-01-10/what-i-use/</guid>
+      <description>For the few times I have to tell people in detail the software and hardware I use on a day to day basis to do my job, here’s a post to list them. My setup changes from time to time but I’ll try to keep this up to date. My dotfiles can be found on This Repo - they work for me, read carefully before installing for yourself.
+Hardware  HP 24” Monitor: HP24y IPS Display MacBook Pro 13” (2017)  2.</description>
+    </item>
+    
+    <item>
+      <title>Building Small Containers for Kubernetes</title>
+      <link>https://hakaselogs.me/2018-12-01/building-small-containers-for-kubernetes/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-12-01/building-small-containers-for-kubernetes/</guid>
+      <description>The first step to deploying any app to Kubernetes, is to bundle the app in a container. There are several official, and community-backed container images for various languages and distros, and most of these containers can be really large, or sometimes contain overheads your app may never need/use.
+Thanks to Docker, you can easily create container images in a few steps; specify a base image, add your app-specific changes, and build your container.</description>
+    </item>
+    
+    <item>
+      <title>Building a Web App With Go, Gin and React</title>
+      <link>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</guid>
+      <description>TL;DR: In this tutorial, I&amp;rsquo;ll show you how easy it is to build a web application with Go and the Gin framework and add authentication to it. Check out the Github repo for the code we&amp;rsquo;re going to write.
+ Gin is a high-performance micro-framework that delivers a very minimalistic framework that carries with it only the most essential features, libraries, and functionalities needed to build web applications and microservices. It makes it simple to build a request handling pipeline from modular, reusable pieces.</description>
+    </item>
+    
+    <item>
+      <title>The CouchDB Replicator Database - An Overview</title>
+      <link>https://hakaselogs.me/2018-04-19/the-couchdb-replicator-database-an-overview/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-04-19/the-couchdb-replicator-database-an-overview/</guid>
+      <description>TL;DR: In this article, I&amp;rsquo;ll give an overview of the replicator database in CouchDB, how to spin off a replication task in CouchDB
+ CouchDB is a database that completely embraces the web. CouchDB stores your data as JSON documents, and allows you access these documents easily, from a web interface or its REST API. We won&amp;rsquo;t be going too deep into couchdb as it would be out of scope for this article - I&amp;rsquo;ll write one of those pretty soon.</description>
+    </item>
+    
+    <item>
+      <title>Here&#39;s What&#39;s New  In Go 1.10</title>
+      <link>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</guid>
+      <description>Go 1.8 is one year old (Happy belated Birthday 🎊 🎉) Go 1.9 is already 6 months old! Go 1.10 is out ✌
+ The latest Go release, v1.10 arrived six months after V1.9. This release was stated in the change-logs and the Go blog. I&amp;rsquo;m gonna share some interesting changes I&amp;rsquo;ve found in Go 1.10 with you.
+New Features The Language Go 1.10 offers compiler tool chain and performance improvements, but no significant changes was made to the language&amp;rsquo;s specification.</description>
+    </item>
+    
+    <item>
+      <title>React Native vs Ionic - A Quick Comparison</title>
+      <link>https://hakaselogs.me/2017-12-05/react-native-vs-ionic-a-quick-comparison/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-12-05/react-native-vs-ionic-a-quick-comparison/</guid>
+      <description>The main purpose of this article, is to highlight the important differences between Ionic and React Native. Developers utilize a variety of tools. There&amp;rsquo;s always an unending discussion and argument on which platform is best, as every developer has her own personal preferences. Hopefully this article would give you the information you&amp;rsquo;ll need to make a decision on which you&amp;rsquo;d want to settle for in your next mobile app project.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Go - Variables</title>
+      <link>https://hakaselogs.me/2017-11-19/getting-started-with-go-variables/</link>
+      <pubDate>Sun, 19 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-11-19/getting-started-with-go-variables/</guid>
+      <description>In the previous article - Golang - Getting Started on The Practical Dev, I wrote an intro to the Go programing language, and how to setup a development environment for your platform.
+In this part of the series, we&amp;rsquo;re going to talk about variables in Go, check it out HERE</description>
+    </item>
+    
+    <item>
+      <title>Golang - Getting Started, The Practical Dev</title>
+      <link>https://hakaselogs.me/2017-11-18/golang-getting-started-the-practical-dev/</link>
+      <pubDate>Sat, 18 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-11-18/golang-getting-started-the-practical-dev/</guid>
+      <description>“Go will be the server language of the future.” — Tobias Lütke, Shopify
+ Go was first created as an experiment, the goal of its creators was to come up with a language that would resolve bad practices of others while keeping the good things.
+Its first release was on March 2012. Go was designed to feel familiar and to stay as simple as possible, the entire language specification fits in just a few pages.</description>
+    </item>
+    
+    <item>
+      <title>Terminal for Beginners!</title>
+      <link>https://hakaselogs.me/2017-10-28/terminal-for-beginners/</link>
+      <pubDate>Sat, 28 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-10-28/terminal-for-beginners/</guid>
+      <description>Getting into Software Development seem overwhelming (actually it is) these days. One has to go through the hassle of getting familiar with different languages, to organizing codebases, to libraries, frameworks, the list goes on. Every Job description (at least the sane ones), requires additional skills to get the job. Example of such, Version Control (Git or Mecurial), tasks runners, build tools, package managers, etc.
+Most of these extra tools are being accessed/used from a command line interface.</description>
+    </item>
+    
+    <item>
+      <title>How I Learned Golang</title>
+      <link>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</guid>
+      <description>Go is a relatively new programming language, and nothing makes a developer go crazier than a new programming language, haha! As many new tech inventions, Go was created as an experiment. The goal of its creators was to come up with a language that would resolve bad practices of others while keeping the good things. It was first released in March 2012. Since then Go has attracted many developers from all fields and disciplines.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript Async/Await 101</title>
+      <link>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</guid>
+      <description>Async and Await has been a blessing to most JavaScript Developers. Even while it was on the Stage 4 proposal for ES6, the feature has been warmtly welcomed.
+Node.js now Supports async/await since its version 7.6.
+What is async/await? If this is your first time seeing/hearing of this term, here&amp;rsquo;s it in plain English:
+ Its the newest way/pattern of writing asychronous code in JavaScript, asides Promises and callbacks. Async/await compared to Promises, are non-blocking Async/await makes aysnchronous code appear and behave like synchronous code.</description>
+    </item>
+    
+    <item>
+      <title>for...in vs for...of Loops in JavaScript</title>
+      <link>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</guid>
+      <description>The for..in and for..of loops, gives us a clean and concise syntax to iterate on iterable items like arrays, strings, objects, and enumerables. Now the question is where to use which. Here&amp;rsquo;s a little reminder to get you you started.
+for..in Use this to iterate over the properties of an object:
+let person = { name: &amp;#39;Francis&amp;#39;, alias: &amp;#39;codehakase&amp;#39;, eyeColour: &amp;#39;brown&amp;#39; }; for(let key in person) { console.log( `${key}=&amp;gt; ${person[key]}` ); } // name =&amp;gt; Francis // alias =&amp;gt; codehakase .</description>
+    </item>
+    
+    <item>
+      <title>Build your first RESTful API with Node.js</title>
+      <link>https://hakaselogs.me/2017-06-13/build-your-first-restful-api-with-node.js/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-06-13/build-your-first-restful-api-with-node.js/</guid>
+      <description>Node.js is one intimidating JavaScript framework, especially for beginners. This article serves as a quick quide to Node.js, Express.js and MongoDB. We&amp;rsquo;ll building a simple REST API that&amp;rsquo;ll serve as a basic foundation for an application.
+For the purpose of this tutorial, you&amp;rsquo;ll be creating the base for a ToDo List application (yeah its kinda like the convention to start with ToDo list apps). You&amp;rsquo;ll use all CRUD (create, read, update and delete) actions on the API.</description>
+    </item>
+    
+    <item>
+      <title>Making hakasebot - Twitter Bots 101</title>
+      <link>https://hakaselogs.me/2017-05-30/making-hakasebot-twitter-bots-101/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-30/making-hakasebot-twitter-bots-101/</guid>
+      <description>![Bots]({{ site.url }}/images/twitter-bots.gif &amp;ldquo;Bots&amp;rdquo;)
+This was my first attempt making twitter bots. I made a very simple twitter bot for this blog, check the Source and also follow @_hakasebot.
+Setting Up The bot was created using the Twit package, which is a Twitter API client for Node.js. Twit needs to connect with my twitter account so first I created a new Twitter Application. After that, I took note of my application&amp;rsquo;s keys:</description>
+    </item>
+    
+    <item>
+      <title>JavaScript Objects 101</title>
+      <link>https://hakaselogs.me/2017-05-25/javascript-objects-101/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-25/javascript-objects-101/</guid>
+      <description>In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers.
+What Is An Object? In JavaScript terms, An Object is a collection of data, which consits of several variables and functions - which are called properties and methods.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to JavaScript Promises</title>
+      <link>https://hakaselogs.me/2017-05-21/introduction-to-javascript-promises/</link>
+      <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-21/introduction-to-javascript-promises/</guid>
+      <description>JavaScript promises have become a popular way to handle the tangled mess that JavaScript’s asynchronous nature often creates for us. Synchronous code is eaiser to follow and debug, async is better for flexibiity. Promises are becomming a big part of the JavaScript world, with awesome APIs implemented with it.
+What is a Promise? A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action&amp;rsquo;s eventual success value or failure reason.</description>
+    </item>
+    
+    <item>
+      <title>Object-Oriented PHP - An Easy Approach</title>
+      <link>https://hakaselogs.me/2017-05-17/object-oriented-php-an-easy-approach/</link>
+      <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-17/object-oriented-php-an-easy-approach/</guid>
+      <description>For some PHP developers, the concept of object-orient programming, seems like a frightening concept. You might have browsed through repos on GitHub or read articles on how to implement a feature in a particular PHP project of yours, and the code is full of complicated syntax. I tell you, the concept of OOP is easy to grasp.
+Object-Oriented programming (OOP), is a style of programming which allows us developers and programmers group related tasks or actions into classes to produce effective code.</description>
+    </item>
+    
+    <item>
+      <title>Introducing Adonis Js</title>
+      <link>https://hakaselogs.me/2017-05-09/introducing-adonis-js/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-09/introducing-adonis-js/</guid>
+      <description>TL;DR AdonisJs is a true MVC Framework for Node.js. It encapsulate all the boring parts of Web programming and offers you a nice &amp;amp; clean API to work with. AdonisJs makes it easy to write web applications with less code. In this article, i will show you how to get started with AdonisJs. Checkout the repo on Github.
+Node.js is one of the emerging technologies to write real-time applications using one of your favorite web languages: Javascript.</description>
+    </item>
+    
+  </channel>
+</rss>

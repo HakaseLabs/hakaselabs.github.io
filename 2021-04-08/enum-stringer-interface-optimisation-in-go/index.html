@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Enum Stringer Interface optimisation in Go - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Enum Stringer Interface optimisation in Go">
+<meta itemprop="description" content="A tip on how to optimise enum stringer interface">
+<meta itemprop="dateModified" content="2021-04-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="229">
+
+
+
+<meta itemprop="keywords" content="golang,go," />
+<meta property="og:title" content="Enum Stringer Interface optimisation in Go" />
+<meta property="og:description" content="A tip on how to optimise enum stringer interface" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2021-04-08/enum-stringer-interface-optimisation-in-go/" />
+<meta property="article:published_time" content="2021-04-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-08T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Enum Stringer Interface optimisation in Go"/>
+<meta name="twitter:description" content="A tip on how to optimise enum stringer interface"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">08</span>
+							<span class="rest">Apr 2021</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Enum Stringer Interface optimisation in Go</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>The most idiomatic way of describing an enum type in Go is to use constants, often in conjunction with <a href="https://golang.org/ref/spec#Iota">iota</a>.</p>
+<p>A pattern I&rsquo;ve used to implement the <code>Stringer</code> interface for an enum type is to
+lookup the string representation in a slice. Consider this snippet from a
+project I&rsquo;m working on:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#008000">// Status ...
+</span><span style="color:#008000"></span><span style="color:#00f">type</span> Status <span style="color:#2b91af">uint32</span>
+
+<span style="color:#008000">// List of possible status values
+</span><span style="color:#008000"></span><span style="color:#00f">const</span> (
+  <span style="color:#008000">// The operation is known, but hasn&#39;t been decided yet
+</span><span style="color:#008000"></span>	Processing Status = <span style="color:#00f">iota</span>
+  <span style="color:#008000">// The operation will never be accepted
+</span><span style="color:#008000"></span>	Rejected
+  <span style="color:#008000">// The operation was accepted
+</span><span style="color:#008000"></span>	Accepted
+  ...
+)
+
+<span style="color:#00f">func</span> (s Status) String() <span style="color:#2b91af">string</span> {
+  <span style="color:#00f">return</span> []<span style="color:#2b91af">string</span>{<span style="color:#a31515">&#34;processing&#34;</span>, <span style="color:#a31515">&#34;rejected&#34;</span>, <span style="color:#a31515">&#34;accepted&#34;</span>}[s]
+}
+</code></pre></div><p>The snippet above works correct but has a few glitches &ndash; passing
+<code>Status(-2)</code> or <code>Status(300)</code>  will cause the <code>String()</code> method to panic, and
+when appending to the slice, the order of the enum constants has to be taken
+into consideration.</p>
+<p>A way to optimise this is to use a map which provides <code>O(1)</code> access time rather
+than the linear <code>O(n)</code> time in the string slice version.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">...
+<span style="color:#008000">// Map of Status values back to their constant names for pretty printing.
+</span><span style="color:#008000"></span><span style="color:#00f">var</span> txStatuses = <span style="color:#00f">map</span>[Status]<span style="color:#2b91af">string</span>{
+	Processing: <span style="color:#a31515">&#34;processing&#34;</span>,
+	Rejected:   <span style="color:#a31515">&#34;rejected&#34;</span>,
+	Accepted:   <span style="color:#a31515">&#34;accepted&#34;</span>,
+}
+
+<span style="color:#008000">// String returns the ErrorCode as a human-readable name.
+</span><span style="color:#008000"></span><span style="color:#00f">func</span> (s Status) String() <span style="color:#2b91af">string</span> {
+	<span style="color:#00f">if</span> s := txStatuses[s]; s != <span style="color:#a31515">&#34;&#34;</span> {
+		<span style="color:#00f">return</span> s
+	}
+	<span style="color:#00f">return</span> fmt.Sprintf(<span style="color:#a31515">&#34;Unknown Status (%d)&#34;</span>, uint32(s))
+}
+</code></pre></div>
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/golang">golang</a></li>
+							
+							<li><a href="/tags/go">go</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

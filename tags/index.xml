@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/</link>
+    <description>Recent content in Tags on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Mon, 03 May 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>go</title>
+      <link>https://hakaselogs.me/tags/go/</link>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://hakaselogs.me/tags/golang/</link>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>json</title>
+      <link>https://hakaselogs.me/tags/json/</link>
+      <pubDate>Mon, 03 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/json/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>development</title>
+      <link>https://hakaselogs.me/tags/development/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://hakaselogs.me/tags/vim/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>workflow</title>
+      <link>https://hakaselogs.me/tags/workflow/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/workflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>setup</title>
+      <link>https://hakaselogs.me/tags/setup/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/setup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://hakaselogs.me/tags/docker/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://hakaselogs.me/tags/kubernetes/</link>
+      <pubDate>Sat, 01 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gin-gonic</title>
+      <link>https://hakaselogs.me/tags/gin-gonic/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/gin-gonic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>https://hakaselogs.me/tags/react/</link>
+      <pubDate>Fri, 20 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/react/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>couchdb</title>
+      <link>https://hakaselogs.me/tags/couchdb/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/couchdb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>databases</title>
+      <link>https://hakaselogs.me/tags/databases/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/databases/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nosql</title>
+      <link>https://hakaselogs.me/tags/nosql/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/nosql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>changelog</title>
+      <link>https://hakaselogs.me/tags/changelog/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/changelog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ionic</title>
+      <link>https://hakaselogs.me/tags/ionic/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/ionic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react-native</title>
+      <link>https://hakaselogs.me/tags/react-native/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/react-native/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terminal</title>
+      <link>https://hakaselogs.me/tags/terminal/</link>
+      <pubDate>Sun, 19 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unix</title>
+      <link>https://hakaselogs.me/tags/unix/</link>
+      <pubDate>Sun, 19 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/unix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>getting-started</title>
+      <link>https://hakaselogs.me/tags/getting-started/</link>
+      <pubDate>Sat, 02 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/getting-started/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>https://hakaselogs.me/tags/javascript/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>loops</title>
+      <link>https://hakaselogs.me/tags/loops/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/loops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>api</title>
+      <link>https://hakaselogs.me/tags/api/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>https://hakaselogs.me/tags/node.js/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nodejs</title>
+      <link>https://hakaselogs.me/tags/nodejs/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rest</title>
+      <link>https://hakaselogs.me/tags/rest/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/rest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bots</title>
+      <link>https://hakaselogs.me/tags/bots/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/bots/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>twitter</title>
+      <link>https://hakaselogs.me/tags/twitter/</link>
+      <pubDate>Tue, 30 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/twitter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>objects</title>
+      <link>https://hakaselogs.me/tags/objects/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/objects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>promises</title>
+      <link>https://hakaselogs.me/tags/promises/</link>
+      <pubDate>Sun, 21 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/promises/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oop</title>
+      <link>https://hakaselogs.me/tags/oop/</link>
+      <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/oop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>php</title>
+      <link>https://hakaselogs.me/tags/php/</link>
+      <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>adonisjs</title>
+      <link>https://hakaselogs.me/tags/adonisjs/</link>
+      <pubDate>Tue, 09 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/adonisjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>async/await</title>
+      <link>https://hakaselogs.me/tags/async/await/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/tags/async/await/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

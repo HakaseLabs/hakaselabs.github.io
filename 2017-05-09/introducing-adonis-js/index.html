@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Introducing Adonis Js - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Introducing Adonis Js">
+<meta itemprop="description" content="Get started with AdonisJS eaisly.">
+<meta itemprop="dateModified" content="2017-05-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="676">
+
+
+
+<meta itemprop="keywords" content="adonisjs,javascript," />
+<meta property="og:title" content="Introducing Adonis Js" />
+<meta property="og:description" content="Get started with AdonisJS eaisly." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-05-09/introducing-adonis-js/" />
+<meta property="article:published_time" content="2017-05-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-05-09T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Introducing Adonis Js"/>
+<meta name="twitter:description" content="Get started with AdonisJS eaisly."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">09</span>
+							<span class="rest">May 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Introducing Adonis Js</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<h2 id="tldr">TL;DR</h2>
+<p>AdonisJs is a true MVC Framework for Node.js. It encapsulate all the boring parts of Web programming and offers you a nice &amp; clean API to work with. AdonisJs makes it easy to write web applications with less code. In this article, i will show you how to get started with AdonisJs. Checkout the repo on Github.</p>
+<p>Node.js is one of the emerging technologies to write real-time applications using one of your favorite web languages: Javascript. With the ample choices of frameworks to write your first web server, not even a single one offers the desired developer experience. This is where AdonisJs shines.</p>
+<h2 id="what-really-makes-adonisjs-tick">What really Makes AdonisJs tick?</h2>
+<p>AdonisJs is inspired by a PHP Framework called Laravel. It borrows the concepts of Dependency injection and service providers to write beautiful code which is testable to its core. Shipped with some cool features like:</p>
+<ul>
+<li>Lucid ORM (Effective Implementation of Active Record)</li>
+<li>Authentication</li>
+<li>Database Migrations</li>
+<li>Mailing System</li>
+<li>Data Validator</li>
+</ul>
+<p>Similar to <strong>Laravel</strong>, here are some features Adonis has which are similar to Laravel’s:</p>
+<ul>
+<li>Routing</li>
+<li>Scaffolding</li>
+<li>IOC (Inversion of Control) and Dependency Injection (DI)</li>
+<li>Query Builder</li>
+<li>Model Factories and Database Seeding</li>
+<li>Directory Structure</li>
+<li>Artisan like command utility called ACE</li>
+</ul>
+<h2 id="why-should-i-use-adonisjs">Why should I use AdonisJs?</h2>
+<p>AdonisJs focuses on the key aspects of creating stable and scalable web applications, some of them are:</p>
+<h3 id="developer-experience">Developer Experience</h3>
+<p>The framework makes use of latest inbuilt ES2015 features to get rid of spaghetti code. You will hardly find yourself writing callbacks since there is a solid support for ES2015 generators. Also, the OOP nature of the framework helps you in abstracting your code into multiple re-usable chunks.
+Consistent API</p>
+<h3 id="consistent-api">Consistent API</h3>
+<p>The API throughout the code base is so consistent that after working for a while, you will be able to guess the method names, expected output, etc.
+Speed &amp; Productivity</p>
+<h3 id="speed-and-productivity">Speed and Productivity</h3>
+<p>AdonisJs ships with a bunch of 1st party components known as providers. Writing entire web server is a matter of weeks(if not days). It ships with solid support for <strong>Mailing, Authentication, Redis, SQL ORM, Data validation and sanitization</strong>, etc.</p>
+<h2 id="installing-adonisjs">Installing AdonisJS</h2>
+<p>Installing AdonisJs is very straight forward, the prerequisites is Nodejs &gt;=4.0 and NPM &gt;=3.0.</p>
+<p>npm is a package manager for Node.js. During the development process, you will find yourself using npm install a lot. Hence all dependencies are pulled from npm only.</p>
+<p><em>Note:</em> We’ll be using a command line (terminal) through out, if you are on Mac OS, Ubuntu, Linux the commands we’d use should work. If you are on windows, get a command line tool like Git Bash, so you can use the same comamnds.</p>
+<h3 id="installing-adonis-cli">Installing Adonis-CLI</h3>
+<p>We’ll install adonis-cli globally using npm. It is a command line tool to scaffold new applications within a matter of seconds.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm i -g adonis-cli
+</code></pre></div><p><img src="http://i1.wp.com/cdn-images-1.medium.com/max/1600/1*gCIyTiyEis5hUtxdmAAn0A.gif" alt=""></p>
+<p>With Adonis-CLI installed, we can create projects using it. For this tutorial, we’ll be creating a project holla-adonis.</p>
+<p>We’ll create the project using Adonis-CLI</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">adonis new holla-adonis
+</code></pre></div><p><img src="http://i0.wp.com/cdn-images-1.medium.com/max/1600/1*k0mjXf6_EclO_MbTpRq5SA.gif" alt="">
+scaffolding a new project with adonis-cli</p>
+<p>Now you’ve created a new project, lets move into the directory and launch the HTTP server.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd holla-adonis thennpm run serve:dev
+</code></pre></div><p>Now open up your favourite browser and navigate to http://localhost:3333 and you should see the welcome screen.
+<img src="http://i0.wp.com/cdn-images-1.medium.com/max/1600/1*xA3sJQFPVwMangNEKs0QRw.png" alt="welcome screen"></p>
+<h2 id="installing-adonisjs-manually">Installing AdonisJs manually</h2>
+<p>If you’d prefer installing Adonis without adonis-cli (which you should definitely use), you can clone the source from Github and build manually:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git clone --dissociate https://github.com/adonisjs/adonis-app holla-adonis
+
+cd holla-adonis
+</code></pre></div><h3 id="install-dependencies">Install Dependencies</h3>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">npm install
+</code></pre></div><p><strong>Were there problems while Installing AdonisJs?</strong></p>
+<p>If you have not updated to the latest or supported version of Node.js , you might encounter Proxies Error why? Because older versions of Node.js requires the &ndash;harmony_proxies flag to add support for ES2015 Proxies. If you are using Node.js &lt; 6.0, make sure to make following changes.</p>
+<p>Open up the package.json file in your holla-adonis directory, and replace the values of the json keys to this:</p>
+<p>And replace the first line of the ace file to:</p>
+<pre><code>#!/usr/bin/env node — harmony_proxies
+</code></pre>
+<h3 id="conclusion">Conclusion</h3>
+<p>In this article, we explored the AdonisJs framework from noting its features, to Installing and setting up a Project with it.</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/adonisjs">adonisjs</a></li>
+							
+							<li><a href="/tags/javascript">javascript</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

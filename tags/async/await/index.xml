@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>async/await on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/async/await/</link>
+    <description>Recent content in async/await on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    
+	<atom:link href="https://hakaselogs.me/tags/async/await/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JavaScript Async/Await 101</title>
+      <link>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</link>
+      <pubDate>Sat, 12 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</guid>
+      <description>Async and Await has been a blessing to most JavaScript Developers. Even while it was on the Stage 4 proposal for ES6, the feature has been warmtly welcomed.
+Node.js now Supports async/await since its version 7.6.
+What is async/await? If this is your first time seeing/hearing of this term, here&amp;rsquo;s it in plain English:
+ Its the newest way/pattern of writing asychronous code in JavaScript, asides Promises and callbacks. Async/await compared to Promises, are non-blocking Async/await makes aysnchronous code appear and behave like synchronous code.</description>
+    </item>
+    
+  </channel>
+</rss>

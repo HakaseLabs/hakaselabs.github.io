@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Building Small Containers for Kubernetes - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Building Small Containers for Kubernetes">
+<meta itemprop="description" content="This article will show you how you can build small containers to make your Kubernetes deployments faster and more secure.">
+<meta itemprop="dateModified" content="2018-12-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1001">
+
+
+
+<meta itemprop="keywords" content="go,docker,kubernetes,golang," />
+<meta property="og:title" content="Building Small Containers for Kubernetes" />
+<meta property="og:description" content="This article will show you how you can build small containers to make your Kubernetes deployments faster and more secure." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2018-12-01/building-small-containers-for-kubernetes/" />
+<meta property="article:published_time" content="2018-12-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-12-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Building Small Containers for Kubernetes"/>
+<meta name="twitter:description" content="This article will show you how you can build small containers to make your Kubernetes deployments faster and more secure."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">01</span>
+							<span class="rest">Dec 2018</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Building Small Containers for Kubernetes</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>The first step to deploying any app to <a href="https://kubernetes.io">Kubernetes</a>, is to bundle the app in a
+container. There are several official, and community-backed container images for
+various languages and distros, and most of these containers can be really large,
+or sometimes contain overheads your app may never need/use.</p>
+<p>Thanks to <a href="https://docker.io">Docker</a>, you can easily create container images in
+a few steps; specify a base image, add your app-specific changes, and build your
+container.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#00f">FROM</span><span style="color:#a31515"> golang:alpine</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">ADD</span> . /app<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">EXPOSE</span><span style="color:#a31515"> 8080</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">ENTRYPOINT</span> [<span style="color:#a31515">&#34;/app/run&#34;</span>]<span style="">
+</span></code></pre></div><p>We specified a base image (Linux alpine in this case), set the working directory
+to be used in the container, exposed a network port, and an entry point, which
+will start the app in the container. With the Dockerfile set, we can build the
+container.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build myapp .
+</code></pre></div><p>While the above process is pretty straight forward, there are some issues
+to put into consideration. Using the default images can lead to large container
+images, security vulnerabilities, and memory overheads.</p>
+<h4 id="lets-flesh-out-a-sample-app">Let&rsquo;s flesh out a sample app</h4>
+<p>We&rsquo;ll write a simple app in Go, that exposes a single HTTP route that returns a
+string when hit. We will build a Docker image from it.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
+
+<span style="color:#00f">import</span> (
+	<span style="color:#a31515">&#34;fmt&#34;</span>
+	<span style="color:#a31515">&#34;log&#34;</span>
+	<span style="color:#a31515">&#34;net/http&#34;</span>
+	<span style="color:#a31515">&#34;time&#34;</span>
+)
+
+<span style="color:#00f">func</span> main() {
+	r := http.NewServeMux()
+	r.HandleFunc(<span style="color:#a31515">&#34;/api/&#34;</span>, <span style="color:#00f">func</span>(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, <span style="color:#a31515">&#34;Hello From Go!&#34;</span>)
+	})
+	s := &amp;http.Server{
+		Addr:        <span style="color:#a31515">&#34;:8080&#34;</span>,
+		Handler:     r,
+		ReadTimeout: 10 * time.Second,
+	}
+	fmt.Println(<span style="color:#a31515">&#34;Starting server on port 8080&#34;</span>)
+	log.Fatal(s.ListenAndServe())
+}
+</code></pre></div><p>Let&rsquo;s build the Docker image with our app. First, we need to create a Dockerfile.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#00f">FROM</span><span style="color:#a31515"> golang:latest</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> mkdir /app<span style="">
+</span><span style=""></span><span style="color:#00f">ADD</span> . /app/<span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> go build -o myapp .<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">CMD</span> [<span style="color:#a31515">&#34;/app/myapp&#34;</span>]<span style="">
+</span></code></pre></div><p>Build the image.</p>
+<blockquote>
+<p>PS: Replace tag with anything of choice: <!-- raw HTML omitted -->/appname</p>
+</blockquote>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build -t codehakase/goapp .
+</code></pre></div><p>That&rsquo;s it! We just Dockerized a simple Go app. Let&rsquo;s take a look at the image we
+just built.
+<img src="https://res.cloudinary.com/hakase-labs/image/upload/v1543632543/Screen_Shot_2018-12-01_at_3.47.19_AM_wgpi3m.png" alt="docker images list"></p>
+<p>For a simple Go app, the image is over 700 megabytes. The Go binary itself is
+probably a few megabytes in size, and the additional overhead is wasted space,
+and can also be a hiding place for bugs and security vulnerabilities.</p>
+<p>What is taking up so much space? In this scenario, the container needs Go
+installed, along with all the dependencies Go relies on, and all of this sits on
+top of a Debian or Linux distro.</p>
+<p>There are two ways to reduce container image sizes, actually three of which the
+third is more often used in the Go community:</p>
+<ol>
+<li>Using Small Base Images</li>
+<li>The Builder Pattern</li>
+<li>Using Empty Images</li>
+</ol>
+<p>Using small base images are the easiest way to reduce container image size. The
+stack/language in use probably provides an official image that&rsquo;s much smaller
+than the default image.</p>
+<p>Let&rsquo;s update the Dockerfile to use a small base image. We&rsquo;re going to use
+<code>golang:alpine</code> in this case.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#00f">FROM</span><span style="color:#a31515"> golang:alpine</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> mkdir /app<span style="">
+</span><span style=""></span><span style="color:#00f">ADD</span> . /app/<span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> go build -o myapp .<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">CMD</span> [<span style="color:#a31515">&#34;/app/myapp&#34;</span>]<span style="">
+</span></code></pre></div><p>Rebuild image.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build -t codehakase/goapp .
+</code></pre></div><p>With the update to the Dockerfile, our image is now smaller compared to the
+previous image.
+<img src="https://res.cloudinary.com/hakase-labs/image/upload/v1543633738/Screen_Shot_2018-12-01_at_4.07.28_AM_wm920i.png" alt="using small base images"></p>
+<p>This image size if still quite large, and we can even go smaller using the
+Builder Pattern. Since we&rsquo;re using a compiled language (Go) in this example, in
+the builder pattern, we should note that compiled languages often requires tools
+that are not necessarily needed to run the code. These tools are mostly for
+building and compiling to a binary. With the builder pattern, we can remove
+these tools in the final container.</p>
+<p>To use the Builder pattern in our existing example, we&rsquo;ll compile our code in a
+container, and then use the compiled code to package the final container, without
+all the required tools.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#00f">FROM</span><span style="color:#a31515"> golang:alpine AS main-env</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> mkdir /app<span style="">
+</span><span style=""></span><span style="color:#00f">ADD</span> . /app/<span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
+</span><span style=""></span><span style="color:#00f">RUN</span> cd /app &amp;&amp; go build -o myapp<span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">FROM</span><span style="color:#a31515"> alpine</span><span style="">
+</span><span style=""></span><span style="color:#00f">WORKDIR</span><span style="color:#a31515"> /app</span><span style="">
+</span><span style=""></span><span style="color:#00f">COPY</span> --from=main-env /app/myapp /app<span style="">
+</span><span style=""></span><span style="color:#00f">EXPOSE</span><span style="color:#a31515"> 8080</span><span style="">
+</span><span style="">
+</span><span style=""></span><span style="color:#00f">ENTRYPOINT</span> ./myapp<span style="">
+</span></code></pre></div><p>We updated the Dockerfile to use the builder pattern. First, it builds and
+compiles the app in the <code>alpine</code> container and name the step <code>main-env</code>, and
+then copies the binary from the previous step to the new container.</p>
+<p>Rebuild the multistage Dockerfile.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build -t codehakase/goapp .
+</code></pre></div><p>The result of the build is a new container which is just a little over 10
+megabytes.
+<img src="https://res.cloudinary.com/hakase-labs/image/upload/v1543634782/Screen_Shot_2018-12-01_at_4.24.48_AM_c6fnis.png" alt="builder pattern"></p>
+<p>Remember the first image we built that was over 700 megabytes? We&rsquo;ve been able
+to cut that down to 10.7 megabytes using the builder pattern.</p>
+<p>We can still reduce this number a bit, by making use of scratch (empty)
+images. What&rsquo;s a scratch image? It&rsquo;s a special docker image that&rsquo;s empty. To use
+this, we need to first build our app outside the docker environment and add the
+compiled binary to the container.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ go build -o myapp .
+</code></pre></div><p>We&rsquo;ll update the Dockerfile to add the binary to a scratch image.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#00f">FROM</span><span style="color:#a31515"> scratch</span><span style="">
+</span><span style=""></span><span style="color:#00f">ADD</span> myapp /<span style="">
+</span><span style=""></span><span style="color:#00f">CMD</span> [<span style="color:#a31515">&#34;/myapp&#34;</span>]<span style="">
+</span></code></pre></div><p>Let&rsquo;s build this image and see how large it turns out.
+<img src="https://res.cloudinary.com/hakase-labs/image/upload/v1543635780/Screen_Shot_2018-12-01_at_4.36.33_AM_n2pane.png" alt="scratch image"></p>
+<p>We got it down to 6.5 megabytes, cool! Let&rsquo;s try running our container to test
+our app.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker run -it codehakase/goapp
+</code></pre></div><p>You may get an error like this:
+<img src="https://res.cloudinary.com/hakase-labs/image/upload/v1543635780/Screen_Shot_2018-12-01_at_4.40.08_AM_pvjj3k.png" alt=""></p>
+<p>Reason for this error, is the Go binary is looking for libraries on the OS its
+running on, since the scratch image is empty, there are no libraries to look in.
+We need to modify the build command to statically compile our Go app:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ GO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o myapp .
+</code></pre></div><p>Rebuild with <code>docker build -t codehakase/goapp</code>, and run the our container
+again, forwarding the port on the container to our machine:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker run -it -p 8080:8080 codehakase/goapp
+  Starting server on port 8080
+</code></pre></div><p>Navigate to <code>http://localhost:8080/api</code> to test the response from the app.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The goal of this article was to explain how to reduce container sizes
+specifically for Go apps. With smaller containers, you have more performance, as
+building your containers say in a CI environment is going to be faster, pushing
+your built images to a container registry will take less amount of time, and
+most importantly pulling these containers to your distributed kubernetes
+clusters will be faster, as smaller containers are less likely to delay a
+deployment for a new cluster.</p>
+<p>If you have any suggestions or comments, leave a comment below or ping
+<a href="https://twitter.com/codehakase">@codehakase</a></p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/go">go</a></li>
+							
+							<li><a href="/tags/docker">docker</a></li>
+							
+							<li><a href="/tags/kubernetes">kubernetes</a></li>
+							
+							<li><a href="/tags/golang">golang</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

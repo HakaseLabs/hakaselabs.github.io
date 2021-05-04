@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/go/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/golang/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/json/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/posts/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2021-05-03/working-with-json-in-go/</loc>
+    <lastmod>2021-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/projects/</loc>
+    <lastmod>2021-04-08T10:52:01+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2021-04-08/enum-stringer-interface-optimisation-in-go/</loc>
+    <lastmod>2021-04-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/development/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2020-02-07/line-numbers-in-vim/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/vim/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/workflow/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/setup/</loc>
+    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2020-01-10/what-i-use/</loc>
+    <lastmod>2020-01-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2018-12-01/building-small-containers-for-kubernetes/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/docker/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/kubernetes/</loc>
+    <lastmod>2018-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/gin-gonic/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/react/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/couchdb/</loc>
+    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/databases/</loc>
+    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/nosql/</loc>
+    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2018-04-19/the-couchdb-replicator-database-an-overview/</loc>
+    <lastmod>2018-04-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/changelog/</loc>
+    <lastmod>2018-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</loc>
+    <lastmod>2018-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/ionic/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-12-05/react-native-vs-ionic-a-quick-comparison/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/react-native/</loc>
+    <lastmod>2017-12-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-11-19/getting-started-with-go-variables/</loc>
+    <lastmod>2017-11-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/terminal/</loc>
+    <lastmod>2017-11-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/unix/</loc>
+    <lastmod>2017-11-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-11-18/golang-getting-started-the-practical-dev/</loc>
+    <lastmod>2017-11-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-10-28/terminal-for-beginners/</loc>
+    <lastmod>2017-10-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/getting-started/</loc>
+    <lastmod>2017-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-09-02/how-i-learned-golang/</loc>
+    <lastmod>2017-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/javascript/</loc>
+    <lastmod>2017-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-08-12/javascript-async/await-101/</loc>
+    <lastmod>2017-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/loops/</loc>
+    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/api/</loc>
+    <lastmod>2017-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-06-13/build-your-first-restful-api-with-node.js/</loc>
+    <lastmod>2017-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/node.js/</loc>
+    <lastmod>2017-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/nodejs/</loc>
+    <lastmod>2017-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/rest/</loc>
+    <lastmod>2017-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/bots/</loc>
+    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-05-30/making-hakasebot-twitter-bots-101/</loc>
+    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/twitter/</loc>
+    <lastmod>2017-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-05-25/javascript-objects-101/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/objects/</loc>
+    <lastmod>2017-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-05-21/introduction-to-javascript-promises/</loc>
+    <lastmod>2017-05-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/promises/</loc>
+    <lastmod>2017-05-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-05-17/object-oriented-php-an-easy-approach/</loc>
+    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/oop/</loc>
+    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/php/</loc>
+    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/adonisjs/</loc>
+    <lastmod>2017-05-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/2017-05-09/introducing-adonis-js/</loc>
+    <lastmod>2017-05-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hakaselogs.me/tags/async/await/</loc>
+  </url>
+  
+</urlset>

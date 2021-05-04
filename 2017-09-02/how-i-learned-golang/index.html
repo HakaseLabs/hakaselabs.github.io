@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>How I Learned Golang - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="How I Learned Golang">
+<meta itemprop="description" content="How I started with Go Programming">
+<meta itemprop="dateModified" content="2017-09-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1190">
+
+
+
+<meta itemprop="keywords" content="go,getting-started," />
+<meta property="og:title" content="How I Learned Golang" />
+<meta property="og:description" content="How I started with Go Programming" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-09-02/how-i-learned-golang/" />
+<meta property="article:published_time" content="2017-09-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-09-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How I Learned Golang"/>
+<meta name="twitter:description" content="How I started with Go Programming"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">02</span>
+							<span class="rest">Sep 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">How I Learned Golang</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>Go is a relatively new programming language, and nothing makes a developer go crazier than a new programming language, haha! As many new tech inventions, Go was created as an experiment. The goal of its creators was to come up with a language that would resolve bad practices of others while keeping the good things. It was first released in March 2012. Since then Go has attracted many developers from all fields and disciplines.</p>
+<p>During the second quarter of this Year, I joined <em>ViVA XD</em>, an In-flight entertainment platform changing the world one trip at a time. We chose Go to build the whole infrastructure. Go was/is still an awesome choice for us in terms of performance, and its fast and simple development process.</p>
+<p>In this article, I&rsquo;ll give a short introduction of the Go language and it would serve as a motivation for further reading.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>I had no prior experience with Go, as a norm, Learning a new programming language, I started out by checking the <a href="https://golang.org/">Golang offical webpage</a>. I found the installation instructions for my OS, tutorials, an awesome documentation. It was terrifying (as the first Statically Typed language I&rsquo;ve used). <a href="https://tour.golang.org/welcome/1">The Tour of Go</a> was recommended, its an interactive Go tutorial (comes bundled with Go) which got me familiar with Go&rsquo;s syntax and literals. I finished with the Tour in a couple of days, and got an idea of how things work in the Go environment like variables, types, structs, pointers, lists, etc. At this point, I didn&rsquo;t really grasp all about Go, my experience from other languages gave me enough knowledge during my first task at ViVA XD. Go does an awesome job making us compile our source code to a single binary for any platform. Our app runs on Linux, so if we had a developer working on a Mac she can compile it down easily
+<code>GOOS=linux go build</code> and in a matter of seconds a Linux build is ready.</p>
+<h2 id="going-deeper">Going deeper</h2>
+<p>I got familiar with the syntax, and other important part of the Go language, like goroutines, concurrency, error handling, packages, interfaces, two-value assignments, etc.</p>
+<h3 id="no-exceptions-">No Exceptions 😉</h3>
+<p>In Go, functions usually return a value and an error, but not limited to that alone. Functions can return multiple values. Handling errors in Go is simple, we check the second return value (or the position where the error is returned from the function). This structure gives a good way to chain errors from one point to another.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">type</span> Server <span style="color:#00f">struct</span> {}
+
+<span style="color:#00f">func</span> main() {
+	err := s.Run()
+}
+
+<span style="color:#00f">func</span> (s *Server) Run() (err <span style="color:#2b91af">error</span>) {
+	http.HandleFunc(<span style="color:#a31515">&#34;/&#34;</span>, s.handleHomeRequest)
+	err = http.ListenAndServe(<span style="color:#a31515">&#34;:4000&#34;</span>, <span style="color:#00f">nil</span>)
+	<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+		<span style="color:#00f">return</span> err
+	}
+	<span style="color:#00f">return</span> <span style="color:#00f">nil</span>
+}
+</code></pre></div><h3 id="variable-and-declarations">Variable and Declarations</h3>
+<p>In Go, all variables must be defined. We can&rsquo;t have an assignment like <code>x = 2</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">package</span> main
+
+<span style="color:#00f">import</span> (
+	<span style="color:#a31515">&#34;fmt&#34;</span>
+)
+
+<span style="color:#00f">func</span> main() {
+	<span style="color:#00f">var</span> num <span style="color:#2b91af">int</span>
+	num = 20
+	fmt.Printf(<span style="color:#a31515">&#34;The number is %d\n&#34;</span>, num)
+}
+</code></pre></div><p>We declare a variable <code>num</code> of type <code>int</code>. Go by default, assigns a <strong>zero</strong> value to variables. Integers are assigned <strong>0</strong>, booleans, <code>false</code>, strings <code>&quot;&quot;</code>, and so on. That pattern may look like a lot of typing, Go also provides us a handy operator <code>:=</code>.
+So we can rewrite the declaration above to <code>num := 29</code></p>
+<blockquote>
+<p>As long as the variable is new, <code>:=</code> can be used.</p>
+</blockquote>
+<h3 id="two-value-assignment">Two-value Assignment</h3>
+<p>Interfaces in Go are used to do exactly what they were designed to do in any language, which is to logically group code that has similar behaviour, not to achieve less code.
+In Go, every type implements at least zero methods, which means each type implements a special zero <code>interface{}</code>. This is useful when we do no not know what type a variable is.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#00f">var</span> someData <span style="color:#00f">interface</span>{}
+err := json.Unmarshal(raw_bytes, &amp;someData)
+<span style="color:#00f">if</span> err != <span style="color:#00f">nil</span> {
+	log.Error(err)
+}
+</code></pre></div><p>To get a type from this, we use Type assertion. It is a simple statement, if the assertion fails, the assigned value will have the default value of the type. Another way to do this is to use a Two-value assignment. We assign a second value in the type assertion statement which will hold a boolean stating if it was successful.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">jsonStruct := someData.(<span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#00f">interface</span>{})
+num := jsonStruct[<span style="color:#a31515">&#34;num&#34;</span>].(<span style="color:#2b91af">int</span>)
+str, ok := jsonStruct[<span style="color:#a31515">&#34;str&#34;</span>].(<span style="color:#2b91af">string</span>)
+<span style="color:#00f">if</span> !ok {
+	log.Error(<span style="color:#a31515">&#34;error converting to string&#34;</span>)
+}
+</code></pre></div><p>Same applies for retrieving values from a map</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">data := make(<span style="color:#00f">map</span>[<span style="color:#2b91af">string</span>]<span style="color:#2b91af">int</span>)
+data[<span style="color:#a31515">&#34;result&#34;</span>] = 20
+val, ok := data[<span style="color:#a31515">&#34;result&#34;</span>] <span style="color:#008000">// returns false if key isn&#39;t found
+</span><span style="color:#008000"></span><span style="color:#00f">if</span> !ok {
+	log.info(<span style="color:#a31515">&#34;Value for key not found!!&#34;</span>)
+}
+</code></pre></div><h3 id="goroutines">Goroutines</h3>
+<p>Most of the modern programming languages like Python, Java, etc originated from the single threaded environment. Most of them supports multi-threading, but they still face some problems that comes with concurrent execution, race conditions, threading-locking and deadlocks. Those of which makes it hard to create a multi-threading application on those languages.</p>
+<p>In Java (from research, I don&rsquo;t have experience with Java), creating new threads is not memory efficient. Every thread consumes approx 1MB of memory heap size. If you start spinning thousands of threads, they will put tremendous pressure on the heap and will cause a shut down due to loss of memory. Also, Communication between two or more threads, is very difficult.</p>
+<p>Go was released in 2009 when multi-core processors were already available. Go is built with keeping concurrency in mind. Go has <code>goroutines</code> instead of threads. They consume almost <em>2KB</em> memory from the heap. So one can spin millions of goroutines at any time.</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*NFojvbkdRkxz0ZDbu4ysNA.jpeg" alt="How Goroutines work" title="How Goroutines work - http://golangtutorials.blogspot.in/2011/06/goroutines.html"></p>
+<h5 id="some-benefits-from-using-goroutines">Some benefits from using goroutines</h5>
+<ul>
+<li>Goroutines allow you avoid having to resort to mutex locking when sharing data structures.</li>
+<li>Goroutines have faster startup time than threads.</li>
+<li>Goroutines makes use of <em>channels</em>, a built-in way used to safely communicate between themselves.</li>
+<li>Goroutines and OS threads do not have a 1:1 mapping. A single goroutine can run on multiple threads. Goroutines are multiplexed into small number of OS threads.</li>
+</ul>
+<blockquote>
+<p>More on Concurrency by <a href="https://blog.golang.org/concurrency-is-not-parallelism">Rob Pike</a></p>
+</blockquote>
+<h3 id="written-in-go-its-easy-to-maintain">Written in Go? Its easy to maintain</h3>
+<p>Go intentionally leaves out many features of modern OOP languages.</p>
+<ul>
+<li>No classes. Everything is divided into packages. Go has only structs.</li>
+<li>No support for inheritance. Go makes it easy to understand the code, as there&rsquo;s no super class to look out for.</li>
+<li>No Execeptions</li>
+<li>No generics</li>
+<li>No annotations</li>
+<li>No constructors</li>
+</ul>
+<h2 id="getting-better">Getting better</h2>
+<p>After checking all the official Go resources I was constantly on the lookout to get to know more about the Go language, I&rsquo;ve come across awesome contents that teaches one Go. There&rsquo;s <a href="https://gobyexample.com/">Go by example</a>, <a href="https://golang-book.com">Go Book</a>, <a href="https://golang.org/doc/effective_go.html">Effective Go</a>, among others online.
+These resources helped out and is still helping me out, even though I there was some times the topic was frustrating, but it all became fun now)</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Go is very different from other object-oriented languages, it still has its own good sides. Its backed by Google, and is also used by some big companies like IBM, Intel, Medium, Adobe (<strong><a href="https://github.com/golang/go/wiki/GoUsers">https://github.com/golang/go/wiki/GoUsers</a></strong>).</p>
+<p>I had programming experience before learning Go, most of the concepts wasn&rsquo;t new to me, Go is still very easy to start out with even if you&rsquo;re an absolute beginner.</p>
+<p>Want to share how you started out with Go, ask me questions? Let me know in the comments 🙂</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/go">go</a></li>
+							
+							<li><a href="/tags/getting-started">getting-started</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

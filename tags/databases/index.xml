@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>databases on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/databases/</link>
+    <description>Recent content in databases on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Thu, 19 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/databases/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The CouchDB Replicator Database - An Overview</title>
+      <link>https://hakaselogs.me/2018-04-19/the-couchdb-replicator-database-an-overview/</link>
+      <pubDate>Thu, 19 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-04-19/the-couchdb-replicator-database-an-overview/</guid>
+      <description>TL;DR: In this article, I&amp;rsquo;ll give an overview of the replicator database in CouchDB, how to spin off a replication task in CouchDB
+ CouchDB is a database that completely embraces the web. CouchDB stores your data as JSON documents, and allows you access these documents easily, from a web interface or its REST API. We won&amp;rsquo;t be going too deep into couchdb as it would be out of scope for this article - I&amp;rsquo;ll write one of those pretty soon.</description>
+    </item>
+    
+  </channel>
+</rss>

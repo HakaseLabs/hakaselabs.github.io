@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Introduction to JavaScript Promises - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="Introduction to JavaScript Promises">
+<meta itemprop="description" content="The basics you need to know, about promises in JavaScript">
+<meta itemprop="dateModified" content="2017-05-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="779">
+
+
+
+<meta itemprop="keywords" content="javascript,promises," />
+<meta property="og:title" content="Introduction to JavaScript Promises" />
+<meta property="og:description" content="The basics you need to know, about promises in JavaScript" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-05-21/introduction-to-javascript-promises/" />
+<meta property="article:published_time" content="2017-05-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-05-21T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Introduction to JavaScript Promises"/>
+<meta name="twitter:description" content="The basics you need to know, about promises in JavaScript"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">21</span>
+							<span class="rest">May 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">Introduction to JavaScript Promises</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p>JavaScript promises have become a popular way to handle the tangled mess that JavaScript’s asynchronous nature often creates for us.
+Synchronous code is eaiser to follow and debug, async is better for flexibiity. Promises are becomming a big part of the JavaScript world, with awesome APIs implemented with it.</p>
+<h2 id="what-is-a-promise">What is a Promise?</h2>
+<p>A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action&rsquo;s eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future. - <strong>Mozilla Developer Network (MDN)</strong></p>
+<h2 id="how-promises-work">How Promises work</h2>
+<p>A promise, returns an object synchronously from asynchronous function, in three possible states:</p>
+<ul>
+<li>Fuilfiled <code>resolve()</code> - The action relating to the promise succeeded</li>
+<li>Rejected <code>reject()</code> - The action relating to the promise failed</li>
+<li>Pending - not yet fulfilled or rejected</li>
+<li>Settled - Has fulfilled or rejected</li>
+</ul>
+<p><strong>A simple promise:</strong> The code below has a function that returns a promise after a specified time delay.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">const</span> greet = t =&gt; <span style="color:#00f">new</span> Promise((resolve) =&gt; setTimeout(resolve, t));
+
+greet(5000)
+    .then( () =&gt; console.log(<span style="color:#a31515">&#34;Promises!!&#34;</span>));
+</code></pre></div><p>The <code>greet</code> function waits for 5 seconds (5000ms) and log to the console a string.</p>
+<h2 id="basic-promise-usage">Basic Promise Usage</h2>
+<p>A new Promise is created with the <code>new</code> keyword and the promise provides <code>resolve</code> and <code>reject</code> functions to the provided callback:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">const</span> myPromise = <span style="color:#00f">new</span> Promise( (resolve, reject) =&gt; {
+    <span style="color:#008000">// we could run an async task here
+</span><span style="color:#008000"></span>    <span style="color:#00f">if</span> (<span style="color:#00f">true</span>) { <span style="color:#008000">// condition is good
+</span><span style="color:#008000"></span>        resolve(<span style="color:#a31515">&#39;Success!!&#39;</span>);
+    } <span style="color:#00f">else</span> {;
+        reject(<span style="color:#a31515">&#39;Failure&#39;</span>)
+    }
+
+    myPromise.then( () =&gt; {
+        <span style="color:#008000">// do something with the result
+</span><span style="color:#008000"></span>    }).<span style="color:#00f">catch</span>(<span style="color:#00f">function</span>() {
+        <span style="color:#008000">// error message
+</span><span style="color:#008000"></span>    })
+});
+</code></pre></div><p>The ES6 promise constructor takes a function, with two parameters, <code>resolve()</code> and <code>reject()</code>.</p>
+<h3 id="then">then()</h3>
+<p>All promise instance, gets a <code>then</code> method which allows you to react to the promise. It receives the result given to it by the <code>resolve()</code> call.
+The <code>then</code> callback method, is triggered when a promise is resolved.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">const</span> p = <span style="color:#00f">new</span> Promise( (resolve, reject) {
+    setTimeout( () =&gt; {
+        resolve(10);
+    }, 3000);
+})
+.then( (num) =&gt; {
+    console.log(<span style="color:#a31515">&#39;then call 1: &#39;</span>, num);
+    <span style="color:#00f">return</span> num * 2;
+})
+.then( (num) =&gt; {
+    console.log(<span style="color:#a31515">&#39;then call 2: &#39;</span>, num);
+    <span style="color:#00f">return</span> num * 2;
+})
+</code></pre></div><p>The output of the above code:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    &gt; then call 1: 10
+    &gt; then call 2: 20
+</code></pre></div><h3 id="catch">catch()</h3>
+<p>The <code>catch</code> callback is executed when a promise is rejected</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">const</span> p = <span style="color:#00f">new</span> Promise( (resolve, reject) =&gt; {
+    setTimeout(<span style="color:#00f">function</span>() {
+        reject(<span style="color:#a31515">&#39;Rejected!!&#39;</span>);
+    }, 2000);
+})
+.then( (e) =&gt; { console.log(<span style="color:#a31515">&#39;done&#39;</span>, e); })
+.<span style="color:#00f">catch</span>( (e) =&gt; { console.log(<span style="color:#a31515">&#39;catch:&#39;</span>, e); } )
+
+<span style="color:#008000">// output
+</span><span style="color:#008000">// catch: Rejected!!
+</span></code></pre></div><p>You can also use Promises in jQuery. jQuery has an object called <code>Deferred</code> that has <code>resolve</code> and <code>reject</code> methods that behaves like the resolve and reject methods passed to the Native JavaScript Promise constructor.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#008000">//using jQuery
+</span><span style="color:#008000"></span><span style="color:#00f">let</span> p = $.Deferred(<span style="color:#00f">function</span> (dfd) {
+    setTimeout(dfd.resolve, 1000);
+}).p();
+</code></pre></div><h2 id="important-promise-rules">Important Promise Rules</h2>
+<p>A standard for promises was defined by the <a href="https://promisesaplus.com/implementations">Promises/A+ specification</a> community.
+Promises following the specmust follow a specific set of rules:</p>
+<ul>
+<li>A promise, is an object that supplies a standard compliant <code>.then</code> method.</li>
+<li>A pending promise may transition into a fulfilled or rejected state.</li>
+<li>A fulfiled or rejected promise is settled, and must not transition into any other state.</li>
+<li>Once a promise is settled, it must have a value, which must not change.</li>
+</ul>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">The change refers to identity (===) comparison
+</code></pre></div><h2 id="extras">Extras</h2>
+<p>The native <code>Promise</code> object has some extra stuff you might be interested in:</p>
+<ul>
+<li><code>Promise.reject()</code> return a rejected promise.</li>
+<li><code>Promise.resolve()</code> returns a resolved promise.</li>
+<li><code>Promise.race()</code> takes an array and returns a promise that resolves with the value of the resolved promise in th eiterable or rejects with the first promise that rejects.</li>
+<li><code>Promise.all()</code> take and array, and returns a promise that resolves when all the promises in te iterable argument have resolved, or rejects with the reason of the first passed promise that rejects.</li>
+</ul>
+<h2 id="browser-support--polyfill">Browser support &amp; Polyfill</h2>
+<p>As of Chrome 32, Firefox 29, Safari 8 &amp; Microsoft Edge, promises are enabled by default.
+To bring browsers that lack a complete promises implementation, there&rsquo;s <a href="https://github.com/jakearchibald/ES6-Promises#readme">Polyfill</a> to help out.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Promises have become an integral part of JavaScript and a very powerful way of managing asychronous behavior in JavaScript. By next week, I&rsquo;ll publish a read on the Properties of Promises, and relate to a live sample.
+Promises takes some time to get used used too (I still find it confusing at some point), so to grasp this concept, you have to <em>Learn, Un-learn, and Re-learn</em>.
+Have any questions or comments? Leave them below :bowtie: .</p>
+<h2 id="references">References</h2>
+<p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise">Mozilla Developer Network</a></p>
+<p><a href="https://developers.google.com/web/fundamentals/getting-started/primers/promises">Jake Archibald - Google Developers</a></p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/javascript">javascript</a></li>
+							
+							<li><a href="/tags/promises">promises</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

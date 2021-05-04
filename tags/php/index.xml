@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>php on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/php/</link>
+    <description>Recent content in php on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Wed, 17 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Object-Oriented PHP - An Easy Approach</title>
+      <link>https://hakaselogs.me/2017-05-17/object-oriented-php-an-easy-approach/</link>
+      <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-17/object-oriented-php-an-easy-approach/</guid>
+      <description>For some PHP developers, the concept of object-orient programming, seems like a frightening concept. You might have browsed through repos on GitHub or read articles on how to implement a feature in a particular PHP project of yours, and the code is full of complicated syntax. I tell you, the concept of OOP is easy to grasp.
+Object-Oriented programming (OOP), is a style of programming which allows us developers and programmers group related tasks or actions into classes to produce effective code.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>for...in vs for...of Loops in JavaScript - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="for...in vs for...of Loops in JavaScript">
+<meta itemprop="description" content="Differences between the for..in and for..of loops in javascript">
+<meta itemprop="dateModified" content="2017-06-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="224">
+
+
+
+<meta itemprop="keywords" content="javascript,loops," />
+<meta property="og:title" content="for...in vs for...of Loops in JavaScript" />
+<meta property="og:description" content="Differences between the for..in and for..of loops in javascript" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/" />
+<meta property="article:published_time" content="2017-06-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-06-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="for...in vs for...of Loops in JavaScript"/>
+<meta name="twitter:description" content="Differences between the for..in and for..of loops in javascript"/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">19</span>
+							<span class="rest">Jun 2017</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">for...in vs for...of Loops in JavaScript</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p><img src="https://user-images.githubusercontent.com/9336187/27305938-97169192-553b-11e7-99cb-99396a9593fd.png" alt="for-in-graphics" title="Hakase Labs"></p>
+<p>The <code>for..in</code> and <code>for..of</code> loops, gives us a clean and concise syntax to iterate on iterable items like arrays, strings, objects, and enumerables. Now the question is where to use which.
+Here&rsquo;s a little reminder to get you you started.</p>
+<h2 id="forin">for..in</h2>
+<p>Use this to iterate over the properties of an object:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> person = {
+    name: <span style="color:#a31515">&#39;Francis&#39;</span>,
+    alias: <span style="color:#a31515">&#39;codehakase&#39;</span>,
+    eyeColour: <span style="color:#a31515">&#39;brown&#39;</span>
+};
+<span style="color:#00f">for</span>(<span style="color:#00f">let</span> key <span style="color:#00f">in</span> person) {
+    console.log( <span style="color:#a31515">`</span><span style="color:#a31515">${</span>key<span style="color:#a31515">}</span><span style="color:#a31515"> =&gt; </span><span style="color:#a31515">${</span>person[key]<span style="color:#a31515">}</span><span style="color:#a31515">`</span> );
+}
+
+<span style="color:#008000">// name =&gt; Francis
+</span><span style="color:#008000">// alias =&gt; codehakase
+</span><span style="color:#008000"></span>...
+</code></pre></div><p>The <code>for..in</code> loop can also be used to iterate over indexed values of a string:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> text = <span style="color:#a31515">&#39;JavaScript&#39;</span>;
+<span style="color:#00f">for</span> (<span style="color:#00f">let</span> i <span style="color:#00f">in</span> text) {
+    console.log(<span style="color:#a31515">`Index of </span><span style="color:#a31515">${</span>str[index]<span style="color:#a31515">}</span><span style="color:#a31515">: </span><span style="color:#a31515">${</span>i<span style="color:#a31515">}</span><span style="color:#a31515">`</span>);
+}
+<span style="color:#008000">// Index of J: 0
+</span><span style="color:#008000">// Index of a: 1
+</span><span style="color:#008000"></span>...
+</code></pre></div><h1 id="forof">for..of</h1>
+<p>Use this to iterate over the values in an iterable like an array:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#00f">let</span> girls = [<span style="color:#a31515">&#39;Jane&#39;</span>, <span style="color:#a31515">&#39;Lilian&#39;</span>, <span style="color:#a31515">&#39;Tobi&#39;</span>];
+<span style="color:#00f">let</span> boys = [<span style="color:#a31515">&#39;John&#39;</span>, <span style="color:#a31515">&#39;Tom&#39;</span>, <span style="color:#a31515">&#39;Kelvin&#39;</span>];
+<span style="color:#00f">for</span> (<span style="color:#00f">let</span> crush <span style="color:#00f">of</span> girl_crush) {
+    <span style="color:#008000">// lucky crush for them boys
+</span><span style="color:#008000"></span>    <span style="color:#00f">let</span> index = Math.floor(Math.random() * names.length);
+    console.log( <span style="color:#a31515">`</span><span style="color:#a31515">${</span>boys[index<span style="color:#a31515">}</span><span style="color:#a31515"> crushes on </span><span style="color:#a31515">${</span>girls<span style="color:#a31515">}</span><span style="color:#a31515">`</span> );
+}
+<span style="color:#008000">// Tom crushes on Tobi
+</span><span style="color:#008000">// Kelvin crushes on Lilian
+</span><span style="color:#008000">// John crushes on Jane
+</span></code></pre></div><p>The <code>for..of</code> loop can also iterate over <code>maps</code>, <code>generators</code>, and <code>DOM node collections</code></p>
+<p>Now you know where and when to use the <code>for..in</code> and <code>for..of</code> loops.
+Did I miss anything? Let me know in comments section.</p>
+<p>Cheers!</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/javascript">javascript</a></li>
+							
+							<li><a href="/tags/loops">loops</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

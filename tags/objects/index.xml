@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>objects on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/objects/</link>
+    <description>Recent content in objects on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Thu, 25 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/objects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>JavaScript Objects 101</title>
+      <link>https://hakaselogs.me/2017-05-25/javascript-objects-101/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-05-25/javascript-objects-101/</guid>
+      <description>In JavaScript, most things are objects, from core JavaScript features like strings and arrays to the browser APIs built on top of JavaScript. You can even create your own objects to encapsulate related functions and variables into efficient packages, and act as handy data containers.
+What Is An Object? In JavaScript terms, An Object is a collection of data, which consits of several variables and functions - which are called properties and methods.</description>
+    </item>
+    
+  </channel>
+</rss>

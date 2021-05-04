@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>workflow on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/workflow/</link>
+    <description>Recent content in workflow on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Line Numbers In Vim</title>
+      <link>https://hakaselogs.me/2020-02-07/line-numbers-in-vim/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2020-02-07/line-numbers-in-vim/</guid>
+      <description>Vim doesn&amp;rsquo;t show line numbers by default, they can be turned on in your vim configuration. Vim has an absolute, relative and hybrid line numbering mode. Absolute Line Numbers Addding the number option to your vim config, Vim sets up absolute line numbers to show the line number for each line in the current buffer. &amp;#34; set absolute numbersset number &amp;#34; orset nuRelative Line Numbers With the relativenumber option, each line in your file is numbered relative to the cursor’s current position.</description>
+    </item>
+    
+    <item>
+      <title>What I Use</title>
+      <link>https://hakaselogs.me/2020-01-10/what-i-use/</link>
+      <pubDate>Fri, 10 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2020-01-10/what-i-use/</guid>
+      <description>For the few times I have to tell people in detail the software and hardware I use on a day to day basis to do my job, here’s a post to list them. My setup changes from time to time but I’ll try to keep this up to date. My dotfiles can be found on This Repo - they work for me, read carefully before installing for yourself.
+Hardware  HP 24” Monitor: HP24y IPS Display MacBook Pro 13” (2017)  2.</description>
+    </item>
+    
+  </channel>
+</rss>

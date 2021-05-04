@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>The CouchDB Replicator Database - An Overview - hakaselogs</title><link rel="icon" type="image/png" href=/images/favicon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta itemprop="name" content="The CouchDB Replicator Database - An Overview">
+<meta itemprop="description" content="An overview of how the replicator database works in CouchDB, and how to setup replication like a Boss.">
+<meta itemprop="dateModified" content="2018-04-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="788">
+
+
+
+<meta itemprop="keywords" content="couchdb,databases,nosql," />
+<meta property="og:title" content="The CouchDB Replicator Database - An Overview" />
+<meta property="og:description" content="An overview of how the replicator database works in CouchDB, and how to setup replication like a Boss." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hakaselogs.me/2018-04-19/the-couchdb-replicator-database-an-overview/" />
+<meta property="article:published_time" content="2018-04-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-19T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The CouchDB Replicator Database - An Overview"/>
+<meta name="twitter:description" content="An overview of how the replicator database works in CouchDB, and how to setup replication like a Boss."/>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://hakaselogs.me/css/main.css" />
+
+        <link id="dark-scheme" rel="stylesheet" type="text/css" href="https://hakaselogs.me/css/dark.css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+		<script src="https://hakaselogs.me/js/main.js"></script>
+</head>
+
+<body>
+	<div class="container wrapper">
+		<div class="header">
+	
+		<div class="avatar">
+			<a href="https://hakaselogs.me/">
+				<img src="https://storage.googleapis.com/gopherizeme.appspot.com/gophers/0f1736136b4fcbea61798f9d4d04a6b01f4a05ad.png" alt="hakaselogs" />
+			</a>
+		</div>
+	
+	<h1 class="site-title"><a href="https://hakaselogs.me/">hakaselogs</a></h1>
+	<div class="site-description"><p>Notes mostly about software engineering and what I&rsquo;m working on.</p><nav class="nav social">
+			<ul class="flat"><li><a href="https://twitter.com/codehakase" title="Twitter"><i data-feather="twitter"></i></a></li><li><a href="https://github.com/codehakase" title="Github"><i data-feather="github"></i></a></li></ul>
+		</nav>
+	</div>
+
+	<nav class="nav">
+		<ul class="flat">
+			
+			<li>
+				<a href="/">Home</a>
+			</li>
+			
+			<li>
+				<a href="/posts">Archive</a>
+			</li>
+			
+			<li>
+				<a href="/projects">Projects</a>
+			</li>
+			
+			<li>
+				<a href="/tags">Tags</a>
+			</li>
+			
+		</ul>
+	</nav>
+</div>
+
+
+		<div class="post">
+			<div class="post-header">
+        
+				
+					<div class="meta">
+						<div class="date">
+							<span class="day">19</span>
+							<span class="rest">Apr 2018</span>
+						</div>
+					</div>
+				
+        
+				<div class="matter">
+					<h1 class="title">The CouchDB Replicator Database - An Overview</h1>
+				</div>
+			</div>
+					
+			<div class="markdown">
+				<p><strong>TL;DR:</strong> In this article, I&rsquo;ll give an overview of the replicator database in CouchDB, how to spin off a replication task in CouchDB</p>
+<hr>
+<p><strong>CouchDB</strong> is a database that completely embraces the web. CouchDB stores your data as JSON documents, and allows you access these documents easily, from a web interface or its <a href="http://docs.couchdb.org/en/2.1.1/api/basics.html#api-basics">REST API</a>. We won&rsquo;t be going too deep into couchdb as it would be out of scope for this article - I&rsquo;ll write one of those pretty soon.</p>
+<h2 id="replication-in-couchdb">Replication in CouchDB</h2>
+<p>Replication involves a source and a destination database, which can co-exist on the same or on different CouchDB instances. The sole purpose and aim of replication is that at the end of the process, all active documents on the source database are also in the destination database, and all documents deleted in the source databases are also deleted on the destination database.</p>
+<h3 id="the-replicator-database">The Replicator Database</h3>
+<p>This database can exist on any CouchDB node. The replicator database is where you <code>PUT</code> or <code>POST</code> documents to trigger replications, and you issue a <code>DELETE</code> to cancel any ongoing replications set. The default label for the replicator database is <em>_replicator</em>. This name can be changed at any point in time from the CouchDB configuration.</p>
+<blockquote>
+<p>Before proceeding to replicating a database, note, for security reasons, CouchDB is by default configured to listen to localhost/127.0.0.1 only. That means it can&rsquo;t replicate remote CouchDB server(s). To allow remote replication, CouchDB has to bound to <em>0.0.0.0</em>, this is set on the source server. To change bind address, you can do so from the <a href="http://localhost:5984/_utils/config.html">Futon config page</a> or locate <code>bind_address</code> in your CouchDB config.</p>
+</blockquote>
+<h3 id="structure-of-the-replicator-database-documents">Structure of the Replicator Database Documents</h3>
+<p>To trigger a replication, you create a document in the <strong>_replicator</strong> database. Its structure should look like this:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
+  &#34;_id&#34;: &#34;test_replication&#34;,
+  &#34;source&#34;: &#34;mydb&#34;,
+  &#34;target&#34;: &#34;http://someserver.com:5984/mydb&#34;,
+  &#34;create_target&#34;: true
+}
+</code></pre></div><p>Saving the above document, the couchdb daemon triggers a replication, with the content of the document. A log entry should look like these:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[Thu, 18 Apr 2018 19:43:59 WAT] [info] Document `test_replication` triggered replication `REV_+create_target`
+[Thu, 18 Apr 2018 19:44:37 WAT] [info] Replication `REV_+create_target` finished (triggered by document `test_replication`)
+</code></pre></div><p>When a replication is triggered, the document is updated by CouchDB some new fields:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
+  &#34;_id&#34;: &#34;test_replication&#34;,
+  &#34;source&#34;: &#34;mydb&#34;,
+  &#34;target&#34;: &#34;http://someserver.com:5984/mydb&#34;,
+  &#34;create_target&#34;: true,
+  &#34;_replication_id&#34;: &#34;some-id-goes-here&#34;,
+  &#34;_replication_state&#34;: &#34;triggered&#34;,
+  &#34;_replication_state_time&#34;: &#34;2018-04-18T19:46:32&#34;
+}
+</code></pre></div><p>Little note on the new fields added by CouchDB:</p>
+<ul>
+<li><strong>_replication_id</strong> - This is the ID assigned to the replication operation</li>
+<li><strong>_replication_state</strong> - The current state of the replication</li>
+<li><strong>_replication_state_time</strong> - The timestamp that tells when the current replication state was set</li>
+</ul>
+<h3 id="duplicate-replication-documents">Duplicate Replication Documents?</h3>
+<p>There could be a case where two or more documents are added to the <strong>_replicator</strong> database, defining the same replication operation:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// first document
+{
+  &#34;_id&#34;: &#34;replication_1&#34;,
+  &#34;source&#34;: &#34;mydb&#34;,
+  &#34;target&#34;: &#34;http://someserver.com:5984/mydb&#34;
+}
+
+// second document
+{
+  &#34;_id&#34;: &#34;replication_2&#34;,
+  &#34;source&#34;: &#34;mydb&#34;,
+  &#34;target&#34;: &#34;http://someserver.com:5984/mydb&#34;
+}
+</code></pre></div><p>From the above we can tell that both document defines the same replication, only difference is the document ids. CouchDB will definitely trigger this replication, but this time something else happens. The first document <code>replication_1</code>, may trigger the replication, CouchDB updates the doc with the fields <code>_replicaton_id, _replication_state, and _replication_state_time</code>. However, the second document <code>replication_2</code> doesn&rsquo;t get updated with same fields, instead, CouchDB upadates with just one field - <code>_replication_id</code>, which is the same set on the first document.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// after replication is triggered
+
+// first document
+{
+  &#34;_id&#34;: &#34;replication_1&#34;,
+  &#34;source&#34;: &#34;mydb&#34;,
+  &#34;target&#34;: &#34;http://someserver.com:5984/mydb&#34;,
+  &#34;_replication_id&#34;: &#34;my-sample-replication-id&#34;,
+  &#34;_replication_state&#34;: &#34;triggered&#34;,
+  &#34;_replication_state_time&#34;: &#34;2018-04-18T19:46:32&#34;
+
+}
+
+// second document
+{
+  &#34;_id&#34;: &#34;replication_2&#34;,
+  &#34;source&#34;: &#34;mydb&#34;,
+  &#34;target&#34;: &#34;http://someserver.com:5984/mydb&#34;,
+  &#34;_replication_id&#34;: &#34;my-sample-replication-id&#34;
+}
+</code></pre></div><h3 id="cancelling-replications">Cancelling Replications</h3>
+<p>To cancel an ongoing replication, you simply delete the document which triggered the replication.</p>
+<h3 id="typical-replication-procedure">Typical Replication Procedure</h3>
+<p>During replication, CouchDB compares the source and destination databases, to determine which documents differ between them. How does CouchDB determine these? It does so by following the <a href="http://docs.couchdb.org/en/2.1.1/api/database/changes.html#changes">Changes Feeds</a> on the source database, and comparing the documents to the destination database. Changes are submitted to the destination in batches where they can introduce conflicts. If a document already exist on the destination, and has the same revision, it is not transferred.</p>
+<p>A replication task will finish once it reaches the end of the changes feed. If its continuous property is set to true, it will wait for new changes to appear until the task is canceled. Replication tasks also create checkpoint documents on the destination to ensure that a restarted task can continue from where it stopped, for example after it has crashed.</p>
+<h3 id="references">References</h3>
+<p><a href="http://docs.couchdb.org/en/2.1.1/replication/intro.html?highlight=Replication">Introduction to CouchDB Replication - Guide</a></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Hurray! We&rsquo;ve just wrapped up an overview of the CouchDB replicator database, and a little of the replication terminology.</p>
+<p>I&rsquo;ll tend to write more on this topic, as it is a broad one.</p>
+<p>Did I miss something important? Let me know in the comments below :D</p>
+
+      </div>
+      <div>
+        <br>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CK7DTK7L&placement=hakaselogsme" id="_carbonads_js"></script>
+			</div>
+
+			<div class="tags">
+				
+					
+						<ul class="flat">
+							
+							<li><a href="/tags/couchdb">couchdb</a></li>
+							
+							<li><a href="/tags/databases">databases</a></li>
+							
+							<li><a href="/tags/nosql">nosql</a></li>
+							
+						</ul>
+					
+				
+			</div></div>
+	</div>
+	<div class="footer wrapper">
+	<nav class="nav">
+		<div>2021  © hakaselogs |  <a href="https://github.com/knadh/hugo-ink">Ink</a> theme on <a href="https://gohugo.io">Hugo</a></div>
+	</nav>
+</div>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-90124514-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script>feather.replace()</script>
+</body>
+</html>

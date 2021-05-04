@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>loops on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/loops/</link>
+    <description>Recent content in loops on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/loops/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>for...in vs for...of Loops in JavaScript</title>
+      <link>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2017-06-19/for...in-vs-for...of-loops-in-javascript/</guid>
+      <description>The for..in and for..of loops, gives us a clean and concise syntax to iterate on iterable items like arrays, strings, objects, and enumerables. Now the question is where to use which. Here&amp;rsquo;s a little reminder to get you you started.
+for..in Use this to iterate over the properties of an object:
+let person = { name: &amp;#39;Francis&amp;#39;, alias: &amp;#39;codehakase&amp;#39;, eyeColour: &amp;#39;brown&amp;#39; }; for(let key in person) { console.log( `${key}=&amp;gt; ${person[key]}` ); } // name =&amp;gt; Francis // alias =&amp;gt; codehakase .</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>changelog on hakaselogs</title>
+    <link>https://hakaselogs.me/tags/changelog/</link>
+    <description>Recent content in changelog on hakaselogs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© hakaselogs</copyright>
+    <lastBuildDate>Tue, 06 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://hakaselogs.me/tags/changelog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Here&#39;s What&#39;s New  In Go 1.10</title>
+      <link>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hakaselogs.me/2018-03-06/heres-whats-new-in-go-1.10/</guid>
+      <description>Go 1.8 is one year old (Happy belated Birthday 🎊 🎉) Go 1.9 is already 6 months old! Go 1.10 is out ✌
+ The latest Go release, v1.10 arrived six months after V1.9. This release was stated in the change-logs and the Go blog. I&amp;rsquo;m gonna share some interesting changes I&amp;rsquo;ve found in Go 1.10 with you.
+New Features The Language Go 1.10 offers compiler tool chain and performance improvements, but no significant changes was made to the language&amp;rsquo;s specification.</description>
+    </item>
+    
+  </channel>
+</rss>
